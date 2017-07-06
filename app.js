@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var userRoutes = require('./routes/userRoutes');
 var authentication = require('./routes/authentication');
 
 app.use(bodyParser.json());
@@ -22,14 +23,16 @@ app.use(session(
 ));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/mockdata/api/v1', authentication);
+app.use('/mockdata/api/v1', userRoutes);
 
-/*connect().on('error', console.log).on('disconneted', connect);
+//app.use('/mockdata/api/v1', authentication);
+
+connect().on('error', console.log).on('disconneted', connect);
 
 function connect() {
     var options = {server: {socketOptions: {keepAlive: 1}}};
-    return mongoose.connect('mongodb://localhost:27017/wordGame', options).connection;
-}*/
+    return mongoose.connect('mongodb://localhost:27017/mockerydata', options).connection;
+}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

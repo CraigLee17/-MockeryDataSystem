@@ -6,10 +6,11 @@ var mongoose = require('mongoose');
 var schemaSchema = mongoose.Schema({
     id: String,
     name: String,
-    ownerId: mongoose.Schema.ObjectId,
+    ownerID: mongoose.Schema.ObjectId,
     count: Number,
     fields: [{
-        fieldId: mongoose.Schema.ObjectId
+        name: String,
+        dataTypeId: mongoose.Schema.ObjectId
     }],
     fileFormat: String
 });

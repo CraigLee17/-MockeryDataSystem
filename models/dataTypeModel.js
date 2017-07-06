@@ -5,10 +5,9 @@ var mongoose = require('mongoose');
 
 var dataTypeSchema = mongoose.Schema({
     id: String,
-    name: String,
     type: String,
     description: String
 });
 
-var DataTypeSchema = mongoose.model('DataTypeSchema', dataTypeSchema);
-module.exports = DataTypeSchema;
+var DataType = mongoose.model('DataType', dataTypeSchema);
+module.exports = DataType;

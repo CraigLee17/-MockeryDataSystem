@@ -81,7 +81,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/User"
             },
             "headers": {
               "csrf_token": {
@@ -110,10 +110,43 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+
+        ],
         "responses": {
           "default": {
             "description": "successful logout"
+          }
+        }
+      }
+    },
+    "/generate": {
+      "get": {
+        "summary": "Generating data by schema",
+        "operationId": "generate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "schema",
+            "in": "body",
+            "description": "Define schema of data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
           }
         }
       }
@@ -151,7 +184,57 @@
       "xml": {
         "name": "User"
       }
+    },
+    "DataType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "DataType"
+      }
+    },
+    "Schema": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "fileFormat": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "dataTypeId": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
-

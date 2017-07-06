@@ -14,6 +14,6 @@ function findByName(name, cb) {
 module.exports.findByName = findByName;
 
 function findById(id, cb) {
-    DataType.findByID(id, cb);
+    DataType.findById(id, cb);
 }
 module.exports.findById = findById;
