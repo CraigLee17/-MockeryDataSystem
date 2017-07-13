@@ -35,12 +35,12 @@ paths:
   /user/login:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Logs user into the system"
       description: ""
       operationId: "loginUser"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
         - in: body
           name: user
@@ -79,12 +79,34 @@ paths:
       responses:
         default:
           description: "successful logout"
+  /schema:
+    post:
+      summary: "Create a schema"
+      operationId: "createSchema"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "schema"
+          description: "The schema to be created."
+          required: true
+          schema:
+            $ref: "#/definitions/Schema"
+      responses:
+        200:
+          description: "successful created schema"
+          schema:
+            $ref: "#/definitions/Schema"
+        400:
+          description: "Invalid schema supplied"
   /generate:
     get:
-      summary: "Generating data by schema"
+      summary: "Generate data by schema"
       operationId: "generate"
       produces:
       - "application/json"
+      - "text/xml"
+      - "text/csv"
       parameters:
       - name: "schema"
         in: "body"
@@ -99,7 +121,6 @@ paths:
             type: "array"
             items: 
               type: "object"
-            
 definitions:
   User:
     type: "object"
@@ -140,8 +161,8 @@ definitions:
         type: "string"
       name:
         type: "string"
-      ownerId:
-        type: "string"
+      owner:
+        $ref: "#/definitions/User"
       count:
         type: "integer"
       fileFormat:
@@ -153,5 +174,5 @@ definitions:
           properties:
             name:
               type: "string"
-            dataTypeId:
-              type: "string"
+            dataType:
+              $ref: "#/definitions/DataType"

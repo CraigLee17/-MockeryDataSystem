@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 var dataTypeSchema = mongoose.Schema({
     id: String,
-    type: String,
+    name: String,
     description: String
 });
 

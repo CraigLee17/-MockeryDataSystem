@@ -120,12 +120,45 @@
         }
       }
     },
-    "/generate": {
-      "get": {
-        "summary": "Generating data by schema",
-        "operationId": "generate",
+    "/schema": {
+      "post": {
+        "summary": "Create a schema",
+        "operationId": "createSchema",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "schema",
+            "description": "The schema to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful created schema",
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          },
+          "400": {
+            "description": "Invalid schema supplied"
+          }
+        }
+      }
+    },
+    "/generate": {
+      "get": {
+        "summary": "Generate data by schema",
+        "operationId": "generate",
+        "produces": [
+          "application/json",
+          "text/xml",
+          "text/csv"
         ],
         "parameters": [
           {
@@ -211,8 +244,8 @@
         "name": {
           "type": "string"
         },
-        "ownerId": {
-          "type": "string"
+        "owner": {
+          "$ref": "#/definitions/User"
         },
         "count": {
           "type": "integer"
@@ -228,8 +261,8 @@
               "name": {
                 "type": "string"
               },
-              "dataTypeId": {
-                "type": "string"
+              "dataType": {
+                "$ref": "#/definitions/DataType"
               }
             }
           }

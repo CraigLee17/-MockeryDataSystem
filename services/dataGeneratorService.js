@@ -2,43 +2,50 @@
  * Created by Zhiyuan Li on 2017/6/27.
  */
 var dataTypeService = require("./dataTypeService.js");
+var Schema = require("./../models/schemaModel");
+var randomIp = require("random-ip");
 
 var generate = function (schema, cb) {
-    var fields = [];
-    for (var i = 0; i < schema.fields.length; i++) {
-        dataTypeService.findById(schema.fields[i].dataTypeId, function (err, dataType) {
-            fields.push(dataType);
-            if (fields.length == schema.fields.length) {
-                var result = [];
-                while (schema.count > 0) {
-                    var row = {};
-                    for (var index in fields) {
-                        var field = fields[index];
-                        switch (field.type) {
-                            case "number":
-                                row[field.type] = number(5);
-                                break;
-                            case "name":
-                                row[field.type] = name();
-                                break;
-                            case "gender":
-                                row[field.type] = gender();
-                                break;
-                            case "country":
-                                row[field.type] = country();
-                                break;
-                            case "email":
-                                row[field.type] = email();
-                                break;
-                        }
-                    }
-                    result.push(row);
-                    schema.count--;
+    Schema.findById(schema._id).populate('fields.dataType').exec(function (err, schema) {
+        var result = [];
+        var rowNumber = 1;
+        for (var i = 0; i < schema.count; i++) {
+            var row = {};
+            for (var j = 0; j < schema.fields.length; j++) {
+                var type = schema.fields[j].dataType;
+                var fieldName = schema.fields[j].name;
+                switch (type.name) {
+                    case "row":
+                        row[fieldName] = rowNumber;
+                        break;
+                    case "number":
+                        row[fieldName] = number(5);
+                        break;
+                    case "name":
+                        row[fieldName] = name();
+                        break;
+                    case "gender":
+                        row[fieldName] = gender();
+                        break;
+                    case "country":
+                        row[fieldName] = country();
+                        break;
+                    case "email":
+                        row[fieldName] = email();
+                        break;
+                    case "boolean":
+                        row[fieldName] = boolean();
+                        break;
+                    case "ipAddressV4":
+                        row[fieldName] = randomIp('0.0.0.0');
+                        break;
                 }
-                cb(result);
             }
-        });
-    }
+            rowNumber++;
+            result.push(row);
+        }
+        cb(result);
+    });
 };
 module.exports.generate = generate;
 
@@ -50,7 +57,8 @@ var names = [
     "Nick", "Jodi", "Phoebe", "Langston", "Hadria", "Clem", "Anette", "Stewart", "Willy", "Umeko", "Aura", "Lowe", "Oralia", "Issie", "Gwenora",
     "Arny", "Grier", "Flossi", "Tyrus", "Keir", "Quint", "Johnathan", "Gertrud", "Kylynn", "Palmer", "Agneta", "Harrison", "Gardiner", "Nataline",
     "Zachery", "Merla", "Hayyim", "Aeriela", "Alvinia", "Fionna", "Wilmar", "Jammie", "Dionis", "Nathan", "Seymour", "Alexi", "Ware", "Corilla",
-    "Dionne", "Nikolai", "Loralee", "Elton", "Harland"];
+    "Dionne", "Nikolai", "Loralee", "Elton", "Harland"
+];
 
 var name = function () {
     var index = Math.floor(Math.random() * names.length);

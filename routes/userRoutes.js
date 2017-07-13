@@ -6,13 +6,31 @@ var router = express.Router();
 var dataGenerator = require("./../services/dataGeneratorService");
 var schemaService = require("./../services/schemaService");
 var dataTypeService = require("./../services/dataTypeService");
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
+var js2xmlparser = require("js2xmlparser");
+var json2csv = require("json2csv");
 
 router.get("/generate", function (req, res, next) {
-    //var schema = req.body.schema;
     schemaService.findByName("mySchema", function (err, schemas) {
-        dataGenerator.generate(schemas[0], function (result) {
-            res.json(result);
+        var schema = schemas[0];
+        dataGenerator.generate(schema, function (result) {
+            switch (schema.fileFormat.toLowerCase()) {
+                case "xml":
+                    res.set('Content-Type', 'text/xml');
+                    res.send(js2xmlparser.parse("record", result));
+                    break;
+                case "json":
+                    res.json(result);
+                    break;
+                case "csv":
+                    var fields = [];
+                    for (var i = 0; i < schema.fields.length; i++) {
+                        fields.push(schema.fields[i].name);
+                    }
+                    var csv = json2csv({data: result, fields: fields});
+                    res.set('Content-Type', 'text/csv');
+                    res.send(csv);
+            }
         });
     });
 });
@@ -30,43 +48,64 @@ router.post("/schema", function (req, res, next) {
 
 router.get("/initial", function (req, res, next) {
     var dataTypes = [{
-        type: "number",
+        name: "row",
+        description: "This is row number"
+    }, {
+        name: "number",
         description: "This is number"
     }, {
-        type: "email",
+        name: "email",
         description: "This is email"
     }, {
-        type: "gender",
+        name: "gender",
         description: "This is gender"
     }, {
-        type: "country",
+        name: "country",
         description: "This is country"
     }, {
-        type: "name",
+        name: "name",
         description: "This is name"
+    }, {
+        name: "boolean",
+        description: "This is boolean"
+    }, {
+        name: "ipAddressV4",
+        description: "This is IP Address v4"
     }];
     var schema = {
         name: "mySchema",
         fields: [{
-            name: "id",
+            name: "row"
         }, {
-            name: "email",
+            name: "number"
         }, {
-            name: "gender",
+            name: "email"
         }, {
-            name: "country",
+            name: "gender"
         }, {
-            name: "name",
+            name: "country"
+        }, {
+            name: "name"
+        }, {
+            name: "boolean"
+        }, {
+            name: "ipAddressV4"
         }],
-        count: 100,
-        fileFormat: "JSON"
+        count: 10,
+        fileFormat: "json"
     };
     var count = 0;
     mongoose.connection.db.dropCollection('datatypes', function (err, result) {
         mongoose.connection.db.dropCollection('schemas', function (err, result) {
             for (var i in dataTypes) {
                 dataTypeService.create(dataTypes[i], function (err, dataType) {
-                    schema.fields[count]["dataTypeId"] = dataType._id;
+                    for (var i in schema.fields) {
+                        if (schema.fields[i].name == dataType.name) {
+                            schema.fields[i]["dataType"] = dataType._id;
+                            break;
+                        }
+                    }
+
                     if (dataTypes.length - 1 == count++) {
                         schemaService.create(schema, function (err, schema) {
                             if (err)
