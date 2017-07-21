@@ -4,9 +4,8 @@
 var mongoose = require('mongoose');
 
 var schemaSchema = mongoose.Schema({
-    id: String,
     name: String,
-    owner: {
+    user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },

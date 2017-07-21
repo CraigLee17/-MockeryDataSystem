@@ -2,12 +2,16 @@
  * Created by Zhiyuan Li on 2017/6/22.
  */
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = mongoose.Schema({
     username: String,
     firstName: String,
     lastName: String,
-    email: String,
+    email: {
+        type: String,
+        index: true
+    },
     password: String,
     role: String,
     status: Boolean
@@ -18,6 +22,16 @@ userSchema.set('toJSON', {
         delete result.password;
     }
 });
+
+// generating a hash
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 var User = mongoose.model('User', userSchema);
 module.exports = User;

@@ -5,27 +5,32 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
+var logger = require('morgan');
 var userRoutes = require('./routes/userRoutes');
 var authentication = require('./routes/authentication');
+var passport = require('passport');
+var expressValidator = require('express-validator');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(session(
-    {
+app.use(logger('dev'));
+app.use(expressValidator());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(session({
         secret: 'A SECRET KEY. SHOULD BE UNIQE TO THE APP. DONT EVER SHOW IT TO ANYONE',
         resave: true,
         saveUninitialized: true,
         cookie: {
             maxAge: 1000 * 60 * 10
         }
-    }
-));
+    }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/mockdata/api/v1', userRoutes);
 
-//app.use('/mockdata/api/v1', authentication);
+app.use('/mockdata/api/v1', authentication);
+app.use('/mockdata/api/v1', userRoutes);
 
 connect().on('error', console.log).on('disconneted', connect);
 

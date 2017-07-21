@@ -16,9 +16,9 @@
         "tags": [
           "user"
         ],
-        "summary": "Get user by user name",
+        "summary": "Get user",
         "description": "",
-        "operationId": "getUserByName",
+        "operationId": "getUser",
         "produces": [
           "application/json"
         ],
@@ -40,9 +40,39 @@
           },
           "403": {
             "description": "Invalid csrf_token supplied"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Sign up a new user",
+        "description": "",
+        "operationId": "signUpUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "The new user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
-          "404": {
-            "description": "User not found"
+          "400": {
+            "description": "Invalid user info supplied"
           }
         }
       }
@@ -90,11 +120,8 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid username/password supplied"
-          },
           "403": {
-            "description": "Account is disabled"
+            "description": "Bad request"
           }
         }
       }
@@ -104,7 +131,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Logs out current logged in user session",
+        "summary": "Log out current logged in user session",
         "description": "",
         "operationId": "logoutUser",
         "produces": [
@@ -122,6 +149,9 @@
     },
     "/schema": {
       "post": {
+        "tags": [
+          "schema"
+        ],
         "summary": "Create a schema",
         "operationId": "createSchema",
         "produces": [
@@ -149,10 +179,45 @@
             "description": "Invalid schema supplied"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "schema"
+        ],
+        "summary": "Update a schema",
+        "operationId": "updateSchema",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "schema",
+            "description": "The schema to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful update schema",
+            "schema": {
+              "$ref": "#/definitions/Schema"
+            }
+          },
+          "400": {
+            "description": "Invalid schema supplied"
+          }
+        }
       }
     },
     "/generate": {
       "get": {
+        "tags": [
+          "mock data"
+        ],
         "summary": "Generate data by schema",
         "operationId": "generate",
         "produces": [
@@ -244,7 +309,7 @@
         "name": {
           "type": "string"
         },
-        "owner": {
+        "user": {
           "$ref": "#/definitions/User"
         },
         "count": {
@@ -267,6 +332,23 @@
             }
           }
         }
+      }
+    },
+    "MockData": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/User"
+        },
+        "schema": {
+          "$ref": "#/definitions/Schema"
+        },
+        "data": {
+          "type": "object"
+        }
+      },
+      "xml": {
+        "name": "MockData"
       }
     }
   }
