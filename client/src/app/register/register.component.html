@@ -4,8 +4,27 @@
       <div class="panel-heading"><h3 class="panel-title"><strong>Register</strong></h3></div>
 
       <div class="panel-body">
-        <form [formGroup]="registerForm">
-         <!-- <div class="alert alert-danger" *ngIf="registerForm.dirty && !registerForm.valid">Error</div>-->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="alert alert-danger" *ngIf="registerForm.hasError('allDirty') && !registerForm.valid">
+            <li *ngIf="registerForm.controls['firstName'].dirty && registerForm.controls['firstName'].invalid">
+              First name is required!
+            </li>
+            <li *ngIf="registerForm.controls['lastName'].dirty && registerForm.controls['lastName'].invalid">
+              Last name is required!
+            </li>
+            <li *ngIf="registerForm.controls['username'].dirty && registerForm.controls['username'].invalid">
+              Length of username should between 2 and 10!
+            </li>
+            <li *ngIf="registerForm.controls['email'].dirty && registerForm.controls['email'].hasError('email')">
+              Email format wrong!
+            </li>
+            <li *ngIf="registerForm.controls['password'].dirty && registerForm.controls['password'].invalid">
+              Password is required!
+            </li>
+            <li *ngIf="registerForm.controls['confirmedPassword'].dirty && registerForm.hasError('pswNotMatch')">
+              Password and confirm password are different!
+            </li>
+          </div>
           <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6">
               <div class="form-group">
