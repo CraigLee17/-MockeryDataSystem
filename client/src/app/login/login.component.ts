@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../_service/authentication.service';
+import {AuthenticationService} from '../_service/index';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {User} from "../_models/user";
+import {User} from "../_models/index";
 
 @Component({
   selector: 'app-login',
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
+          this.loginForm.reset();
         },
         error => {
           console.log(error);

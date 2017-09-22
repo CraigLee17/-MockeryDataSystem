@@ -19,18 +19,22 @@ app.use(expressValidator());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(session({
-        secret: 'A SECRET KEY. SHOULD BE UNIQE TO THE APP. DONT EVER SHOW IT TO ANYONE',
-        resave: true,
-        saveUninitialized: true,
-        cookie: {
-            maxAge: 1000 * 60 * 10
-        }
-    }));
+    secret: 'A SECRET KEY. SHOULD BE UNIQE TO THE APP. DONT EVER SHOW IT TO ANYONE',
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000 * 60 * 10
+    }
+}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/mockdata/api/v1', authentication);
 app.use('/mockdata/api/v1', userRoutes);
+
+app.use('*', function (req, res) {
+    res.sendFile('index.html', {root: "public"});
+});
 
 connect().on('error', console.log).on('disconneted', connect);
 

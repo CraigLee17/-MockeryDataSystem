@@ -8,25 +8,21 @@ function create(newUser, cb) {
     user.password = user.generateHash(user.password);
     user.save(cb);
 }
-
 module.exports.create = create;
 
 function findAll(cb) {
     User.find({}).sort({status: "descending", role: "descending"}).exec(cb);
 }
-
 module.exports.findAll = findAll;
 
 function findById(id, cb) {
     User.findById(id, cb);
 }
-
 module.exports.findById = findById;
 
 function findByEmail(email, cb) {
     User.findOne({email: email}, cb);
 }
-
 module.exports.findByEmail = findByEmail;
 
 function updateUser(id, newUser, cb) {
@@ -34,5 +30,11 @@ function updateUser(id, newUser, cb) {
         findById(id, cb);
     });
 }
-
 module.exports.updateUser = updateUser;
+
+function defaultRoleAndStatusForNewUser(newUser) {
+    newUser.role = 'user';
+    newUser.status = true;
+    return newUser;
+}
+module.exports.defaultRoleAndStatusForNewUser = defaultRoleAndStatusForNewUser;

@@ -1,5 +1,5 @@
 // load up the user model
-var User = require('./models/userModel');
+var User = require('../models/userModel');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 

@@ -10,7 +10,7 @@ var userService = require("./../services/userService");
 var mongoose = require("mongoose");
 var js2xmlparser = require("js2xmlparser");
 var json2csv = require("json2csv");
-var passport = require('./../passport.js');
+var passport = require('../services/passport.js');
 
 router.get("/generate", function (req, res, next) {
     schemaService.findByName("mySchema", function (err, schemas) {
@@ -72,31 +72,32 @@ router.delete("/schemas/:schemaid", function (req, res, next) {
 });
 
 router.get("/initial", function (req, res, next) {
-    var dataTypes = [{
-        name: "row",
-        description: "This is row number"
-    }, {
-        name: "number",
-        description: "This is number"
-    }, {
-        name: "email",
-        description: "This is email"
-    }, {
-        name: "gender",
-        description: "This is gender"
-    }, {
-        name: "country",
-        description: "This is country"
-    }, {
-        name: "name",
-        description: "This is name"
-    }, {
-        name: "boolean",
-        description: "This is boolean"
-    }, {
-        name: "ipAddressV4",
-        description: "This is IP Address v4"
-    }
+    var dataTypes = [
+        {
+            name: "row",
+            description: "This is row number"
+        }, {
+            name: "number",
+            description: "This is number"
+        }, {
+            name: "email",
+            description: "This is email"
+        }, {
+            name: "gender",
+            description: "This is gender"
+        }, {
+            name: "country",
+            description: "This is country"
+        }, {
+            name: "name",
+            description: "This is name"
+        }, {
+            name: "boolean",
+            description: "This is boolean"
+        }, {
+            name: "ipAddressV4",
+            description: "This is IP Address v4"
+        }
     ];
     var schema = {
         name: "mySchema",
@@ -146,6 +147,9 @@ router.get("/initial", function (req, res, next) {
 });
 
 router.post("/user", function (req, res, next) {
+    if (!(req.user && req.user.role == 'admin')) {
+        req.body = userService.defaultRoleAndStatusForNewUser(req.body);
+    }
     passport.authenticate('signup', function (err, user, info) {
         if (err) {
             throw err;

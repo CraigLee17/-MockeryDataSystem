@@ -10,10 +10,7 @@ export class AuthenticationService {
 
   login(user: User) {
     return this.http.post('/mockdata/api/v1/login', user)
-      .map((response: Response) => {
-        const user = response.json();
-        console.log(response);
-      });
+      .map((response: Response) => response.json());
   }
 
   logout() {

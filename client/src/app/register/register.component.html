@@ -4,8 +4,8 @@
       <div class="panel-heading"><h3 class="panel-title"><strong>Register</strong></h3></div>
 
       <div class="panel-body">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <div class="alert alert-danger" *ngIf="registerForm.hasError('allDirty') && !registerForm.valid">
+        <form [formGroup]="registerForm">
+          <div class="alert alert-danger" *ngIf="!registerForm.hasError('clean') && registerForm.invalid">
             <li *ngIf="registerForm.controls['firstName'].dirty && registerForm.controls['firstName'].invalid">
               First name is required!
             </li>
@@ -13,7 +13,7 @@
               Last name is required!
             </li>
             <li *ngIf="registerForm.controls['username'].dirty && registerForm.controls['username'].invalid">
-              Length of username should between 2 and 10!
+              Length of username should between 3 and 10!
             </li>
             <li *ngIf="registerForm.controls['email'].dirty && registerForm.controls['email'].hasError('email')">
               Email format wrong!
@@ -62,7 +62,7 @@
               </label>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Sign in</button>
+          <button (click)="register(registerForm.value)" class="btn btn-primary" [disabled]="!registerForm.valid">Sign in</button>
         </form>
       </div>
     </div>

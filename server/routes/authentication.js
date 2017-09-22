@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var users = require('./../services/userService.js');
 var uuid = require('uuid');
-var passport = require('./../passport.js');
+var passport = require('../services/passport.js');
 
 router.get('/logout', function (req, res, next) {
     req.logout();
@@ -13,7 +13,6 @@ router.get('/logout', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
-    console.log(req.body);
     passport.authenticate('login', function (err, user, info) {
         if (err) {
             throw err;
