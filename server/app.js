@@ -27,13 +27,13 @@ app.use(session({
     }
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/client')));
 
 app.use('/mockdata/api/v1', authentication);
 app.use('/mockdata/api/v1', userRoutes);
 
-app.use('*', function (req, res) {
-    res.sendFile('index.html', {root: "public"});
+app.use('/*', function (req, res) {
+    res.sendFile('index.html', {root: __dirname + "/public/client"});
 });
 
 connect().on('error', console.log).on('disconneted', connect);

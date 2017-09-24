@@ -41,7 +41,7 @@ router.post("/schema", function (req, res, next) {
     var newSchema = req.body;
     schemaService.create(newSchema, function (err, schema) {
         if (err) {
-            res.status(400).json({msg: "Invalid schema supplied"});
+            res.status(400).send("Invalid schema supplied");
             return;
         }
         res.json(schema);
@@ -52,7 +52,7 @@ router.put("/schema", function (req, res, next) {
     var updatedSchema = req.body;
     schemaService.update(updatedSchema, function (err, schema) {
         if (err) {
-            res.status(400).json({msg: "Invalid schema supplied"});
+            res.status(400).send("Invalid schema supplied");
             return;
         }
         res.json(schema);
@@ -63,7 +63,7 @@ router.delete("/schemas/:schemaid", function (req, res, next) {
     var id = req.params.schemaid;
     schemaService.remove(id, function (err, result) {
         if (err) {
-            res.json(err);
+            res.send(err);
             return;
         } else {
             res.json(result);
@@ -136,7 +136,7 @@ router.get("/initial", function (req, res, next) {
                     if (dataTypes.length - 1 == count++) {
                         schemaService.create(schema, function (err, schema) {
                             if (err)
-                                res.json(err);
+                                res.send(err);
                             res.json(schema);
                         });
                     }
@@ -155,10 +155,21 @@ router.post("/user", function (req, res, next) {
             throw err;
         }
         if (!user) {
-            return res.status(400).json({msg: info});
+            return res.status(400).send(info);
         }
         return res.json(user);
     })(req, res, next);
+});
+
+router.get("/user/:email", function (req, res, next) {
+    var email = req.params.email;
+    userService.findByEmail(email, function (err, user) {
+        if (err) {
+            res.send('User not found!');
+        } else {
+            res.json(user);
+        }
+    })
 });
 
 module.exports = router;

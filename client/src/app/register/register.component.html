@@ -24,6 +24,12 @@
             <li *ngIf="registerForm.controls['confirmedPassword'].dirty && registerForm.hasError('pswNotMatch')">
               Password and confirm password are different!
             </li>
+            <li *ngIf="error">
+              First name is required!
+            </li>
+          </div>
+          <div class="alert alert-danger" *ngIf="error">
+            {{error}}
           </div>
           <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6">
@@ -51,7 +57,8 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
               <div class="form-group">
-                <input type="password" formControlName="confirmedPassword" class="form-control " placeholder="Confirm Password">
+                <input type="password" formControlName="confirmedPassword" class="form-control "
+                       placeholder="Confirm Password">
               </div>
             </div>
           </div>
@@ -62,7 +69,9 @@
               </label>
             </div>
           </div>
-          <button (click)="register(registerForm.value)" class="btn btn-primary" [disabled]="!registerForm.valid">Sign in</button>
+          <button (click)="register(registerForm.value)" class="btn btn-primary" [disabled]="!registerForm.valid">Sign
+            in
+          </button>
         </form>
       </div>
     </div>

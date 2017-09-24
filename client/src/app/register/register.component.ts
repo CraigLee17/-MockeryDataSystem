@@ -10,8 +10,9 @@ import {UserService} from "../_service/index";
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  error: string;
 
-  constructor(private userService : UserService) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
@@ -35,14 +36,17 @@ export class RegisterComponent implements OnInit {
         },
         error => {
           console.log(error);
+          this.error = error._body;
         });
   }
 
   formGroupValidator(formGroup: FormGroup) {
     let res = {pswNotMatch: false, clean: false};
+    // check password equality
     if (formGroup.controls['password'].value != formGroup.controls['confirmedPassword'].value) {
       res.pswNotMatch = true;
     }
+    // check if all inputs are dirty or not
     for (let key in formGroup.controls) {
       if (!formGroup.controls[key].dirty) {
         res.clean = true;

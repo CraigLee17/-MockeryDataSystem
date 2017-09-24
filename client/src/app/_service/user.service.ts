@@ -11,4 +11,8 @@ export class UserService {
   create(user: User) {
     return this.http.post('/mockdata/api/v1/user', user).map((response: Response) => response.json());
   }
+
+  getByEmail(email: string) {
+    return this.http.get('/mockdata/api/v1/user/' + email).map((response: Response) => response.json());
+  }
 }

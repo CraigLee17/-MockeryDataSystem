@@ -9,7 +9,7 @@ var passport = require('../services/passport.js');
 
 router.get('/logout', function (req, res, next) {
     req.logout();
-    res.json({msg: "Successfully logout."});
+    res.send("Successfully logout.");
 });
 
 router.post('/login', function (req, res, next) {
@@ -49,7 +49,7 @@ router.get('/user', function (req, res, next) {
             });
         });
     } else {
-        res.status(403).json({msg: 'Invalid csrf_token supplied'});
+        res.status(403).send('Invalid csrf_token supplied');
     }
 });
 
