@@ -6,17 +6,19 @@ import {HttpModule} from '@angular/http';
 
 import {AuthenticationService} from './_service/authentication.service';
 import {UserService} from "./_service/user.service";
-
+import {SessionService} from "./_service/session.service";
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,7 @@ import {RegisterComponent} from './register/register.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [AuthenticationService, UserService],
+  providers: [AuthenticationService, UserService, SessionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

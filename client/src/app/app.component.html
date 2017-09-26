@@ -1,36 +1,51 @@
 <!-- Navigation -->
 <div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">MOCKERY DATA</a>
-      <div class="navbar-header">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-          <span class="navbar-toggler-icon"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="nav navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="register">Register</a>
-          </li>
-        </ul>
-      </div>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" routerLink="/home">
+      <img src="../favicon.ico" width="35" height="35" class="d-inline-block align-top">
+    </a>
+    <a class="navbar-brand" routerLink="/home">
+      MOCKERY DATA
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <!--<li class="nav-item" *ngIf="curUser">
+          <a class="nav-link" style="color: #61affe">Hi, {{curUser.username}}</a>
+        </li>
+        <li class="nav-item" *ngIf="curUser">
+          <a class="nav-link" routerLink="login">Logout</a>
+        </li>-->
+        <li class="nav-item dropdown" *ngIf="curUser">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-expanded="false" routerLink="">
+            Hi, {{curUser.username}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <button class="dropdown-item" (click)="logout()">Logout</button>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="!curUser">
+          <a class="nav-link" routerLink="login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!curUser">
+          <a class="nav-link" routerLink="register">Register</a>
+        </li>
+      </ul>
     </div>
   </nav>
+  <br>
+  <br>
+  <br>
+  <router-outlet></router-outlet>
+  <hr>
+  <footer>
+    <div class="container">
+      <span class="text-muted"> © 2017 Mockery Data</span>
+    </div>
+  </footer>
 </div>
-
-<br>
-<br>
-<br>
-<router-outlet></router-outlet>
