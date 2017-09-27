@@ -6,8 +6,10 @@ import {SessionService} from "./session.service";
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private http: Http, private sessionService: SessionService) {
-  }
+  loggedIn = false;
+  isAdmin = false;
+
+  constructor(private http: Http, private sessionService: SessionService) {}
 
   login(user: User) {
     return this.http.post('/mockdata/api/v1/login', user)
@@ -15,6 +17,10 @@ export class AuthenticationService {
         let user = response.json();
         if (user) {
           this.sessionService.create(user);
+          this.loggedIn = true;
+          if (this.sessionService.hasRole("admin")) {
+            this.isAdmin = true;
+          }
         }
         return user;
       });
@@ -23,5 +29,11 @@ export class AuthenticationService {
   logout() {
     this.http.get('/mockdata/api/v1/logout');
     this.sessionService.destory();
+    this.loggedIn = false;
+    this.isAdmin = false;
+  }
+
+  getCurrentUser() {
+    return this.sessionService.getUser();
   }
 }

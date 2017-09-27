@@ -9,16 +9,9 @@ import {AuthenticationService} from "./_service/authentication.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  curUser: User;
   authenticationService: AuthenticationService;
 
-  constructor(sessionService: SessionService, authenticationService: AuthenticationService) {
-    this.curUser = sessionService.getUser();
+  constructor(authenticationService: AuthenticationService) {
     this.authenticationService = authenticationService;
-  }
-
-  logout() {
-    this.authenticationService.logout();
-    this.curUser = null;
   }
 }

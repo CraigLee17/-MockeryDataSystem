@@ -15,24 +15,29 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
-        <!--<li class="nav-item" *ngIf="curUser">
-          <a class="nav-link" style="color: #61affe">Hi, {{curUser.username}}</a>
-        </li>
-        <li class="nav-item" *ngIf="curUser">
-          <a class="nav-link" routerLink="login">Logout</a>
-        </li>-->
-        <li class="nav-item dropdown" *ngIf="curUser">
-          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-expanded="false" routerLink="">
-            Hi, {{curUser.username}}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" routerLink="schemaList" id="schemaDropdown" data-toggle="dropdown" aria-expanded="false">
+            My Schemas
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <button class="dropdown-item" (click)="logout()">Logout</button>
+          <div class="dropdown-menu" aria-labelledby="schemaDropdown">
+            <a class="dropdown-item" routerLink="schemaList">Schema List</a>
+            <a class="dropdown-item" routerLink="createList">Create Schema</a>
           </div>
         </li>
-        <li class="nav-item" *ngIf="!curUser">
+        <li class="nav-item dropdown" *ngIf="authenticationService.loggedIn">
+          <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false"
+             routerLink="">
+            Hi, {{authenticationService.getCurrentUser().username}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="userDropdown">
+            <a class="dropdown-item">Profile</a>
+            <a class="dropdown-item" (click)="authenticationService.logout()">Logout</a>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf="!authenticationService.loggedIn">
           <a class="nav-link" routerLink="login">Login</a>
         </li>
-        <li class="nav-item" *ngIf="!curUser">
+        <li class="nav-item" *ngIf="!authenticationService.loggedIn">
           <a class="nav-link" routerLink="register">Register</a>
         </li>
       </ul>
@@ -42,9 +47,9 @@
   <br>
   <br>
   <router-outlet></router-outlet>
-  <hr>
   <footer>
     <div class="container">
+      <hr>
       <span class="text-muted"> © 2017 Mockery Data</span>
     </div>
   </footer>

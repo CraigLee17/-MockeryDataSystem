@@ -19,6 +19,8 @@ var userSchema = mongoose.Schema({
 
 userSchema.set('toJSON', {
     transform: function (doc, result, options) {
+        result.id = result._id;
+        delete result._id;
         delete result.password;
     }
 });

@@ -59,7 +59,7 @@ router.put("/schema", function (req, res, next) {
     });
 });
 
-router.delete("/schemas/:schemaid", function (req, res, next) {
+router.delete("/schemas/:schemaid", function (req, res, next)  {
     var id = req.params.schemaid;
     schemaService.remove(id, function (err, result) {
         if (err) {

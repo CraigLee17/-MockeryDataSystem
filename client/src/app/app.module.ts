@@ -12,13 +12,19 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {HomeComponent} from './home/home.component';
+import { LogoutComponent } from './logout/logout.component';
+import { SchemaListComponent } from './schema-list/schema-list.component';
+import { CreateSchemaComponent } from './create-schema/create-schema.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    LogoutComponent,
+    SchemaListComponent,
+    CreateSchemaComponent
   ],
   imports: [
     BrowserModule,
