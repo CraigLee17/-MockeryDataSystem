@@ -1,30 +1,29 @@
-<div class="row">
-  <div class="col-3">
-    <div class="list-group" id="list-tab" role="tablist">
-      <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home"
-         role="tab" aria-controls="home">Schema1</a>
-      <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile"
-         role="tab" aria-controls="profile">Schema2</a>
-      <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages"
-         role="tab" aria-controls="messages">Schema3</a>
-      <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings"
-         role="tab" aria-controls="settings">Schema4</a>
-    </div>
-  </div>
-  <div class="col-9">
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-        Schema1
-      </div>
-      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-        Schema2
-      </div>
-      <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-        Schema3
-      </div>
-      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-        Schema4
-      </div>
-    </div>
-  </div>
-</div>
+<h3><strong>My Schemas</strong></h3>
+<a class="btn btn-outline-primary" routerLink="/schemas/new">Create a Schema</a>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Schema</th>
+    <th>Last Modified</th>
+    <th>&nbsp;</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><span><a href="/schemas/80862">schema1</a></span>
+      <div><span>id | first_name | last_name | email | gender | ip_address</span></div>
+    </td>
+    <td class="nowrap light">3 minutes ago</td>
+    <td>delete</td>
+  </tr>
+  <tr>
+    <td><span class="record-link"><a href="/schemas/80863">schema2</a></span>
+      <div><span class="schema-columns-list">id | first_name | last_name | email | gender | ip_address</span></div>
+    </td>
+    <td class="nowrap light">less than a minute ago</td>
+    <td>
+      delete
+    </td>
+  </tr>
+  </tbody>
+</table>

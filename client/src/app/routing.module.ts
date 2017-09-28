@@ -13,8 +13,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'schemaList', component: SchemaListComponent},
-  {path: 'createList', component: CreateSchemaComponent},
+  {path: 'schemas', component: SchemaListComponent},
+  {path: 'schemas/new', component: CreateSchemaComponent},
   // otherwise redirect to home
   {path: '**', redirectTo: 'home'}
 ];

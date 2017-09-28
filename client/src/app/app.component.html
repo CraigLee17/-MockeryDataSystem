@@ -1,6 +1,6 @@
 <!-- Navigation -->
-<div class="container">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+  <div class="container">
     <a class="navbar-brand" routerLink="/home">
       <img src="../favicon.ico" width="35" height="35" class="d-inline-block align-top">
     </a>
@@ -15,14 +15,8 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" routerLink="schemaList" id="schemaDropdown" data-toggle="dropdown" aria-expanded="false">
-            My Schemas
-          </a>
-          <div class="dropdown-menu" aria-labelledby="schemaDropdown">
-            <a class="dropdown-item" routerLink="schemaList">Schema List</a>
-            <a class="dropdown-item" routerLink="createList">Create Schema</a>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="schemas">Schemas</a>
         </li>
         <li class="nav-item dropdown" *ngIf="authenticationService.loggedIn">
           <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false"
@@ -42,15 +36,17 @@
         </li>
       </ul>
     </div>
-  </nav>
-  <br>
-  <br>
-  <br>
+  </div>
+</nav>
+<br>
+<br>
+<br>
+<div class="container" style="margin-top: 25px">
   <router-outlet></router-outlet>
-  <footer>
-    <div class="container">
-      <hr>
-      <span class="text-muted"> © 2017 Mockery Data</span>
-    </div>
-  </footer>
 </div>
+<footer>
+  <div class="container">
+    <hr>
+    <span class="text-muted"> © 2017 Mockery Data</span>
+  </div>
+</footer>
