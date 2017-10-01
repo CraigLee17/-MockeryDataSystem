@@ -161,15 +161,13 @@ router.post("/user", function (req, res, next) {
     })(req, res, next);
 });
 
-router.get("/user/:email", function (req, res, next) {
-    var email = req.params.email;
-    userService.findByEmail(email, function (err, user) {
-        if (err) {
-            res.send('User not found!');
-        } else {
-            res.json(user);
-        }
-    })
+router.get("/types", function (req, res, next) {
+    dataTypeService.findAll(function (err, types) {
+       if (err) {
+           req.send(err);
+       } else {
+           res.json(types);
+       }
+    });
 });
-
 module.exports = router;
