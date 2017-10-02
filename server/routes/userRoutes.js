@@ -59,7 +59,7 @@ router.put("/schema", function (req, res, next) {
     });
 });
 
-router.delete("/schemas/:schemaid", function (req, res, next)  {
+router.delete("/schemas/:schemaid", function (req, res, next) {
     var id = req.params.schemaid;
     schemaService.remove(id, function (err, result) {
         if (err) {
@@ -95,7 +95,7 @@ router.get("/initial", function (req, res, next) {
             name: "boolean",
             description: "This is boolean"
         }, {
-            name: "ipAddressV4",
+            name: "ip_address_v4",
             description: "This is IP Address v4"
         }
     ];
@@ -116,10 +116,11 @@ router.get("/initial", function (req, res, next) {
         }, {
             name: "boolean"
         }, {
-            name: "ipAddressV4"
+            name: "ip_address_v4"
         }],
         count: 10,
-        fileFormat: "json"
+        fileFormat: "json",
+        user: '59b20d9177a8e919c496ed59'
     };
     var count = 0;
     mongoose.connection.db.dropCollection("datatypes", function (err, result) {
@@ -163,11 +164,23 @@ router.post("/user", function (req, res, next) {
 
 router.get("/types", function (req, res, next) {
     dataTypeService.findAll(function (err, types) {
-       if (err) {
-           req.send(err);
-       } else {
-           res.json(types);
-       }
+        if (err) {
+            req.send(err);
+        } else {
+            res.json(types);
+        }
     });
 });
+
+router.get("/user/:userid/schemas", function (req, res, next) {
+    var userid = req.params.userid;
+    schemaService.findByUserId(userid, function (err, schemas) {
+        if (err) {
+            req.send(err);
+        } else {
+            res.json(schemas);
+        }
+    });
+});
+
 module.exports = router;

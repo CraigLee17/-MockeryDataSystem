@@ -16,7 +16,7 @@
           <a class="nav-link" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="schemas">Schemas</a>
+          <a class="nav-link" routerLink="schemas" *ngIf="authenticationService.loggedIn">Schemas</a>
         </li>
         <li class="nav-item dropdown" *ngIf="authenticationService.loggedIn">
           <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false"

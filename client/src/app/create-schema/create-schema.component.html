@@ -1,0 +1,110 @@
+<h3><strong>New Schema</strong></h3>
+<div class="row">
+  <div class="col-md-7 col-sm-12">
+    <div class="card">
+      <table class="table table-sm table-striped table-responsive">
+        <thead>
+        <tr>
+          <th>Field Name</th>
+          <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><input class="form-control" value="id"></td>
+          <td>
+            <input class="form-control type-input" readonly data-toggle="modal" data-target="#exampleModal"
+                   value="number"
+                   style="cursor: pointer">
+          </td>
+          <td><a class="oi oi-x" style="margin-top: 8px"></a></td>
+        </tr>
+        <tr>
+          <td><input class="form-control" value="name"></td>
+          <td>
+            <input class="form-control type-input" readonly data-toggle="modal" data-target="#exampleModal"
+                   value="number">
+          </td>
+          <td><a class="oi oi-x" style="margin-top: 8px"></a></td>
+        </tr>
+        <tr>
+          <td><input class="form-control" value="email"></td>
+          <td>
+            <input class="form-control  type-input" readonly data-toggle="modal" data-target="#exampleModal"
+                   value="number">
+          </td>
+          <td><a class="oi oi-x" style="margin-top: 8px"></a></td>
+        </tr>
+        <tr>
+          <td><input class="form-control" value="nationality"></td>
+          <td>
+            <input class="form-control type-input" readonly data-toggle="modal" data-target="#exampleModal"
+                   value="number">
+          </td>
+          <td><a class="oi oi-x" style="margin-top: 8px"></a></td>
+        </tr>
+        <tr>
+          <td><input class="form-control" value="nationality"></td>
+          <td>
+            <input class="form-control  type-input" readonly data-toggle="modal" data-target="#exampleModal"
+                   value="number">
+          </td>
+          <td><a class="oi oi-x" style="margin-top: 8px"></a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="container col-md-5">
+    <div class="form-group">
+      <label class="col-md-3 col-form-label">#Rows:</label>
+      <div class="col-md-9">
+        <input class="form-control" placeholder="number of rows">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-3 col-form-label">Format:</label>
+      <div class="col-md-9">
+        <select class="custom-select form-control">
+          <option selected>JSON</option>
+          <option>CSV</option>
+          <option>XML</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <button class="btn btn-outline-info">Save Schema</button>
+        <button class="btn btn-outline-primary">Preview</button>
+        <button class="btn btn-outline-success">Download Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Choose a Type
+        </h5>
+      </div>
+      <div class="modal-body container row">
+        <div class="col-md-3" *ngFor="let type of dataTypes">
+          <div class="card mt-1 h-130" style="cursor: pointer">
+            <div class="card-body">
+              <h4 class="card-title text-primary">{{type.name}}</h4>
+              <p class="card-text text-secondary">{{type.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,7 @@ import {HomeComponent} from './home/home.component';
 import {LogoutComponent} from './logout/logout.component';
 import {SchemaListComponent} from './schema-list/schema-list.component';
 import {CreateSchemaComponent} from './create-schema/create-schema.component';
+import {SchemaService} from "./_service/schema.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import {CreateSchemaComponent} from './create-schema/create-schema.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [AuthenticationService, UserService, SessionService, DataTypeService],
+  providers: [AuthenticationService, UserService, SessionService, DataTypeService, SchemaService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

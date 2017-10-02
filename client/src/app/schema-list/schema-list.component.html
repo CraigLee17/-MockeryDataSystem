@@ -4,26 +4,17 @@
   <thead>
   <tr>
     <th>Schema</th>
-    <th>Last Modified</th>
     <th>&nbsp;</th>
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td><span><a href="/schemas/80862">schema1</a></span>
-      <div><span>id | first_name | last_name | email | gender | ip_address</span></div>
+  <tr *ngFor="let schema of schemas">
+    <td><span><a href="/schemas/80862">{{schema.name}}</a></span>
+      <div>
+        <span class="mr-3 text-secondary" *ngFor="let type of schema.fields">{{type.name}}</span>
+      </div>
     </td>
-    <td class="nowrap light">3 minutes ago</td>
-    <td>delete</td>
-  </tr>
-  <tr>
-    <td><span class="record-link"><a href="/schemas/80863">schema2</a></span>
-      <div><span class="schema-columns-list">id | first_name | last_name | email | gender | ip_address</span></div>
-    </td>
-    <td class="nowrap light">less than a minute ago</td>
-    <td>
-      delete
-    </td>
+    <td><a class="oi oi-x" style="margin-top: 8px"></a></td>
   </tr>
   </tbody>
 </table>
