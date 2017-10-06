@@ -13,25 +13,29 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Home</a>
+          <a class="nav-link" routerLink="/">
+            Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="schemas" *ngIf="authenticationService.loggedIn">Schemas</a>
+          <a class="nav-link" routerLink="schemas" *ngIf="sessionService.isLogin()" >
+            Schemas
+          </a>
         </li>
-        <li class="nav-item dropdown" *ngIf="authenticationService.loggedIn">
+        <li class="nav-item dropdown" *ngIf="sessionService.isLogin()">
           <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false"
              routerLink="">
-            Hi, {{authenticationService.getCurrentUser().username}}
+            Hi, {{sessionService.getUser().username}}
           </a>
           <div class="dropdown-menu" aria-labelledby="userDropdown">
-            <a class="dropdown-item">Profile</a>
-            <a class="dropdown-item" (click)="authenticationService.logout()">Logout</a>
+            <a class="dropdown-item" data-toggle="collapse" data-target="#navbarResponsive">Profile</a>
+            <a class="dropdown-item" data-toggle="collapse" data-target="#navbarResponsive"
+               (click)="authenticationService.logout()">Logout</a>
           </div>
         </li>
-        <li class="nav-item" *ngIf="!authenticationService.loggedIn">
+        <li class="nav-item" *ngIf="!sessionService.isLogin()">
           <a class="nav-link" routerLink="login">Login</a>
         </li>
-        <li class="nav-item" *ngIf="!authenticationService.loggedIn">
+        <li class="nav-item" *ngIf="!sessionService.isLogin()">
           <a class="nav-link" routerLink="register">Register</a>
         </li>
       </ul>

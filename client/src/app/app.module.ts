@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RoutingModule} from './routing.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 
 import {AuthenticationService} from './_service/authentication.service';
 import {UserService} from "./_service/user.service";
@@ -17,6 +16,8 @@ import {LogoutComponent} from './logout/logout.component';
 import {SchemaListComponent} from './schema-list/schema-list.component';
 import {CreateSchemaComponent} from './create-schema/create-schema.component';
 import {SchemaService} from "./_service/schema.service";
+import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
+import { SchemaDetailsComponent } from './schema-details/schema-details.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +27,19 @@ import {SchemaService} from "./_service/schema.service";
     HomeComponent,
     LogoutComponent,
     SchemaListComponent,
-    CreateSchemaComponent
+    CreateSchemaComponent,
+    SchemaDetailsComponent
   ],
   imports: [
     BrowserModule,
     RoutingModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpClientModule,
+    // attach csrf token to post and put request
+    HttpClientXsrfModule.withOptions({
+      headerName: 'csrf-token',
+      cookieName: 'csrf-token'
+    }),
   ],
   providers: [AuthenticationService, UserService, SessionService, DataTypeService, SchemaService],
   bootstrap: [AppComponent]

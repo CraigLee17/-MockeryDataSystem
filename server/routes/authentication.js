@@ -26,7 +26,8 @@ router.post('/login', function (req, res, next) {
             }
             var csrf_token = uuid.v1();
             req.session.csrf = csrf_token;
-            res.setHeader("csrf_token", csrf_token);
+            req.session.user = user;
+            res.cookie("csrf-token", csrf_token);
             return res.json(user);
         });
     })(req, res, next);
@@ -35,7 +36,7 @@ router.post('/login', function (req, res, next) {
 router.get('/user', function (req, res, next) {
     var user = req.user;
     var csrfInSession = req.session.csrf;
-    var csrfInreq = req.header("csrf_token");
+    var csrfInreq = req.header("csrf-token");
     if (user && csrfInSession == csrfInreq) {
         users.findById(user._id, function (err, userInDB) {
             if (err) {

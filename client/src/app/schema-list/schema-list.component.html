@@ -8,13 +8,13 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let schema of schemas">
-    <td><span><a href="/schemas/80862">{{schema.name}}</a></span>
+  <tr *ngFor="let schema of schemas; let i = index;">
+    <td><span><a [routerLink]="['/schemas', schema.id]">{{schema.name}}</a></span>
       <div>
         <span class="mr-3 text-secondary" *ngFor="let type of schema.fields">{{type.name}}</span>
       </div>
     </td>
-    <td><a class="oi oi-x" style="margin-top: 8px"></a></td>
+    <td><a class="oi oi-x" style="margin-top: 8px" (click)="deleteSchema(i)"></a></td>
   </tr>
   </tbody>
 </table>

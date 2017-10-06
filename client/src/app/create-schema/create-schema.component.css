@@ -6,3 +6,8 @@
   cursor: pointer;
   background-color: white;
 }
+
+a.oi {
+  margin-top: 8px;
+  cursor: pointer;
+}

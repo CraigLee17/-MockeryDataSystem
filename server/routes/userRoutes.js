@@ -183,4 +183,27 @@ router.get("/user/:userid/schemas", function (req, res, next) {
     });
 });
 
+router.post("/user/:userid/schema", function (req, res, next) {
+    var schema = req.body;
+    schema.user = req.session.user.id;
+    schemaService.create(schema, function (err, schema) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(schema);
+        }
+    });
+});
+
+router.delete("/user/:userid/schemas/:schemaid", function (req, res, next) {
+    var id = req.params.schemaid;
+    schemaService.remove(id, function (err, schema) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(schema);
+        }
+    });
+});
+
 module.exports = router;

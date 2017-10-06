@@ -2,6 +2,7 @@
   <h3><strong>Login</strong></h3>
   <form [formGroup]="loginForm">
     <div class="form-group">
+      <label class="col-form-label"><strong>Email:</strong></label>
       <input type="email" class="form-control" formControlName="email" placeholder="email" required/>
       <div class="alert alert-danger"
            *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].dirty">
@@ -15,6 +16,7 @@
       </div>
     </div>
     <div class="form-group">
+      <label class="col-form-label"><strong>Password:</strong></label>
       <input type="password" class="form-control" formControlName="password" placeholder="password" required/>
       <div class="alert alert-danger"
            *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].dirty">

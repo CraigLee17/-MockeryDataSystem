@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
+import {DataType} from "../_models/data.type";
 
 @Injectable()
 export class DataTypeService {
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getAllDataTypes() {
-    return this.http.get('/mockdata/api/v1/types').map((response: Response) => response.json());
+    return this.http.get<[DataType]>('/mockdata/api/v1/types');
   }
 }

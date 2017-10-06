@@ -20,5 +20,12 @@ var schemaSchema = mongoose.Schema({
     fileFormat: String
 });
 
+schemaSchema.set('toJSON', {
+    transform: function (doc, result, options) {
+        result.id = result._id;
+        delete result._id;
+    }
+});
+
 var Schema = mongoose.model('Schema', schemaSchema);
 module.exports = Schema;

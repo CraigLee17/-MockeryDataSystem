@@ -10,17 +10,17 @@ import {Schema} from "../_models/schema";
 export class SchemaListComponent implements OnInit {
   private schemas: [Schema];
 
-  /*schemas = [{
-    name: 'schema1',
-    fields : [{
-      name: 'boolean'
-    }, {
-      name: 'email'
-    }, {
-      name: 'gender'
-    }]
-  }];*/
-
+  /* schemas = [{
+     name: 'schema1',
+     fields: [{
+       name: 'boolean'
+     }, {
+       name: 'email'
+     }, {
+       name: 'gender'
+     }]
+   }];
+ */
   constructor(private schemaService: SchemaService) {
     schemaService.getSchemasByUserId().subscribe(schemas => this.schemas = schemas);
   }
@@ -28,4 +28,12 @@ export class SchemaListComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteSchema(index) {
+    this.schemaService.remove(this.schemas[index].id)
+      .subscribe(
+        schema => console.log(schema),
+        error => console.log(error)
+      );
+    this.schemas.splice(index, 1);
+  }
 }

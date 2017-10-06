@@ -6,6 +6,7 @@ import {LogoutComponent} from "./logout/logout.component";
 import {HomeComponent} from "./home/home.component";
 import {SchemaListComponent} from "./schema-list/schema-list.component";
 import {CreateSchemaComponent} from "./create-schema/create-schema.component";
+import {SchemaDetailsComponent} from "./schema-details/schema-details.component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'schemas', component: SchemaListComponent},
   {path: 'schemas/new', component: CreateSchemaComponent},
+  {path: 'schemas/:id', component: SchemaDetailsComponent},
   // otherwise redirect to home
   {path: '**', redirectTo: 'home'}
 ];

@@ -9,9 +9,15 @@ import {AuthenticationService} from "./_service/authentication.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  sessionService: SessionService;
   authenticationService: AuthenticationService;
 
-  constructor(authenticationService: AuthenticationService) {
+  constructor(sessionService: SessionService, authenticationService: AuthenticationService) {
+    this.sessionService = sessionService;
     this.authenticationService = authenticationService;
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }
