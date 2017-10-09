@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {SchemaService} from "../_service/schema.service";
 import {Schema} from "../_models/schema";
 
@@ -10,7 +10,10 @@ import {Schema} from "../_models/schema";
 })
 export class SchemaDetailsComponent implements OnInit {
   schema: Schema;
-  constructor(private route: ActivatedRoute, private schemaService: SchemaService) {}
+  previewData;
+
+  constructor(private route: ActivatedRoute, private schemaService: SchemaService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -20,6 +23,12 @@ export class SchemaDetailsComponent implements OnInit {
         error => console.log(error)
       );
     });
+  }
+
+  preview() {
+    this.schemaService.previewBySchemaId(this.schema.id).subscribe(
+      data => this.previewData = data,
+      error => console.log(error));
   }
 
 }

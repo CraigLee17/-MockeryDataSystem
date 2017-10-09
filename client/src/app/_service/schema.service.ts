@@ -27,4 +27,8 @@ export class SchemaService {
   remove(id) {
     return this.http.delete('/mockdata/api/v1/user/' + this.user.id + '/schemas/' + id);
   }
+
+  previewBySchemaId(id) {
+    return this.http.get('/mockdata/api/v1/user/' + this.user.id + '/schemas/' + id + '/preview');
+  }
 }

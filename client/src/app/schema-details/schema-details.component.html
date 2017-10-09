@@ -1,3 +1,6 @@
+<div class="row col-md-12 container">
+  <a routerLink="/schemas" class="text-left">Schema List </a>&nbsp;> {{schema?.name}}
+</div>
 <div class="row">
   <div class="col-md-7 col-sm-12">
     <h3><strong>{{schema?.name}}</strong></h3>
@@ -12,14 +15,56 @@
         <tbody>
         <tr *ngFor="let field of schema?.fields">
           <td>
-            <div class="form-control text-primary col-md-3">{{field?.name}}</div>
+            <div class="form-control text-primary">{{field?.name}}</div>
           </td>
           <td>
-            <div class="form-control text-info col-md-3">{{field?.dataType?.name}}</div>
+            <div class="form-control text-info">{{field?.dataType?.name}}</div>
           </td>
         </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+
+  <div class="container col-md-5">
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">#Rows:</label>
+      <div class="col-md-8">
+        <div class="form-control">{{schema?.count}}</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">Format:</label>
+      <div class="col-md-8">
+        <div class="form-control">{{schema?.fileFormat}}</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <button class="btn btn-outline-primary col-sm-12 col-md-4 mb-1"
+                data-toggle="modal" data-target="#modal" (click)="preview()">Preview
+        </button>
+        <button class="btn btn-outline-success col-sm-12 col-md-4 mb-1">Download Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="modalLabel">
+          Preview
+        </h5>
+      </div>
+      <div class="modal-body container">
+        <pre *ngFor="let data of previewData" [innerHTML]="data | json"></pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

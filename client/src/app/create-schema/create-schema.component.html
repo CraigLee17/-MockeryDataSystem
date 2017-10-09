@@ -14,7 +14,7 @@
           <td><input class="form-control" [value]=field.value.name></td>
           <td>
             <input class="form-control type-input" readonly
-                   data-toggle="modal" data-target="#exampleModal" [value]=field.value.dataType.name
+                   data-toggle="modal" data-target="#modal" [value]=field.value.dataType.name
                    (click)="selectedIndex = i">
           </td>
           <td><a class="oi oi-x" (click)="removeField(i)"></a></td>
@@ -59,12 +59,12 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
+        <h5 class="modal-title" id="modalLabel">
           Choose a Type
         </h5>
       </div>

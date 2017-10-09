@@ -36,7 +36,7 @@ var generate = function (schema, cb) {
                     case "boolean":
                         row[fieldName] = boolean();
                         break;
-                    case "ipAddressV4":
+                    case "ip_address_v4":
                         row[fieldName] = randomIp('0.0.0.0');
                         break;
                 }

@@ -37,6 +37,15 @@ router.get("/generate", function (req, res, next) {
     });
 });
 
+router.get("/user/:userid/schemas/:schemaid/preview", function (req, res, next) {
+    var id = req.params.schemaid;
+    schemaService.findByID(id, function (err, schema) {
+        dataGenerator.generate(schema, function (result) {
+            res.json(result);
+        });
+    });
+});
+
 router.post("/schema", function (req, res, next) {
     var newSchema = req.body;
     schemaService.create(newSchema, function (err, schema) {
