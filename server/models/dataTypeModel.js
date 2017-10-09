@@ -8,12 +8,5 @@ var dataTypeSchema = mongoose.Schema({
     description: String
 });
 
-dataTypeSchema.set('toJSON', {
-    transform: function (doc, result, options) {
-        result.id = result._id;
-        delete result._id;
-    }
-});
-
 var DataType = mongoose.model('DataType', dataTypeSchema);
 module.exports = DataType;

@@ -34,11 +34,11 @@ export class CreateSchemaComponent implements OnInit {
     }
   ];*/
   initialFields = [
-    new FormControl({name: 'id', type: {name: 'row'}}),
-    new FormControl({name: 'email', type: {name: 'email'}}),
-    new FormControl({name: 'name', type: {name: 'name'}}),
-    new FormControl({name: 'country', type: {name: 'country'}}),
-    new FormControl({name: 'gender', type: {name: 'gender'}}),
+    new FormControl({name: 'id', dataType: {name: 'row'}}),
+    new FormControl({name: 'email', dataType: {name: 'email'}}),
+    new FormControl({name: 'name', dataType: {name: 'name'}}),
+    new FormControl({name: 'country', dataType: {name: 'country'}}),
+    new FormControl({name: 'gender', dataType: {name: 'gender'}}),
   ];
 
   createSchemaForm: FormGroup;
@@ -71,7 +71,7 @@ export class CreateSchemaComponent implements OnInit {
   }
 
   selectType(type: DataType) {
-    this.fields.controls[this.selectedIndex].value.type = type;
+    this.fields.controls[this.selectedIndex].value.dataType = type;
   }
 
   createSchema(newSchema) {

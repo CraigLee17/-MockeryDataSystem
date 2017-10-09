@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-7 col-sm-12">
+    <h3><strong>{{schema?.name}}</strong></h3>
+    <div class="card">
+      <table class="table table-sm table-striped table-responsive">
+        <thead>
+        <tr>
+          <th>Field Name</th>
+          <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let field of schema?.fields">
+          <td>
+            <div class="form-control text-primary col-md-3">{{field?.name}}</div>
+          </td>
+          <td>
+            <div class="form-control text-info col-md-3">{{field?.dataType?.name}}</div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

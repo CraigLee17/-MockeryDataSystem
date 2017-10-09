@@ -16,6 +16,10 @@ export class SchemaService {
     return this.http.get<[Schema]>('/mockdata/api/v1/user/' + this.user.id + '/schemas');
   }
 
+  getSchemaById(id) {
+    return this.http.get<Schema>('/mockdata/api/v1/user/' + this.user.id + '/schema/' + id);
+  }
+
   create(schema: Schema) {
     return this.http.post('/mockdata/api/v1/user/' + this.user.id + '/schema', schema);
   }

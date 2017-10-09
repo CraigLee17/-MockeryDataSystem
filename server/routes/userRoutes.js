@@ -165,7 +165,7 @@ router.post("/user", function (req, res, next) {
 router.get("/types", function (req, res, next) {
     dataTypeService.findAll(function (err, types) {
         if (err) {
-            req.send(err);
+            res.send(err);
         } else {
             res.json(types);
         }
@@ -176,9 +176,20 @@ router.get("/user/:userid/schemas", function (req, res, next) {
     var userid = req.params.userid;
     schemaService.findByUserId(userid, function (err, schemas) {
         if (err) {
-            req.send(err);
+            res.send(err);
         } else {
             res.json(schemas);
+        }
+    });
+});
+
+router.get("/user/:userid/schema/:id", function (req, res, next) {
+    var id = req.params.id;
+    schemaService.findByID(id, function (err, schema) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(schema);
         }
     });
 });

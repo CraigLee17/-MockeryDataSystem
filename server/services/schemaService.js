@@ -22,7 +22,7 @@ function findByName(name, cb) {
 module.exports.findByName = findByName;
 
 function findByID(id, cb) {
-    Schema.findById(id, cb);
+    Schema.findById(id).populate('fields.dataType').exec(cb);
 }
 
 module.exports.findByID = findByID;
