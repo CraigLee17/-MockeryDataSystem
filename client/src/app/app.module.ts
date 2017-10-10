@@ -18,6 +18,7 @@ import {CreateSchemaComponent} from './create-schema/create-schema.component';
 import {SchemaService} from "./_service/schema.service";
 import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
 import { SchemaDetailsComponent } from './schema-details/schema-details.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SchemaDetailsComponent } from './schema-details/schema-details.componen
     LogoutComponent,
     SchemaListComponent,
     CreateSchemaComponent,
-    SchemaDetailsComponent
+    SchemaDetailsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

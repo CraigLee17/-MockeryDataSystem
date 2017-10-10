@@ -46,40 +46,6 @@ router.get("/user/:userid/schemas/:schemaid/preview", function (req, res, next) 
     });
 });
 
-router.post("/schema", function (req, res, next) {
-    var newSchema = req.body;
-    schemaService.create(newSchema, function (err, schema) {
-        if (err) {
-            res.status(400).send("Invalid schema supplied");
-            return;
-        }
-        res.json(schema);
-    });
-});
-
-router.put("/schema", function (req, res, next) {
-    var updatedSchema = req.body;
-    schemaService.update(updatedSchema, function (err, schema) {
-        if (err) {
-            res.status(400).send("Invalid schema supplied");
-            return;
-        }
-        res.json(schema);
-    });
-});
-
-router.delete("/schemas/:schemaid", function (req, res, next) {
-    var id = req.params.schemaid;
-    schemaService.remove(id, function (err, result) {
-        if (err) {
-            res.send(err);
-            return;
-        } else {
-            res.json(result);
-        }
-    });
-});
-
 router.get("/initial", function (req, res, next) {
     var dataTypes = [
         {
@@ -181,6 +147,10 @@ router.get("/types", function (req, res, next) {
     });
 });
 
+
+
+
+/*-------------------------schemas------------------------------------------*/
 router.get("/user/:userid/schemas", function (req, res, next) {
     var userid = req.params.userid;
     schemaService.findByUserId(userid, function (err, schemas) {
@@ -208,7 +178,7 @@ router.post("/user/:userid/schema", function (req, res, next) {
     schema.user = req.session.user.id;
     schemaService.create(schema, function (err, schema) {
         if (err) {
-            res.send(err);
+            res.status(400).send("Invalid schema supplied");
         } else {
             res.json(schema);
         }

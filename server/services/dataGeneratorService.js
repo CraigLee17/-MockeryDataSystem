@@ -2,50 +2,47 @@
  * Created by Zhiyuan Li on 2017/6/27.
  */
 var dataTypeService = require("./dataTypeService.js");
-var Schema = require("./../models/schemaModel");
 var randomIp = require("random-ip");
 
 var generate = function (schema, cb) {
-    Schema.findById(schema._id).populate('fields.dataType').exec(function (err, schema) {
-        var result = [];
-        var rowNumber = 1;
-        for (var i = 0; i < schema.count; i++) {
-            var row = {};
-            for (var j = 0; j < schema.fields.length; j++) {
-                var type = schema.fields[j].dataType;
-                var fieldName = schema.fields[j].name;
-                switch (type.name) {
-                    case "row":
-                        row[fieldName] = rowNumber;
-                        break;
-                    case "number":
-                        row[fieldName] = number(5);
-                        break;
-                    case "name":
-                        row[fieldName] = name();
-                        break;
-                    case "gender":
-                        row[fieldName] = gender();
-                        break;
-                    case "country":
-                        row[fieldName] = country();
-                        break;
-                    case "email":
-                        row[fieldName] = email();
-                        break;
-                    case "boolean":
-                        row[fieldName] = boolean();
-                        break;
-                    case "ip_address_v4":
-                        row[fieldName] = randomIp('0.0.0.0');
-                        break;
-                }
+    var result = [];
+    var rowNumber = 1;
+    for (var i = 0; i < schema.count; i++) {
+        var row = {};
+        for (var j = 0; j < schema.fields.length; j++) {
+            var type = schema.fields[j].dataType;
+            var fieldName = schema.fields[j].name;
+            switch (type.name) {
+                case "row":
+                    row[fieldName] = rowNumber;
+                    break;
+                case "number":
+                    row[fieldName] = number(5);
+                    break;
+                case "name":
+                    row[fieldName] = name();
+                    break;
+                case "gender":
+                    row[fieldName] = gender();
+                    break;
+                case "country":
+                    row[fieldName] = country();
+                    break;
+                case "email":
+                    row[fieldName] = email();
+                    break;
+                case "boolean":
+                    row[fieldName] = boolean();
+                    break;
+                case "ip_address_v4":
+                    row[fieldName] = randomIp('0.0.0.0');
+                    break;
             }
-            rowNumber++;
-            result.push(row);
         }
-        cb(result);
-    });
+        rowNumber++;
+        result.push(row);
+    }
+    cb(result);
 };
 module.exports.generate = generate;
 

@@ -7,18 +7,20 @@ import {HomeComponent} from "./home/home.component";
 import {SchemaListComponent} from "./schema-list/schema-list.component";
 import {CreateSchemaComponent} from "./create-schema/create-schema.component";
 import {SchemaDetailsComponent} from "./schema-details/schema-details.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'home', component: HomeComponent},
   {path: 'schemas', component: SchemaListComponent},
   {path: 'schemas/new', component: CreateSchemaComponent},
   {path: 'schemas/:id', component: SchemaDetailsComponent},
-  // otherwise redirect to home
-  {path: '**', redirectTo: 'home'}
+  {path: 'notfound', component: NotFoundComponent},
+  // otherwise redirect to not found
+  {path: '**', redirectTo: 'notfound'}
 ];
 
 @NgModule({
@@ -26,4 +28,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class RoutingModule {}
+export class RoutingModule {
+}

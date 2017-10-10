@@ -1,10 +1,10 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" routerLink="/home">
+    <a class="navbar-brand" routerLink="/">
       <img src="../favicon.ico" width="35" height="35" class="d-inline-block align-top">
     </a>
-    <a class="navbar-brand" routerLink="/home">
+    <a class="navbar-brand" routerLink="/">
       MOCKERY DATA
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -27,9 +27,8 @@
             Hi, {{sessionService.getUser().username}}
           </a>
           <div class="dropdown-menu" aria-labelledby="userDropdown">
-            <a class="dropdown-item" data-toggle="collapse" data-target="#navbarResponsive">Profile</a>
-            <a class="dropdown-item" data-toggle="collapse" data-target="#navbarResponsive"
-               (click)="authenticationService.logout()">Logout</a>
+            <a class="dropdown-item" >Profile</a>
+            <a class="dropdown-item" routerLink="logout">Logout</a>
           </div>
         </li>
         <li class="nav-item" *ngIf="!sessionService.isLogin()">

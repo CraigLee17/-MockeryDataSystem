@@ -12,6 +12,7 @@ import {SessionService} from "../_service/session.service";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  error;
 
   constructor(private authenticationService: AuthenticationService, private router: Router,
               private sessionService: SessionService) {
@@ -31,9 +32,10 @@ export class LoginComponent implements OnInit {
         data => {
           this.sessionService.create(data);
           this.loginForm.reset();
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
         },
         error => {
+          this.error = error.error;
           console.log(error);
         });
   }

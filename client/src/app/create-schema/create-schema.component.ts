@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataTypeService} from "../_service/data.type.service";
-import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
+import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
 import {DataType} from "../_models/data.type";
 import {SchemaService} from "../_service/schema.service";
 import {Router} from "@angular/router";
@@ -12,66 +12,97 @@ import {Router} from "@angular/router";
 })
 export class CreateSchemaComponent implements OnInit {
   private dataTypes: DataType[];
-  /*dataTypes = [
-    {
-      name: 'boolean',
-      description: 'this is boolean'
-    }, {
-      name: 'number',
-      description: 'this is number'
-    }, {
-      name: 'email',
-      description: 'this is email'
-    }, {
-      name: 'gender',
-      description: 'this is gender'
-    }, {
-      name: 'postcode',
-      description: 'this is postcode'
-    }, {
-      name: 'country',
-      description: 'this is country'
-    }
-  ];*/
-  initialFields = [
-    new FormControl({name: 'id', dataType: {name: 'row'}}),
-    new FormControl({name: 'email', dataType: {name: 'email'}}),
-    new FormControl({name: 'name', dataType: {name: 'name'}}),
-    new FormControl({name: 'country', dataType: {name: 'country'}}),
-    new FormControl({name: 'gender', dataType: {name: 'gender'}}),
-  ];
+  public createSchemaForm: FormGroup;
+  public selectedIndex;
 
-  createSchemaForm: FormGroup;
-  name = new FormControl('', Validators.required);
-  count = new FormControl('', [Validators.required, Validators.pattern('^[1-9]+[0-9]*$')]);
-  fields = new FormArray(this.initialFields);
-  fileFormat = new FormControl('', Validators.required);
+  /* initialFields = [
+     new FormControl({name: 'id', dataType: {name: 'row', _id: "59d1b0269c4bfe411ce65c84"}}),
+     new FormControl({name: 'email', dataType: {name: 'email', _id: "59d1b0269c4bfe411ce65c86"}}),
+     new FormControl({name: 'name', dataType: {name: 'name', _id: "59d1b0269c4bfe411ce65c89"}}),
+     new FormControl({name: 'country', dataType: {name: 'country', _id: "59d1b0269c4bfe411ce65c88"}}),
+     new FormControl({name: 'gender', dataType: {name: 'gender', _id: "59d1b0269c4bfe411ce65c87"}}),
+   ];*/
 
-  selectedIndex;
-
-  constructor(private dataTypeService: DataTypeService, private schemaService: SchemaService, private router: Router) {
+  constructor(private fb: FormBuilder, private dataTypeService: DataTypeService, private schemaService: SchemaService, private router: Router) {
     dataTypeService.getAllDataTypes().subscribe(dataTypes => this.dataTypes = dataTypes);
   }
 
   ngOnInit() {
-    this.createSchemaForm = new FormGroup({
-      name: this.name,
-      count: this.count,
-      fields: this.fields,
-      fileFormat: this.fileFormat
+    this.createSchemaForm = this.buildForm();
+  }
+
+  buildField() {
+    const fields = <FormArray>this.createSchemaForm.controls['fields'];
+    const lastOne = <FormGroup>fields.controls[fields.length - 1];
+    return this.fb.group(lastOne.controls);
+  }
+
+  buildFields() {
+    return this.fb.array([
+      this.fb.group({
+        name: ['id', Validators.required],
+        dataType: this.fb.group({
+          name: ['row', Validators.required],
+          _id: ['59d1b0269c4bfe411ce65c84', Validators.required]
+        })
+      }),
+      this.fb.group({
+        name: ['email', Validators.required],
+        dataType: this.fb.group({
+          name: ['email', Validators.required],
+          _id: ['59d1b0269c4bfe411ce65c86', Validators.required]
+        })
+      }),
+      this.fb.group({
+        name: ['name', Validators.required],
+        dataType: this.fb.group({
+          name: ['name', Validators.required],
+          _id: ['59d1b0269c4bfe411ce65c89', Validators.required]
+        })
+      }),
+      this.fb.group({
+        name: ['country', Validators.required],
+        dataType: this.fb.group({
+          name: ['country', Validators.required],
+          _id: ['59d1b0269c4bfe411ce65c88', Validators.required]
+        })
+      }),
+      this.fb.group({
+        name: ['gender', Validators.required],
+        dataType: this.fb.group({
+          name: ['gender', Validators.required],
+          _id: ['59d1b0269c4bfe411ce65c87', Validators.required]
+        })
+      })
+    ])
+  }
+
+  buildForm() {
+    return this.fb.group({
+      name: ['', Validators.required],
+      count: ['', [Validators.required, Validators.pattern('^[1-9]+[0-9]*$')]],
+      fileFormat: ['', Validators.required],
+      fields: this.buildFields()
     });
   }
 
   removeField(index) {
-    this.fields.removeAt(index);
+    const fields = <FormArray>this.createSchemaForm.controls['fields'];
+    if (fields.length == 1) {
+      alert("The schema should have one field at least!");
+    } else {
+      fields.removeAt(index);
+    }
   }
 
   addField() {
-    this.fields.push(new FormControl({name: '', type: {name: '', description: ''}}));
+    const fields = <FormArray>this.createSchemaForm.controls['fields'];
+    fields.push(this.buildField());
   }
 
   selectType(type: DataType) {
-    this.fields.controls[this.selectedIndex].value.dataType = type;
+    const fields = <FormArray>this.createSchemaForm.controls['fields'];
+    fields.controls[this.selectedIndex].patchValue({dataType: type});
   }
 
   createSchema(newSchema) {

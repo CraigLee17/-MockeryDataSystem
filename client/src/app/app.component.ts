@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {SessionService} from "./_service/session.service";
-import {User} from "./_models/user";
 import {AuthenticationService} from "./_service/authentication.service";
 
 @Component({
@@ -15,9 +14,5 @@ export class AppComponent {
   constructor(sessionService: SessionService, authenticationService: AuthenticationService) {
     this.sessionService = sessionService;
     this.authenticationService = authenticationService;
-  }
-
-  logout() {
-    this.authenticationService.logout();
   }
 }

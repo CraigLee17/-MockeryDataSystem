@@ -6,29 +6,34 @@ import {Schema} from "../_models/schema";
 
 @Injectable()
 export class SchemaService {
-  private user: User;
+  private sessionService: SessionService;
 
   constructor(private http: HttpClient, sessionService: SessionService) {
-    this.user = sessionService.getUser();
+    this.sessionService = sessionService;
   }
 
   getSchemasByUserId() {
-    return this.http.get<[Schema]>('/mockdata/api/v1/user/' + this.user.id + '/schemas');
+    let user = this.sessionService.getUser();
+    return this.http.get<[Schema]>('/mockdata/api/v1/user/' + user.id + '/schemas');
   }
 
   getSchemaById(id) {
-    return this.http.get<Schema>('/mockdata/api/v1/user/' + this.user.id + '/schema/' + id);
+    let user = this.sessionService.getUser();
+    return this.http.get<Schema>('/mockdata/api/v1/user/' + user.id + '/schema/' + id);
   }
 
   create(schema: Schema) {
-    return this.http.post('/mockdata/api/v1/user/' + this.user.id + '/schema', schema);
+    let user = this.sessionService.getUser();
+    return this.http.post('/mockdata/api/v1/user/' + user.id + '/schema', schema);
   }
 
   remove(id) {
-    return this.http.delete('/mockdata/api/v1/user/' + this.user.id + '/schemas/' + id);
+    let user = this.sessionService.getUser();
+    return this.http.delete('/mockdata/api/v1/user/' + user.id + '/schemas/' + id);
   }
 
   previewBySchemaId(id) {
-    return this.http.get('/mockdata/api/v1/user/' + this.user.id + '/schemas/' + id + '/preview');
+    let user = this.sessionService.getUser();
+    return this.http.get('/mockdata/api/v1/user/' + user.id + '/schemas/' + id + '/preview');
   }
 }

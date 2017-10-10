@@ -13,7 +13,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let field of schema?.fields">
+        <tr *ngFor="let field of schema?.fields" class="justify-content-between">
           <td>
             <div class="form-control text-primary">{{field?.name}}</div>
           </td>
@@ -41,10 +41,10 @@
     </div>
     <div class="form-group">
       <div class="col-md-12">
-        <button class="btn btn-outline-primary col-sm-12 col-md-4 mb-1"
+        <button class="btn btn-outline-primary col-sm-12 col-md-8 mb-1"
                 data-toggle="modal" data-target="#modal" (click)="preview()">Preview
         </button>
-        <button class="btn btn-outline-success col-sm-12 col-md-4 mb-1">Download Data</button>
+        <button class="btn btn-outline-success col-sm-12 col-md-8 mb-1">Download</button>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title text-primary" id="modalLabel">
-          Preview
+          Preview (JSON Format)
         </h5>
       </div>
       <div class="modal-body container">

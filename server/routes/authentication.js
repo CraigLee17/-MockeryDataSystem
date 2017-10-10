@@ -18,7 +18,7 @@ router.post('/login', function (req, res, next) {
             throw err;
         }
         if (!user) {
-            return res.status(403).json({msg: info});
+            return res.status(403).send(info);
         }
         req.logIn(user, function (err) {
             if (err) {
