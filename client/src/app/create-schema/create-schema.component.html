@@ -34,6 +34,10 @@
       <label class="col-md-4 col-form-label">#Rows:</label>
       <div class="col-md-8">
         <input class="form-control" placeholder="number of rows" formControlName="count">
+        <div class="alert alert-danger"
+             *ngIf="createSchemaForm.controls['count'].dirty && createSchemaForm.controls['count'].invalid">
+          Rows should be a positive integer!
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -50,6 +54,10 @@
       <label class="col-md-4 col-form-label">Schema Name:</label>
       <div class="col-md-8">
         <input class="form-control" placeholder="schema name" formControlName="name">
+        <div class="alert alert-danger"
+             *ngIf="createSchemaForm.controls['name'].dirty && createSchemaForm.controls['name'].invalid">
+          Schema name is required!
+        </div>
       </div>
     </div>
     <div class="form-group">

@@ -5,7 +5,8 @@ var express = require('express');
 var userService = require('./../services/userService');
 var router = express.Router();
 
-router.all('/:userid/*', function (req, res, next) {
+/*
+router.all('/:userid/!*', function (req, res, next) {
     var csrfInreq = req.header("csrf_token");
     var csrfInSession = req.session.csrf;
     var authenticatedUser = req.session.user;
@@ -22,9 +23,15 @@ router.all('/:userid/*', function (req, res, next) {
         }
     });
 });
+*/
 
 router.get('/:userid/users', function (req, res, next) {
     userService.findAll(function (err, users) {
-        res.json(users);
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(users);
+        }
     });
 });
+module.exports = router;

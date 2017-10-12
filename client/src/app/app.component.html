@@ -17,6 +17,11 @@
             Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="users" *ngIf="sessionService.hasRole('admin')" >
+            Users
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="schemas" *ngIf="sessionService.isLogin()" >
             Schemas
           </a>

@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var logger = require('morgan');
 var userRoutes = require('./routes/userRoutes');
+var adminRoutes = require('./routes/adminRoutes');
 var authentication = require('./routes/authentication');
 var passport = require('passport');
 var expressValidator = require('express-validator');
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public/client')));
 
 app.use('/mockdata/api/v1', authentication);
 app.use('/mockdata/api/v1', userRoutes);
+app.use('/mockdata/api/v1/admin', adminRoutes);
 
 app.use('/*', function (req, res) {
     res.sendFile('index.html', {root: __dirname + "/public/client"});

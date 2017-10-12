@@ -19,6 +19,8 @@ import {SchemaService} from "./_service/schema.service";
 import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
 import { SchemaDetailsComponent } from './schema-details/schema-details.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { UsersComponent } from './users/users.component';
+import {Ng2SmartTableModule} from "ng2-smart-table";
 
 @NgModule({
   declarations: [
@@ -30,13 +32,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SchemaListComponent,
     CreateSchemaComponent,
     SchemaDetailsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
     RoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    Ng2SmartTableModule,
     // attach csrf token to post and put request
     HttpClientXsrfModule.withOptions({
       headerName: 'csrf-token',
