@@ -23,6 +23,8 @@
       </tr>
       </tbody>
     </table>-->
-    <ng2-smart-table class="table-hover table-striped table-responsive" [settings]="settings" [source]="source" (userRowSelect)="selectUser(data, source)"></ng2-smart-table>
+    <ng2-smart-table class="table-hover table-striped table-responsive"
+                     [settings]="settings" [source]="source" (userRowSelect)="selectUser($event)">
+    </ng2-smart-table>
   </div>
 </div>

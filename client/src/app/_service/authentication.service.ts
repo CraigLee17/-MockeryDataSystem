@@ -14,8 +14,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.http.get('/mockdata/api/v1/logout');
-    this.sessionService.destory();
+   return this.http.get('/mockdata/api/v1/logout');
   }
 
   getCurrentUser() {

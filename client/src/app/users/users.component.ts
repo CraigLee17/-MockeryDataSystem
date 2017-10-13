@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../_service/user.service";
 import {User} from "../_models/user";
+import {Router} from "@angular/router";
 import {LocalDataSource} from 'ng2-smart-table';
 
 @Component({
@@ -39,21 +40,21 @@ export class UsersComponent implements OnInit {
       edit: false,
       delete: false
     },
-    pager :{
+    pager: {
       perPage: 9
     },
     noDataMessage: "Not user found!"
   };
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     userService.getAllUsers().subscribe(users => this.source = new LocalDataSource(users));
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  selectUser(data, source) {
-    console.log(data);
-    console.log(source);
-
+  selectUser(event) {
+    let user: User = event.data;
+    this.router.navigate(['/users', user.id]);
   }
 }

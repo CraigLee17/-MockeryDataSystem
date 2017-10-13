@@ -21,6 +21,7 @@ import { SchemaDetailsComponent } from './schema-details/schema-details.componen
 import { NotFoundComponent } from './not-found/not-found.component';
 import { UsersComponent } from './users/users.component';
 import {Ng2SmartTableModule} from "ng2-smart-table";
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
     CreateSchemaComponent,
     SchemaDetailsComponent,
     NotFoundComponent,
-    UsersComponent
+    UsersComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

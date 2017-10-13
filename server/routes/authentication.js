@@ -9,7 +9,7 @@ var passport = require('../services/passport.js');
 
 router.get('/logout', function (req, res, next) {
     req.logout();
-    res.send("Successfully logout.");
+    res.json({msg: "Successfully logout."});
 });
 
 router.post('/login', function (req, res, next) {
