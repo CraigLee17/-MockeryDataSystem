@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SchemaService} from "../_service/schema.service";
 import {Schema} from "../_models/schema";
+import {SessionService} from "../_service/session.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-schema-list',
@@ -10,8 +12,9 @@ import {Schema} from "../_models/schema";
 export class SchemaListComponent implements OnInit {
   private schemas: [Schema];
 
-  constructor(private schemaService: SchemaService) {
-    schemaService.getSchemasByUserId().subscribe(schemas => this.schemas = schemas);
+  constructor(private schemaService: SchemaService, private sessionService: SessionService) {
+    const id = sessionService.getUser().id;
+    schemaService.getSchemasByUserId(id).subscribe(schemas => this.schemas = schemas);
   }
 
   ngOnInit() {}

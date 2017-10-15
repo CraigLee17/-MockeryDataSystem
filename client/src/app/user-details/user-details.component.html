@@ -1,0 +1,69 @@
+<div class="row col-md-12 container">
+  <a routerLink="/users" class="text-left">Users </a> > {{user?.username}}
+</div>
+<div class="row">
+  <div class="col-md-7 col-sm-12">
+    <h3><strong>{{user?.username}}</strong></h3>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="form-group">
+          <label class="col-form-label"><strong>First Name:</strong></label>
+          <input type="text" value="{{user?.firstName}}" class="form-control text-info" readonly>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="form-group">
+          <label class="col-form-label"><strong>Last Name:</strong></label>
+          <input type="text" value="{{user?.lastName}}" class="form-control text-info" readonly>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label"><strong>Username:</strong></label>
+      <input type="text" value="{{user?.username}}" class="form-control text-info" readonly>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label"><strong>Email:</strong></label>
+      <input type="email" value="{{user?.email}}" class="form-control text-info" readonly>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="form-group">
+          <label class="col-form-label"><strong>Role:</strong></label>
+          <div class="custom-controls-stacked d-block my-3">
+            <label class="custom-control custom-radio">
+              <input name="role" type="radio" class="custom-control-input" [checked]="user?.role === 'admin'" required>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Admin</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input name="role" type="radio" class="custom-control-input" [checked]="user?.role === 'user'" required>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">User</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="form-group">
+          <label class="col-form-label"><strong>Status:</strong></label>
+          <div class="custom-controls-stacked d-block my-3">
+            <label class="custom-control custom-radio">
+              <input name="status" type="radio" class="custom-control-input" [checked]="user?.status" required>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">True</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input name="status" type="radio" class="custom-control-input" [checked]="!user?.status" required>
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">False</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-primary">
+      {{user?.username}}' s schemas
+    </button>
+  </div>
+</div>

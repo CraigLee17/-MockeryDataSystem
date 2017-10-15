@@ -13,12 +13,16 @@ export class UserService {
     return this.http.post('/mockdata/api/v1/user', user);
   }
 
-  getByEmail(email: string) {
-    return this.http.get('/mockdata/api/v1/user/' + email);
+  getUserByEmail(email: string) {
+    return this.http.get(`/mockdata/api/v1/user/${email}`);
   }
 
   getAllUsers() {
     let user = this.sessionService.getUser();
-    return this.http.get<[User]>('/mockdata/api/v1/admin/' + user.id + '/users');
+    return this.http.get<[User]>(`/mockdata/api/v1/admin/${user.id}/users`);
+  }
+
+  getUserById(id: String) {
+    return this.http.get<User>(`/mockdata/api/v1/user/${id}`);
   }
 }

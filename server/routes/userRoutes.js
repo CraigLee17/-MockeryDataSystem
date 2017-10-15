@@ -122,6 +122,17 @@ router.get("/initial", function (req, res, next) {
     });
 });
 
+router.get("/user/:id", function (req, res, next) {
+    var id = req.params.id;
+    userService.findById(id, function (err, user) {
+       if (err) {
+           res.send(err);
+       } else {
+           res.json(user);
+       }
+    });
+});
+
 router.post("/user", function (req, res, next) {
     if (!(req.user && req.user.role == 'admin')) {
         req.body = userService.defaultRoleAndStatusForNewUser(req.body);
@@ -148,8 +159,6 @@ router.get("/types", function (req, res, next) {
 });
 
 
-
-
 /*-------------------------schemas------------------------------------------*/
 router.get("/user/:userid/schemas", function (req, res, next) {
     var userid = req.params.userid;
@@ -162,7 +171,7 @@ router.get("/user/:userid/schemas", function (req, res, next) {
     });
 });
 
-router.get("/user/:userid/schema/:id", function (req, res, next) {
+router.get("/user/:userid/schemas/:id", function (req, res, next) {
     var id = req.params.id;
     schemaService.findByID(id, function (err, schema) {
         if (err) {

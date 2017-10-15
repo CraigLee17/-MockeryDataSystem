@@ -12,28 +12,27 @@ export class SchemaService {
     this.sessionService = sessionService;
   }
 
-  getSchemasByUserId() {
-    let user = this.sessionService.getUser();
-    return this.http.get<[Schema]>('/mockdata/api/v1/user/' + user.id + '/schemas');
+  getSchemasByUserId(id) {
+    return this.http.get<[Schema]>(`/mockdata/api/v1/user/${id}/schemas`);
   }
 
   getSchemaById(id) {
     let user = this.sessionService.getUser();
-    return this.http.get<Schema>('/mockdata/api/v1/user/' + user.id + '/schema/' + id);
+    return this.http.get<Schema>(`/mockdata/api/v1/user/${user.id}/schemas/${id}`);
   }
 
   create(schema: Schema) {
     let user = this.sessionService.getUser();
-    return this.http.post('/mockdata/api/v1/user/' + user.id + '/schema', schema);
+    return this.http.post(`/mockdata/api/v1/user/${user.id}/schema`, schema);
   }
 
   remove(id) {
     let user = this.sessionService.getUser();
-    return this.http.delete('/mockdata/api/v1/user/' + user.id + '/schemas/' + id);
+    return this.http.delete(`/mockdata/api/v1/user/${user.id}/schemas/${id}`);
   }
 
   previewBySchemaId(id) {
     let user = this.sessionService.getUser();
-    return this.http.get('/mockdata/api/v1/user/' + user.id + '/schemas/' + id + '/preview');
+    return this.http.get(`/mockdata/api/v1/user/${user.id}/schemas/${id}/preview`);
   }
 }
