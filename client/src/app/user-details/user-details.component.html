@@ -1,5 +1,5 @@
 <div class="row col-md-12 container">
-  <a routerLink="/users" class="text-left">Users </a> > {{user?.username}}
+  <a routerLink="/users" class="text-left">Users </a>&nbsp;> {{user?.username}}
 </div>
 <div class="row">
   <div class="col-md-7 col-sm-12">
@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-outline-primary">
+    <button type="button" class="btn btn-outline-primary" [routerLink]="['/user', user.id, 'schemas']">
       {{user?.username}}' s schemas
     </button>
   </div>

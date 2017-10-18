@@ -3,6 +3,7 @@
  */
 var dataTypeService = require("./dataTypeService.js");
 var randomIp = require("random-ip");
+var RandomSSN = require('ssn').RandomSSN;
 
 var generate = function (schema, cb) {
     var result = [];
@@ -37,6 +38,13 @@ var generate = function (schema, cb) {
                 case "ip_address_v4":
                     row[fieldName] = randomIp('0.0.0.0');
                     break;
+                case "US_states":
+                    row[fieldName] = state();
+                    break;
+                case "ssn":
+                    row[fieldName] = ssn();
+                    break;
+
             }
         }
         rowNumber++;
@@ -88,4 +96,15 @@ var email = function () {
 var boolean = function () {
     var index = Math.floor(Math.random() * 2);
     return [true, false][index];
+};
+
+var states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'District of Columbia', 'Federated States of Micronesia', 'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Marshall Islands', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
+
+var state = function () {
+    var index = Math.floor(Math.random() * states.length);
+    return states[index];
+};
+
+var ssn = function () {
+    return new RandomSSN().value().toFormattedString();
 };

@@ -4,6 +4,7 @@ import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angul
 import {DataType} from "../_models/data.type";
 import {SchemaService} from "../_service/schema.service";
 import {Router} from "@angular/router";
+import {SessionService} from "../_service/session.service";
 
 @Component({
   selector: 'app-create-schema',
@@ -23,7 +24,9 @@ export class CreateSchemaComponent implements OnInit {
      new FormControl({name: 'gender', dataType: {name: 'gender', _id: "59d1b0269c4bfe411ce65c87"}}),
    ];*/
 
-  constructor(private fb: FormBuilder, private dataTypeService: DataTypeService, private schemaService: SchemaService, private router: Router) {
+  constructor(private sessionService: SessionService,
+              private fb: FormBuilder, private dataTypeService: DataTypeService,
+              private schemaService: SchemaService, private router: Router) {
     dataTypeService.getAllDataTypes().subscribe(dataTypes => this.dataTypes = dataTypes);
   }
 
@@ -108,7 +111,7 @@ export class CreateSchemaComponent implements OnInit {
   createSchema(newSchema) {
     this.schemaService.create(newSchema).subscribe(
       data => {
-        this.router.navigate(['/schemas']);
+        this.router.navigate(['/user', this.sessionService.getUser().id, 'schemas']);
       },
       error => {
         console.log(error);

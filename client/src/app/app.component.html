@@ -17,12 +17,12 @@
             Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="users" *ngIf="sessionService.hasRole('admin')" >
+          <a class="nav-link" routerLink="users" *ngIf="sessionService.hasRole('admin')">
             Users
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="schemas" *ngIf="sessionService.isLogin()" >
+          <a class="nav-link" routerLink="schemas" *ngIf="sessionService.isLogin() && sessionService.hasRole('user')">
             Schemas
           </a>
         </li>
@@ -32,7 +32,7 @@
             Hi, {{sessionService.getUser().username}}
           </a>
           <div class="dropdown-menu" aria-labelledby="userDropdown">
-            <a class="dropdown-item" >Profile</a>
+            <a class="dropdown-item">Profile</a>
             <a class="dropdown-item" routerLink="logout">Logout</a>
           </div>
         </li>

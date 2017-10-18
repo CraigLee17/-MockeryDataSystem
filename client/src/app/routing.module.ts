@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
+  {path: 'user/:id/schemas', component: SchemaListComponent},
   {path: 'schemas', component: SchemaListComponent},
   {path: 'schemas/new', component: CreateSchemaComponent},
   {path: 'schemas/:id', component: SchemaDetailsComponent},

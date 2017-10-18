@@ -1,6 +1,6 @@
 <h3><strong>Schemas</strong></h3>
-<a class="btn btn-outline-primary" routerLink="/schemas/new">Create a Schema</a>
-<table class="table">
+<a class="btn btn-outline-primary" routerLink="/schemas/new" *ngIf="sessionService.hasRole('user')">Create a Schema</a>
+<table class="table" *ngIf="schemas.length != 0">
   <thead>
   <tr>
     <th>Schema</th>
@@ -18,3 +18,4 @@
   </tr>
   </tbody>
 </table>
+<div class="alert alert-info" *ngIf="schemas.length == 0">Not schema found from this user!</div>

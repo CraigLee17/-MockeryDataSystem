@@ -12,12 +12,18 @@ import {ActivatedRoute} from "@angular/router";
 export class SchemaListComponent implements OnInit {
   private schemas: [Schema];
 
-  constructor(private schemaService: SchemaService, private sessionService: SessionService) {
-    const id = sessionService.getUser().id;
-    schemaService.getSchemasByUserId(id).subscribe(schemas => this.schemas = schemas);
+  constructor(private route: ActivatedRoute, private schemaService: SchemaService, private sessionService : SessionService) {
+    this.route.params.subscribe(params => {
+      let id = params['id'];
+      if (!id) {
+        id = sessionService.getUser().id;
+      }
+      schemaService.getSchemasByUserId(id).subscribe(schemas => this.schemas = schemas);
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   deleteSchema(index) {
     if (confirm("Are you sure to delete this schema?")) {
