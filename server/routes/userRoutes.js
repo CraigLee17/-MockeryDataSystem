@@ -37,7 +37,7 @@ router.get("/generate", function (req, res, next) {
     });
 });
 
-router.get("/user/:userid/schemas/:schemaid/preview", function (req, res, next) {
+router.get("/schemas/:schemaid/preview", function (req, res, next) {
     var id = req.params.schemaid;
     schemaService.findByID(id, function (err, schema) {
         dataGenerator.generate(schema, function (result) {
@@ -122,7 +122,7 @@ router.get("/initial", function (req, res, next) {
     });
 });
 
-router.get("/user/:id", function (req, res, next) {
+router.get("/users/:id", function (req, res, next) {
     var id = req.params.id;
     userService.findById(id, function (err, user) {
        if (err) {
@@ -133,7 +133,7 @@ router.get("/user/:id", function (req, res, next) {
     });
 });
 
-router.post("/user", function (req, res, next) {
+router.post("/users", function (req, res, next) {
     if (!(req.user && req.user.role == 'admin')) {
         req.body = userService.defaultRoleAndStatusForNewUser(req.body);
     }
@@ -160,7 +160,7 @@ router.get("/types", function (req, res, next) {
 
 
 /*-------------------------schemas------------------------------------------*/
-router.get("/user/:userid/schemas", function (req, res, next) {
+router.get("/users/:userid/schemas", function (req, res, next) {
     var userid = req.params.userid;
     schemaService.findByUserId(userid, function (err, schemas) {
         if (err) {
@@ -171,7 +171,7 @@ router.get("/user/:userid/schemas", function (req, res, next) {
     });
 });
 
-router.get("/user/:userid/schemas/:id", function (req, res, next) {
+router.get("/schemas/:id", function (req, res, next) {
     var id = req.params.id;
     schemaService.findByID(id, function (err, schema) {
         if (err) {
@@ -182,7 +182,7 @@ router.get("/user/:userid/schemas/:id", function (req, res, next) {
     });
 });
 
-router.post("/user/:userid/schema", function (req, res, next) {
+router.post("/schemas", function (req, res, next) {
     var schema = req.body;
     schema.user = req.session.user.id;
     schemaService.create(schema, function (err, schema) {
@@ -194,7 +194,7 @@ router.post("/user/:userid/schema", function (req, res, next) {
     });
 });
 
-router.delete("/user/:userid/schemas/:schemaid", function (req, res, next) {
+router.delete("/schemas/:schemaid", function (req, res, next) {
     var id = req.params.schemaid;
     schemaService.remove(id, function (err, schema) {
         if (err) {

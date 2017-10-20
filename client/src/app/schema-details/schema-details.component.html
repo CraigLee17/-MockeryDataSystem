@@ -1,5 +1,6 @@
 <div class="row col-md-12 container">
-  <a routerLink="/schemas" class="text-left">Schema List </a>&nbsp;> {{schema?.name}}
+  <a routerLink="/schemas" class="text-left" [routerLink]="['/user', userid, 'schemas']">
+    Schema List </a>&nbsp;> {{schema?.name}}
 </div>
 <div class="row">
   <div class="col-md-7 col-sm-12">

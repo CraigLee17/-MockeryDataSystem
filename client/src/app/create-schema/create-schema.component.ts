@@ -57,9 +57,9 @@ export class CreateSchemaComponent implements OnInit {
         })
       }),
       this.fb.group({
-        name: ['name', Validators.required],
+        name: ['first-name', Validators.required],
         dataType: this.fb.group({
-          name: ['name', Validators.required],
+          name: ['first-name', Validators.required],
           _id: ['59d1b0269c4bfe411ce65c89', Validators.required]
         })
       }),

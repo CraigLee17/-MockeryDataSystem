@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public/client')));
 
 app.use('/mockdata/api/v1', authentication);
 app.use('/mockdata/api/v1', userRoutes);
-app.use('/mockdata/api/v1/admin', adminRoutes);
+app.use('/mockdata/api/v1', adminRoutes);
 
 app.use('/*', function (req, res) {
     res.sendFile('index.html', {root: __dirname + "/public/client"});

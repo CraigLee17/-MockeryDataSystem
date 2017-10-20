@@ -11,13 +11,14 @@ import {Schema} from "../_models/schema";
 export class SchemaDetailsComponent implements OnInit {
   schema: Schema;
   previewData;
+  userid;
 
-  constructor(private route: ActivatedRoute, private schemaService: SchemaService) {
-  }
+  constructor(private route: ActivatedRoute, private schemaService: SchemaService) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       let id = params['id'];
+      this.userid = params['userid'];
       this.schemaService.getSchemaById(id).subscribe(
         schema => this.schema = schema,
         error => console.log(error)

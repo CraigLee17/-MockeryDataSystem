@@ -12,17 +12,6 @@ export class UserDetailsComponent implements OnInit {
 
   user: User;
 
-  /*  user = {
-      "email": "123@qq.com",
-      "status": true,
-      "role": "admin",
-      "lastName": "li",
-      "firstName": "Zhiyuan",
-      "username": "craig",
-      "id": "59c56267238fdc3c682e02aa"
-    };*/
-
-
   constructor(private route: ActivatedRoute, private userService: UserService) {
   }
 
@@ -35,4 +24,15 @@ export class UserDetailsComponent implements OnInit {
       );
     });
   }
+
+  changeStatus(status) {
+    this.user.status = status;
+    this.userService.updateUser(this.user);
+  }
+
+  changeRole(role) {
+    this.user.role = role;
+    this.userService.updateUser(this.user);
+  }
+
 }

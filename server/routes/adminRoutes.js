@@ -25,7 +25,7 @@ router.all('/:userid/!*', function (req, res, next) {
 });
 */
 
-router.get('/:userid/users', function (req, res, next) {
+router.get('/users', function (req, res, next) {
     userService.findAll(function (err, users) {
         if (err) {
             res.send(err);

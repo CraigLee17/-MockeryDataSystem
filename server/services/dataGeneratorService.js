@@ -4,6 +4,8 @@
 var dataTypeService = require("./dataTypeService.js");
 var randomIp = require("random-ip");
 var RandomSSN = require('ssn').RandomSSN;
+var randomLastName = require('random-lastName');
+var randomFirstName = require('random-firstName');
 
 var generate = function (schema, cb) {
     var result = [];
@@ -20,8 +22,11 @@ var generate = function (schema, cb) {
                 case "number":
                     row[fieldName] = number(5);
                     break;
-                case "name":
-                    row[fieldName] = name();
+                case "first_name":
+                    row[fieldName] = firstName();
+                    break;
+                case "last_name":
+                    row[fieldName] = randomLastName();
                     break;
                 case "gender":
                     row[fieldName] = gender();
@@ -58,18 +63,6 @@ var number = function (length) {
     return Math.random().toString().slice(2, 2 + length);
 };
 
-var names = [
-    "Nick", "Jodi", "Phoebe", "Langston", "Hadria", "Clem", "Anette", "Stewart", "Willy", "Umeko", "Aura", "Lowe", "Oralia", "Issie", "Gwenora",
-    "Arny", "Grier", "Flossi", "Tyrus", "Keir", "Quint", "Johnathan", "Gertrud", "Kylynn", "Palmer", "Agneta", "Harrison", "Gardiner", "Nataline",
-    "Zachery", "Merla", "Hayyim", "Aeriela", "Alvinia", "Fionna", "Wilmar", "Jammie", "Dionis", "Nathan", "Seymour", "Alexi", "Ware", "Corilla",
-    "Dionne", "Nikolai", "Loralee", "Elton", "Harland"
-];
-
-var name = function () {
-    var index = Math.floor(Math.random() * names.length);
-    return names[index];
-};
-
 var gender = function () {
     var index = Math.floor(Math.random() * 2);
     return ["male", "female"][index];
@@ -87,10 +80,10 @@ var country = function () {
 
 var domains = ["atos", "uwlax", "sina", "gmail", "walmart", "taobao", "baidu", "netflix", "qq", "stanford"];
 var email = function () {
-    var firstInital = name()[0];
-    var lastName = name();
+    var firstInitial = randomFirstName().charAt(0);
+    var lastName = randomLastName();
     var index = Math.floor(Math.random() * domains.length);
-    return firstInital + lastName + '@' + domains[index] + '.com';
+    return firstInitial + lastName + '@' + domains[index] + '.com';
 };
 
 var boolean = function () {

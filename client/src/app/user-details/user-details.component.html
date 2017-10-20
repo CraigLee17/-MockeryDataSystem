@@ -32,12 +32,14 @@
           <label class="col-form-label"><strong>Role:</strong></label>
           <div class="custom-controls-stacked d-block my-3">
             <label class="custom-control custom-radio">
-              <input name="role" type="radio" class="custom-control-input" [checked]="user?.role === 'admin'" required>
+              <input name="role" type="radio" class="custom-control-input" (click)="changeRole('admin')"
+                     [checked]="user?.role === 'admin'">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">Admin</span>
             </label>
             <label class="custom-control custom-radio">
-              <input name="role" type="radio" class="custom-control-input" [checked]="user?.role === 'user'" required>
+              <input name="role" type="radio" class="custom-control-input" (click)="changeRole('user')"
+                     [checked]="user?.role === 'user'">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">User</span>
             </label>
@@ -49,12 +51,14 @@
           <label class="col-form-label"><strong>Status:</strong></label>
           <div class="custom-controls-stacked d-block my-3">
             <label class="custom-control custom-radio">
-              <input name="status" type="radio" class="custom-control-input" [checked]="user?.status" required>
+              <input name="status" type="radio" class="custom-control-input" (click)="changeStatus('true')"
+                     [checked]="user?.status">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">True</span>
             </label>
             <label class="custom-control custom-radio">
-              <input name="status" type="radio" class="custom-control-input" [checked]="!user?.status" required>
+              <input name="status" type="radio" class="custom-control-input" (click)="changeStatus('false')"
+                     [checked]="!user?.status">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">False</span>
             </label>
@@ -62,7 +66,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-outline-primary" [routerLink]="['/user', user.id, 'schemas']">
+    <button type="button" class="btn btn-outline-primary" [routerLink]="['/user', user?.id, 'schemas']">
       {{user?.username}}' s schemas
     </button>
   </div>

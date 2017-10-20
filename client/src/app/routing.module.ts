@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'user/:id/schemas', component: SchemaListComponent},
   {path: 'schemas', component: SchemaListComponent},
   {path: 'schemas/new', component: CreateSchemaComponent},
-  {path: 'schemas/:id', component: SchemaDetailsComponent},
+  {path: 'users/:userid/schemas/:id', component: SchemaDetailsComponent},
   {path: 'users', component: UsersComponent},
   {path: 'users/:id', component: UserDetailsComponent},
   {path: 'notfound', component: NotFoundComponent},

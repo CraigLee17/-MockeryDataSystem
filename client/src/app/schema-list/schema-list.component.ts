@@ -11,14 +11,15 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class SchemaListComponent implements OnInit {
   private schemas: [Schema];
+  private id;
 
-  constructor(private route: ActivatedRoute, private schemaService: SchemaService, private sessionService : SessionService) {
+  constructor(private route: ActivatedRoute, private schemaService: SchemaService, private sessionService: SessionService) {
     this.route.params.subscribe(params => {
-      let id = params['id'];
-      if (!id) {
-        id = sessionService.getUser().id;
+      this.id = params['id'];
+      if (!this.id) {
+        this.id = sessionService.getUser().id;
       }
-      schemaService.getSchemasByUserId(id).subscribe(schemas => this.schemas = schemas);
+      schemaService.getSchemasByUserId(this.id).subscribe(schemas => this.schemas = schemas);
     });
   }
 

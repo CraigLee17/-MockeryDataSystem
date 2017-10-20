@@ -1,6 +1,6 @@
 <h3><strong>Schemas</strong></h3>
 <a class="btn btn-outline-primary" routerLink="/schemas/new" *ngIf="sessionService.hasRole('user')">Create a Schema</a>
-<table class="table" *ngIf="schemas.length != 0">
+<table class="table" *ngIf="schemas?.length != 0">
   <thead>
   <tr>
     <th>Schema</th>
@@ -9,13 +9,13 @@
   </thead>
   <tbody>
   <tr *ngFor="let schema of schemas; let i = index;">
-    <td><span><a [routerLink]="['/schemas', schema.id]">{{schema.name}}</a></span>
+    <td><span><a [routerLink]="['/users',id,'schemas', schema?.id]">{{schema?.name}}</a></span>
       <div>
-        <span class="mr-3 text-secondary" *ngFor="let type of schema.fields">{{type.name}}</span>
+        <span class="mr-3 text-secondary" *ngFor="let field of schema?.fields">{{field?.name}}</span>
       </div>
     </td>
     <td><a class="oi oi-x" style="margin-top: 8px" (click)="deleteSchema(i)"></a></td>
   </tr>
   </tbody>
 </table>
-<div class="alert alert-info" *ngIf="schemas.length == 0">Not schema found from this user!</div>
+<div class="alert alert-info" *ngIf="schemas?.length == 0">Not schema found from this user!</div>

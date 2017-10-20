@@ -10,19 +10,18 @@ export class UserService {
   }
 
   create(user: User) {
-    return this.http.post('/mockdata/api/v1/user', user);
-  }
-
-  getUserByEmail(email: string) {
-    return this.http.get(`/mockdata/api/v1/user/${email}`);
+    return this.http.post('/mockdata/api/v1/users', user);
   }
 
   getAllUsers() {
-    let user = this.sessionService.getUser();
-    return this.http.get<[User]>(`/mockdata/api/v1/admin/${user.id}/users`);
+    return this.http.get<[User]>(`/mockdata/api/v1/users`);
   }
 
   getUserById(id: String) {
-    return this.http.get<User>(`/mockdata/api/v1/user/${id}`);
+    return this.http.get<User>(`/mockdata/api/v1/users/${id}`);
+  }
+
+  updateUser(user : User) {
+
   }
 }

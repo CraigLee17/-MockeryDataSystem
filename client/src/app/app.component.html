@@ -27,8 +27,8 @@
           </a>
         </li>
         <li class="nav-item dropdown" *ngIf="sessionService.isLogin()">
-          <a class="nav-link dropdown-toggle" id="userDropdown" data-toggle="dropdown" aria-expanded="false"
-             routerLink="">
+          <a class="nav-link dropdown-toggle" id="userDropdown"
+             data-toggle="dropdown" aria-expanded="false">
             Hi, {{sessionService.getUser().username}}
           </a>
           <div class="dropdown-menu" aria-labelledby="userDropdown">
