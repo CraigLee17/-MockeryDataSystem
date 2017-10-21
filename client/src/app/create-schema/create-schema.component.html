@@ -16,8 +16,8 @@
           </td>
           <td>
             <input class="form-control type-input" readonly
-                   data-toggle="modal" data-target="#modal" [value]=field.value.dataType.name
-                   (click)="selectedIndex = i">
+                   data-toggle="modal" data-target="#modal"
+                   [value]=field.value.dataType.name (click)="selectedIndex = i">
           </td>
           <td>
             <a class="oi oi-x" (click)="removeField(i)"></a>
@@ -72,7 +72,6 @@
   </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -82,12 +81,20 @@
           Choose a Type
         </h5>
       </div>
-      <div class="modal-body container row">
-        <div class="col-md-4 col-sm-6" *ngFor="let type of dataTypes">
-          <div class="card mt-1 h-130" style="cursor: pointer" (click)="selectType(type)" data-dismiss="modal">
-            <div class="card-body">
-              <h4 class="card-title text-primary">{{type.name}}</h4>
-              <p class="card-text text-secondary">{{type.description}}</p>
+      <div class="modal-body">
+        <ul class="nav nav-pills">
+          <li class="nav-item" *ngFor="let key of category; let i = index">
+            <a class="nav-link text-uppercase" [ngClass]="{active: i==0}" data-toggle="tab" href="#{{key}}" role="tab"
+               aria-controls=key aria-selected="true">{{key}}</a>
+          </li>
+        </ul>
+        <div class="tab-content container">
+          <div class="tab-pane fade show" [ngClass]="{active: i==0}" id={{key}}
+               *ngFor="let key of category; let i = index">
+            <div class="type" *ngFor="let type of dataTypes[key]" (click)="selectType(type)"
+                 data-dismiss="modal">
+              <div class="type-name">{{type.name}}</div>
+              <div class="type-description">{{type.description}}</div>
             </div>
           </div>
         </div>

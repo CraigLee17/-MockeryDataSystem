@@ -125,11 +125,11 @@ router.get("/initial", function (req, res, next) {
 router.get("/users/:id", function (req, res, next) {
     var id = req.params.id;
     userService.findById(id, function (err, user) {
-       if (err) {
-           res.send(err);
-       } else {
-           res.json(user);
-       }
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(user);
+        }
     });
 });
 
@@ -204,5 +204,93 @@ router.delete("/schemas/:schemaid", function (req, res, next) {
         }
     });
 });
+
+router.get("/init", function (req, res, next) {
+    mongoose.connection.db.dropCollection("datatypes", function (err, result) {
+        var types = buildTypes();
+        for (var i in types) {
+            var type = {name: types[i]};
+            dataTypeService.create(type, function (type) {
+            })
+        }
+        res.send("success");
+    });
+});
+
+function buildTypes() {
+    return [
+        "address.zipCode",
+        "address.city",
+        "address.cityPrefix",
+        "address.streetName",
+        "address.streetAddress",
+        "address.streetSuffix",
+        "address.streetPrefix",
+        "address.secondaryAddress",
+        "address.county",
+        "address.country",
+        "address.countryCode",
+        "address.state",
+        "address.stateAbbr",
+        "address.latitude",
+        "address.longitude",
+        "company.suffixes",
+        "company.companyName",
+        "company.companySuffix",
+        "company.catchPhrase",
+        "date.past",
+        "date.future",
+        "date.between",
+        "date.recent",
+        "date.soon",
+        "date.month",
+        "date.weekday",
+        "finance.account",
+        "finance.accountName",
+        "finance.mask",
+        "finance.amount",
+        "finance.transactionType",
+        "finance.currencyCode",
+        "finance.currencyName",
+        "finance.currencySymbol",
+        "internet.avater",
+        "internet.email",
+        "internet.userName",
+        "internet.protocol",
+        "internet.domainName",
+        "internet.url",
+        "internet.ip",
+        "internet.ipv6",
+        "internet.password",
+        "name.firstName",
+        "name.lastName",
+        "name.jobTitle",
+        "name.prefix",
+        "name.suffix",
+        "name.title",
+        "name.jobDescriptor",
+        "name.jobArea",
+        "name.jobType",
+        "phone.phoneNumber",
+        "phone.phoneNumberFormat",
+        "random.number",
+        "random.arrayElement",
+        "random.objectElement",
+        "random.uuid",
+        "random.boolean",
+        "random.word",
+        "random.image",
+        "random.locale",
+        "random.alphaNumeric",
+        "random.hexaDecimal",
+        "system.fileName",
+        "system.mimeType",
+        "system.fileType",
+        "system.fileExt",
+        "system.directoryPath",
+        "system.filePath",
+        "system.commonFileName"
+    ];
+}
 
 module.exports = router;

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DataTypeService} from "../_service/data.type.service";
-import {FormGroup, FormControl, Validators, FormArray, FormBuilder} from '@angular/forms';
+import {FormGroup, Validators, FormArray, FormBuilder} from '@angular/forms';
 import {DataType} from "../_models/data.type";
 import {SchemaService} from "../_service/schema.service";
 import {Router} from "@angular/router";
@@ -12,22 +12,29 @@ import {SessionService} from "../_service/session.service";
   styleUrls: ['./create-schema.component.css']
 })
 export class CreateSchemaComponent implements OnInit {
-  private dataTypes: DataType[];
-  public createSchemaForm: FormGroup;
-  public selectedIndex;
+  private dataTypes = {};
+  private createSchemaForm: FormGroup;
+  private selectedIndex;
+  private category = ["address", "company", "date", "finance", "internet", "name", "phone", "random", "system"];
 
-  /* initialFields = [
-     new FormControl({name: 'id', dataType: {name: 'row', _id: "59d1b0269c4bfe411ce65c84"}}),
-     new FormControl({name: 'email', dataType: {name: 'email', _id: "59d1b0269c4bfe411ce65c86"}}),
-     new FormControl({name: 'name', dataType: {name: 'name', _id: "59d1b0269c4bfe411ce65c89"}}),
-     new FormControl({name: 'country', dataType: {name: 'country', _id: "59d1b0269c4bfe411ce65c88"}}),
-     new FormControl({name: 'gender', dataType: {name: 'gender', _id: "59d1b0269c4bfe411ce65c87"}}),
-   ];*/
 
   constructor(private sessionService: SessionService,
               private fb: FormBuilder, private dataTypeService: DataTypeService,
               private schemaService: SchemaService, private router: Router) {
-    dataTypeService.getAllDataTypes().subscribe(dataTypes => this.dataTypes = dataTypes);
+    this.dataTypeService.getAllDataTypes().subscribe(dataTypes => this.categorizeTypes(dataTypes));
+  }
+
+  categorizeTypes(dataTypes) {
+    for (var index in this.category) {
+      var kind = this.category[index];
+      this.dataTypes[kind] = dataTypes.filter(type => type.name.startsWith(kind)).map(
+        type => {
+          type.name = type.name.substring(type.name.indexOf('.') + 1).
+          replace(/([A-Z])/g, ' $1').
+          replace(/^./, str => str.toUpperCase());
+          return type;
+        });
+    }
   }
 
   ngOnInit() {
@@ -43,38 +50,38 @@ export class CreateSchemaComponent implements OnInit {
   buildFields() {
     return this.fb.array([
       this.fb.group({
-        name: ['id', Validators.required],
-        dataType: this.fb.group({
-          name: ['row', Validators.required],
-          _id: ['59d1b0269c4bfe411ce65c84', Validators.required]
-        })
-      }),
-      this.fb.group({
         name: ['email', Validators.required],
         dataType: this.fb.group({
           name: ['email', Validators.required],
-          _id: ['59d1b0269c4bfe411ce65c86', Validators.required]
+          _id: ['59eabbc83bb4472dcc1f6c12', Validators.required]
         })
       }),
       this.fb.group({
         name: ['first-name', Validators.required],
         dataType: this.fb.group({
-          name: ['first-name', Validators.required],
-          _id: ['59d1b0269c4bfe411ce65c89', Validators.required]
+          name: ['firstName', Validators.required],
+          _id: ['59eabbc83bb4472dcc1f6c1a', Validators.required]
+        })
+      }),
+      this.fb.group({
+        name: ['last-name', Validators.required],
+        dataType: this.fb.group({
+          name: ['lastName', Validators.required],
+          _id: ['59eabbc83bb4472dcc1f6c1b', Validators.required]
         })
       }),
       this.fb.group({
         name: ['country', Validators.required],
         dataType: this.fb.group({
           name: ['country', Validators.required],
-          _id: ['59d1b0269c4bfe411ce65c88', Validators.required]
+          _id: ['59eabbc83bb4472dcc1f6bf8', Validators.required]
         })
       }),
       this.fb.group({
-        name: ['gender', Validators.required],
+        name: ['date', Validators.required],
         dataType: this.fb.group({
-          name: ['gender', Validators.required],
-          _id: ['59d1b0269c4bfe411ce65c87', Validators.required]
+          name: ['past', Validators.required],
+          _id: ['59eabbc83bb4472dcc1f6c02', Validators.required]
         })
       })
     ])
