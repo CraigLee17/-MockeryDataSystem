@@ -1,9 +1,9 @@
 /**
  * Created by Zhiyuan Li on 2017/6/27.
  */
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var schemaSchema = mongoose.Schema({
+const schemaSchema = mongoose.Schema({
     name: String,
     user: {
         type: mongoose.Schema.ObjectId,
@@ -27,5 +27,5 @@ schemaSchema.set('toJSON', {
     }
 });
 
-var Schema = mongoose.model('Schema', schemaSchema);
+const Schema = mongoose.model('Schema', schemaSchema);
 module.exports = Schema;

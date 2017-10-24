@@ -1,7 +1,7 @@
 /**
  * Created by Zhiyuan Li on 2017/7/17.
  */
-var MockData = require('./../models/mockDataModel');
+const MockData = require('./../models/mockDataModel');
 
 function create(dataType, cb) {
     new MockData(dataType).save(cb);

@@ -25,7 +25,7 @@ export class CreateSchemaComponent implements OnInit {
   }
 
   categorizeTypes(dataTypes) {
-    for (var index in this.category) {
+    for (let index in this.category) {
       var kind = this.category[index];
       this.dataTypes[kind] = dataTypes.filter(type => type.name.startsWith(kind)).map(
         type => {

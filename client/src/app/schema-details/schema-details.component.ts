@@ -17,7 +17,7 @@ export class SchemaDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      let id = params['id'];
+      const id = params['id'];
       this.userid = params['userid'];
       this.schemaService.getSchemaById(id).subscribe(
         schema => this.schema = schema,

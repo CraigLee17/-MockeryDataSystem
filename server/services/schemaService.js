@@ -1,7 +1,7 @@
 /**
  * Created by Zhiyuan Li on 2017/6/27.
  */
-var Schema = require('./../models/schemaModel');
+const Schema = require('./../models/schemaModel');
 
 function create(schema, cb) {
     new Schema(schema).save(cb);

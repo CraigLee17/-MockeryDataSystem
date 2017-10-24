@@ -1,21 +1,21 @@
 /**
  * Created by Zhiyuan Li on 2017/6/27.
  */
-var express = require("express");
-var router = express.Router();
-var dataGenerator = require("./../services/dataGeneratorService");
-var schemaService = require("./../services/schemaService");
-var dataTypeService = require("./../services/dataTypeService");
-var userService = require("./../services/userService");
-var mongoose = require("mongoose");
-var js2xmlparser = require("js2xmlparser");
-var json2csv = require("json2csv");
-var passport = require('../services/passport.js');
+const express = require("express");
+const router = express.Router();
+const dataGenerator = require("./../services/dataGeneratorService");
+const schemaService = require("./../services/schemaService");
+const dataTypeService = require("./../services/dataTypeService");
+const userService = require("./../services/userService");
+const mongoose = require("mongoose");
+const js2xmlparser = require("js2xmlparser");
+const json2csv = require("json2csv");
+const passport = require('../services/passport.js');
 
-router.get("/generate", function (req, res, next) {
-    schemaService.findByName("mySchema", function (err, schemas) {
-        var schema = schemas[0];
-        dataGenerator.generate(schema, function (result) {
+router.get("/schemas/:id/download", function (req, res, next) {
+    const id = req.params.id;
+    schemaService.findByID(id, function (err, schema) {
+        dataGenerator.generateBySchema(schema, function (result) {
             switch (schema.fileFormat.toLowerCase()) {
                 case "xml":
                     res.set("Content-Type", "text/xml");
@@ -26,7 +26,7 @@ router.get("/generate", function (req, res, next) {
                     break;
                 case "csv":
                     var fields = [];
-                    for (var i = 0; i < schema.fields.length; i++) {
+                    for (let i = 0; i < schema.fields.length; i++) {
                         fields.push(schema.fields[i].name);
                     }
                     var csv = json2csv({data: result, fields: fields});
@@ -38,92 +38,16 @@ router.get("/generate", function (req, res, next) {
 });
 
 router.get("/schemas/:schemaid/preview", function (req, res, next) {
-    var id = req.params.schemaid;
+    const id = req.params.schemaid;
     schemaService.findByID(id, function (err, schema) {
-        dataGenerator.generate(schema, function (result) {
+        dataGenerator.generateBySchema(schema, function (result) {
             res.json(result);
         });
     });
 });
 
-router.get("/initial", function (req, res, next) {
-    var dataTypes = [
-        {
-            name: "row",
-            description: "This is row number"
-        }, {
-            name: "number",
-            description: "This is number"
-        }, {
-            name: "email",
-            description: "This is email"
-        }, {
-            name: "gender",
-            description: "This is gender"
-        }, {
-            name: "country",
-            description: "This is country"
-        }, {
-            name: "name",
-            description: "This is name"
-        }, {
-            name: "boolean",
-            description: "This is boolean"
-        }, {
-            name: "ip_address_v4",
-            description: "This is IP Address v4"
-        }
-    ];
-    var schema = {
-        name: "mySchema",
-        fields: [{
-            name: "row"
-        }, {
-            name: "number"
-        }, {
-            name: "email"
-        }, {
-            name: "gender"
-        }, {
-            name: "country"
-        }, {
-            name: "name"
-        }, {
-            name: "boolean"
-        }, {
-            name: "ip_address_v4"
-        }],
-        count: 10,
-        fileFormat: "json",
-        user: '59b20d9177a8e919c496ed59'
-    };
-    var count = 0;
-    mongoose.connection.db.dropCollection("datatypes", function (err, result) {
-        mongoose.connection.db.dropCollection("schemas", function (err, result) {
-            for (var i in dataTypes) {
-                dataTypeService.create(dataTypes[i], function (err, dataType) {
-                    for (var i in schema.fields) {
-                        if (schema.fields[i].name == dataType.name) {
-                            schema.fields[i]["dataType"] = dataType._id;
-                            break;
-                        }
-                    }
-
-                    if (dataTypes.length - 1 == count++) {
-                        schemaService.create(schema, function (err, schema) {
-                            if (err)
-                                res.send(err);
-                            res.json(schema);
-                        });
-                    }
-                });
-            }
-        });
-    });
-});
-
 router.get("/users/:id", function (req, res, next) {
-    var id = req.params.id;
+    const id = req.params.id;
     userService.findById(id, function (err, user) {
         if (err) {
             res.send(err);
@@ -161,7 +85,7 @@ router.get("/types", function (req, res, next) {
 
 /*-------------------------schemas------------------------------------------*/
 router.get("/users/:userid/schemas", function (req, res, next) {
-    var userid = req.params.userid;
+    const userid = req.params.userid;
     schemaService.findByUserId(userid, function (err, schemas) {
         if (err) {
             res.send(err);
@@ -172,7 +96,7 @@ router.get("/users/:userid/schemas", function (req, res, next) {
 });
 
 router.get("/schemas/:id", function (req, res, next) {
-    var id = req.params.id;
+    const id = req.params.id;
     schemaService.findByID(id, function (err, schema) {
         if (err) {
             res.send(err);
@@ -183,7 +107,7 @@ router.get("/schemas/:id", function (req, res, next) {
 });
 
 router.post("/schemas", function (req, res, next) {
-    var schema = req.body;
+    let schema = req.body;
     schema.user = req.session.user.id;
     schemaService.create(schema, function (err, schema) {
         if (err) {
@@ -195,7 +119,7 @@ router.post("/schemas", function (req, res, next) {
 });
 
 router.delete("/schemas/:schemaid", function (req, res, next) {
-    var id = req.params.schemaid;
+    const id = req.params.schemaid;
     schemaService.remove(id, function (err, schema) {
         if (err) {
             res.send(err);
@@ -207,11 +131,10 @@ router.delete("/schemas/:schemaid", function (req, res, next) {
 
 router.get("/init", function (req, res, next) {
     mongoose.connection.db.dropCollection("datatypes", function (err, result) {
-        var types = buildTypes();
-        for (var i in types) {
-            var type = {name: types[i]};
-            dataTypeService.create(type, function (type) {
-            })
+        const types = buildTypes();
+        for (let i in types) {
+            let type = {name: types[i]};
+            dataTypeService.create(type, function (type) {})
         }
         res.send("success");
     });

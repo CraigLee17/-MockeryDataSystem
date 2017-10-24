@@ -54,7 +54,7 @@ export class UsersComponent implements OnInit {
   }
 
   selectUser(event) {
-    let user: User = event.data;
+    const user: User = event.data;
     this.router.navigate(['/users', user.id]);
   }
 }

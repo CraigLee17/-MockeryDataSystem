@@ -1,10 +1,10 @@
 /**
  * Created by Zhiyuan Li on 2017/6/22.
  */
-var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt-nodejs');
 
-var userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     username: String,
     firstName: String,
     lastName: String,
@@ -35,5 +35,5 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-var User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 module.exports = User;

@@ -1,9 +1,9 @@
 /**
  * Created by Zhiyuan Li on 2017/6/27.
  */
-var express = require('express');
-var userService = require('./../services/userService');
-var router = express.Router();
+const express = require('express');
+const userService = require('./../services/userService');
+const router = express.Router();
 
 /*
 router.all('/:userid/!*', function (req, res, next) {

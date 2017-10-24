@@ -1,9 +1,9 @@
 /**
  * Created by Zhiyuan Li on 2017/6/27.
  */
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var mockDataSchema = mongoose.Schema({
+const mockDataSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
@@ -15,5 +15,5 @@ var mockDataSchema = mongoose.Schema({
     data: {}
 });
 
-var MockData = mongoose.model('MockData', mockDataSchema);
+const MockData = mongoose.model('MockData', mockDataSchema);
 module.exports = MockData;

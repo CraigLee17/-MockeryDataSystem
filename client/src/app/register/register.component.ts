@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
   }
 
   formGroupValidator(formGroup: FormGroup) {
-    let res = {pswNotMatch: false, clean: false};
+    const res = {pswNotMatch: false, clean: false};
     // check password equality
     if (formGroup.controls['password'].value != formGroup.controls['confirmedPassword'].value) {
       res.pswNotMatch = true;

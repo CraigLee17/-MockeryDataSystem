@@ -1,11 +1,11 @@
 /**
  * Created by Zhiyuan Li on 2017/6/22.
  */
-var express = require('express');
-var router = express.Router();
-var users = require('./../services/userService.js');
-var uuid = require('uuid');
-var passport = require('../services/passport.js');
+const express = require('express');
+const router = express.Router();
+const users = require('./../services/userService.js');
+const uuid = require('uuid');
+const passport = require('../services/passport.js');
 
 router.get('/logout', function (req, res, next) {
     req.logout();
@@ -34,9 +34,9 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/user', function (req, res, next) {
-    var user = req.user;
-    var csrfInSession = req.session.csrf;
-    var csrfInreq = req.header("csrf-token");
+    const user = req.user;
+    const csrfInSession = req.session.csrf;
+    const csrfInreq = req.header("csrf-token");
     if (user && csrfInSession == csrfInreq) {
         users.findById(user._id, function (err, userInDB) {
             if (err) {

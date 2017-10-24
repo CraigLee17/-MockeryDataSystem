@@ -34,3 +34,9 @@ a.oi {
   color: #606060;
   font-size: 12px;
 }
+
+.tab-content{
+  overflow: auto;
+  height: 300px;
+  width: inherit;
+}

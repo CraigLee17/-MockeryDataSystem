@@ -1,10 +1,10 @@
 /**
  * Created by Zhiyuan Li on 2017/6/22.
  */
-var User = require('./../models/userModel');
+const User = require('./../models/userModel');
 
 function create(newUser, cb) {
-    var user = new User(newUser);
+    let user = new User(newUser);
     user.password = user.generateHash(user.password);
     user.save(cb);
 }

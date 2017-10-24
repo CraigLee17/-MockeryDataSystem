@@ -1,23 +1,31 @@
 /**
  * Created by Zhiyuan Li on 2017/6/27.
  */
-var mocker = require('mocker-data-generator').default;
-
-var generate = function (schema, cb) {
-    var dataSchema = buildFields(schema.fields);
-    mocker().schema(schema.name, dataSchema, schema.count).build(function (data) {
-        cb(data[schema.name]);
-    });
-};
+const mocker = require('mocker-data-generator').default;
 
 function buildFields(fields) {
-    var dataSchema = {};
-    for (var i = 0; i < fields.length; i++) {
-        var name = fields[i].name;
-        var type = fields[i].dataType.name;
+    let dataSchema = {};
+    for (let i = 0; i < fields.length; i++) {
+        let name = fields[i].name;
+        let type = fields[i].dataType.name;
         dataSchema[name] = {faker: type};
     }
     return dataSchema;
 }
 
-module.exports.generate = generate;
+function generateBySchema (schema, cb) {
+    const dataSchema = buildFields(schema.fields);
+    mocker().schema(schema.name, dataSchema, schema.count).build(data => cb(data[schema.name]));
+};
+
+module.exports.generateBySchema = generateBySchema;
+
+function generateBySchemas (schemas, cb) {
+    const mock = mocker();
+    const dataSchemas = schemas.map(schema => buildFields(schema.fields));
+    for (let i in schemas) {
+        mock.schema(schemas[i].name + i, dataSchemas[i], schemas[i].count);
+    }
+    mock.build(data => cb(data));
+};
+module.exports.generateBySchemas = generateBySchemas;

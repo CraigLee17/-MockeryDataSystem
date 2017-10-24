@@ -1,7 +1,7 @@
 /**
  * Created by Zhiyuan Li on 2017/6/27.
  */
-var DataType = require('./../models/dataTypeModel');
+const DataType = require('./../models/dataTypeModel');
 
 function create(dataType, cb) {
     new DataType(dataType).save(cb);

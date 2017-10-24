@@ -1,7 +1,7 @@
 // load up the user model
-var User = require('../models/userModel');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+const User = require('../models/userModel');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 passport.serializeUser(function (user, done) {
     done(null, user._id);
@@ -53,7 +53,7 @@ passport.use('signup', new LocalStrategy({
     },
     function (req, email, password, done) {
         process.nextTick(function () {
-            var validatorSchema = {
+            const validatorSchema = {
                 "username": {
                     notEmpty: true,
                     isLength: {

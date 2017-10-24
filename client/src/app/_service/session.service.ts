@@ -25,12 +25,12 @@ export class SessionService {
   }
 
   isLogin() {
-    var user = this.getUser();
+    const user = this.getUser();
     return user ? true : false;
   }
 
   hasRole(role) {
-    var user = this.getUser();
+    const user = this.getUser();
     return user && user.role === role ? true : false;
   }
 }
