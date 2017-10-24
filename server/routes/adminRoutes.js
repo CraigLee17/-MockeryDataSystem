@@ -34,4 +34,28 @@ router.get('/users', function (req, res, next) {
         }
     });
 });
+
+router.put('/users/:id/status', function (req, res, next) {
+    const id = req.params.id;
+    const status = req.body.status;
+    userService.updateUserStatus(id, status, function (err, user) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(user);
+        }
+    });
+});
+
+router.put('/users/:id/role', function (req, res, next) {
+    const id = req.params.id;
+    const role = req.body.role;
+    userService.updateUserRole(id, role, function (err, user) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(user);
+        }
+    });
+});
 module.exports = router;

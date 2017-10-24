@@ -26,13 +26,17 @@ export class UserDetailsComponent implements OnInit {
   }
 
   changeStatus(status) {
-    this.user.status = status;
-    this.userService.updateUser(this.user);
+    this.userService.updateUserStatus(this.user.id, status).subscribe(
+      user => this.user = user,
+      error => console.log(error)
+    );
   }
 
   changeRole(role) {
-    this.user.role = role;
-    this.userService.updateUser(this.user);
+    this.userService.updateUserRole(this.user.id, role).subscribe(
+      user => this.user = user,
+      error => console.log(error)
+    );
   }
 
 }

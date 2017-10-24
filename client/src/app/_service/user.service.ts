@@ -6,7 +6,7 @@ import {SessionService} from "./session.service";
 
 @Injectable()
 export class UserService {
-  constructor(private http: HttpClient, private sessionService: SessionService) {
+  constructor(private http: HttpClient) {
   }
 
   create(user: User) {
@@ -21,7 +21,11 @@ export class UserService {
     return this.http.get<User>(`/mockdata/api/v1/users/${id}`);
   }
 
-  updateUser(user : User) {
+  updateUserStatus(id: String, status: Boolean) {
+    return this.http.put<User>(`/mockdata/api/v1/users/${id}/status`, {status: status});
+  }
 
+  updateUserRole(id: String, role: String) {
+    return this.http.put<User>(`/mockdata/api/v1/users/${id}/role`, {role: role});
   }
 }

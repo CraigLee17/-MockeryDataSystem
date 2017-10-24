@@ -11,6 +11,7 @@ This project uses the [MEAN stack](https://en.wikipedia.org/wiki/MEAN_(software_
 * [**N**ode.js](https://nodejs.org): runtime environment
 
 Other tools and technologies used:
+* [Mocker-data-generator](https://github.com/danibram/mocker-data-generator) Data generator
 * [Angular CLI](https://cli.angular.io): frontend scaffolding
 * [Bootstrap 4](http://www.getbootstrap.com): layout and styles
 * [Passport.js](http://passportjs.org/docs): User authentication
