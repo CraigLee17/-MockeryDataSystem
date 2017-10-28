@@ -1,7 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RoutingModule} from './routing.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {AceEditorModule} from 'ng2-ace-editor';
 
 import {AuthenticationService} from './_service/authentication.service';
 import {UserService} from "./_service/user.service";
@@ -17,11 +18,11 @@ import {SchemaListComponent} from './schema-list/schema-list.component';
 import {CreateSchemaComponent} from './create-schema/create-schema.component';
 import {SchemaService} from "./_service/schema.service";
 import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
-import { SchemaDetailsComponent } from './schema-details/schema-details.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { UsersComponent } from './users/users.component';
+import {SchemaDetailsComponent} from './schema-details/schema-details.component';
+import {NotFoundComponent} from './not-found/not-found.component';
+import {UsersComponent} from './users/users.component';
 import {Ng2SmartTableModule} from "ng2-smart-table";
-import { UserDetailsComponent } from './user-details/user-details.component';
+import {UserDetailsComponent} from './user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -38,11 +39,13 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     UserDetailsComponent
   ],
   imports: [
+    AceEditorModule,
     BrowserModule,
     RoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     Ng2SmartTableModule,
+    FormsModule,
     // attach csrf token to post and put request
     HttpClientXsrfModule.withOptions({
       headerName: 'csrf-token',

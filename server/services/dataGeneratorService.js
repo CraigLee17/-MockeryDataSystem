@@ -4,23 +4,32 @@
 const mocker = require('mocker-data-generator').default;
 
 function buildFields(fields) {
-    let dataSchema = {};
+    const dataSchema = {};
     for (let i = 0; i < fields.length; i++) {
-        let name = fields[i].name;
-        let type = fields[i].dataType.name;
-        dataSchema[name] = {faker: type};
+        const name = fields[i].name;
+        const type = fields[i].dataType.name;
+        const option = fields[i].option;
+        if (option != "") {
+            dataSchema[name] = {function: buildOption(option)};
+        } else {
+            dataSchema[name] = {faker: type};
+        }
     }
     return dataSchema;
 }
 
-function generateBySchema (schema, cb) {
+function buildOption(option) {
+    return new Function("return " + option);
+}
+
+function generateBySchema(schema, cb) {
     const dataSchema = buildFields(schema.fields);
     mocker().schema(schema.name, dataSchema, schema.count).build(data => cb(data[schema.name]));
 };
 
 module.exports.generateBySchema = generateBySchema;
 
-function generateBySchemas (schemas, cb) {
+function generateBySchemas(schemas, cb) {
     const mock = mocker();
     const dataSchemas = schemas.map(schema => buildFields(schema.fields));
     for (let i in schemas) {

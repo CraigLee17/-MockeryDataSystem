@@ -6,6 +6,10 @@ import {SchemaService} from "../_service/schema.service";
 import {Router} from "@angular/router";
 import {SessionService} from "../_service/session.service";
 
+import 'brace';
+import 'brace/theme/tomorrow';
+
+
 @Component({
   selector: 'app-create-schema',
   templateUrl: './create-schema.component.html',
@@ -15,6 +19,7 @@ export class CreateSchemaComponent implements OnInit {
   private dataTypes = {};
   private createSchemaForm: FormGroup;
   private selectedIndex;
+  private textfield = '';
   private category = ["address", "company", "date", "finance", "internet", "name", "phone", "random", "system"];
 
 
@@ -29,9 +34,7 @@ export class CreateSchemaComponent implements OnInit {
       var kind = this.category[index];
       this.dataTypes[kind] = dataTypes.filter(type => type.name.startsWith(kind)).map(
         type => {
-          type.name = type.name.substring(type.name.indexOf('.') + 1).
-          replace(/([A-Z])/g, ' $1').
-          replace(/^./, str => str.toUpperCase());
+          type.name = type.name.substring(type.name.indexOf('.') + 1).replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
           return type;
         });
     }
@@ -50,39 +53,44 @@ export class CreateSchemaComponent implements OnInit {
   buildFields() {
     return this.fb.array([
       this.fb.group({
+        name: ['firstName', Validators.required],
+        dataType: this.fb.group({
+          name: ['firstName', Validators.required],
+          _id: ['59eabbc83bb4472dcc1f6c1a', Validators.required]
+        }),
+        option: ''
+      }),
+      this.fb.group({
+        name: ['lastName', Validators.required],
+        dataType: this.fb.group({
+          name: ['lastName', Validators.required],
+          _id: ['59eabbc83bb4472dcc1f6c1b', Validators.required]
+        }),
+        option: ''
+      }),
+      this.fb.group({
         name: ['email', Validators.required],
         dataType: this.fb.group({
           name: ['email', Validators.required],
           _id: ['59eabbc83bb4472dcc1f6c12', Validators.required]
-        })
-      }),
-      this.fb.group({
-        name: ['first-name', Validators.required],
-        dataType: this.fb.group({
-          name: ['firstName', Validators.required],
-          _id: ['59eabbc83bb4472dcc1f6c1a', Validators.required]
-        })
-      }),
-      this.fb.group({
-        name: ['last-name', Validators.required],
-        dataType: this.fb.group({
-          name: ['lastName', Validators.required],
-          _id: ['59eabbc83bb4472dcc1f6c1b', Validators.required]
-        })
+        }),
+        option: ''
       }),
       this.fb.group({
         name: ['country', Validators.required],
         dataType: this.fb.group({
           name: ['country', Validators.required],
           _id: ['59eabbc83bb4472dcc1f6bf8', Validators.required]
-        })
+        }),
+        option: ''
       }),
       this.fb.group({
         name: ['date', Validators.required],
         dataType: this.fb.group({
           name: ['past', Validators.required],
           _id: ['59eabbc83bb4472dcc1f6c02', Validators.required]
-        })
+        }),
+        option: ''
       })
     ])
   }
@@ -110,9 +118,22 @@ export class CreateSchemaComponent implements OnInit {
     fields.push(this.buildField());
   }
 
+  applyOption() {
+    if (this.textfield != '') {
+      const fields = <FormArray>this.createSchemaForm.controls['fields'];
+      fields.controls[this.selectedIndex].patchValue({option: this.textfield});
+    }
+  }
+
   selectType(type: DataType) {
     const fields = <FormArray>this.createSchemaForm.controls['fields'];
     fields.controls[this.selectedIndex].patchValue({dataType: type});
+  }
+
+  fillTextfield(index) {
+    this.selectedIndex = index;
+    const fields = <FormArray>this.createSchemaForm.controls['fields'];
+    this.textfield = fields.controls[index].value.option;
   }
 
   createSchema(newSchema) {
@@ -124,5 +145,4 @@ export class CreateSchemaComponent implements OnInit {
         console.log(error);
       });
   }
-
 }

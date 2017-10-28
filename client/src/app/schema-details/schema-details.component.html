@@ -10,7 +10,7 @@
         <thead>
         <tr>
           <th>Field Name</th>
-          <th>Type</th>
+          <th>Type/Options</th>
         </tr>
         </thead>
         <tbody>
@@ -18,8 +18,11 @@
           <td>
             <div class="form-control text-primary">{{field?.name}}</div>
           </td>
-          <td>
+          <td *ngIf="field?.option == ''">
             <div class="form-control text-info">{{field?.dataType?.name}}</div>
+          </td>
+          <td *ngIf="field?.option != ''">
+            <div class="form-control text-info">{{field?.option}}</div>
           </td>
         </tr>
         </tbody>

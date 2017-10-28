@@ -7,6 +7,7 @@
         <tr>
           <th>Field Name</th>
           <th>Type</th>
+          <th>Options</th>
         </tr>
         </thead>
         <tbody formArrayName="fields">
@@ -20,7 +21,13 @@
                    [value]=field.value.dataType.name (click)="selectedIndex = i">
           </td>
           <td>
-            <a class="oi oi-x" (click)="removeField(i)"></a>
+            <button class="btn btn-secondary" data-placement="bottom" rel="tooltip"
+                    type="button" data-toggle="modal" data-target="#optionModal" (click)="fillTextfield(i)">
+              <i class="oi oi-cog"></i>
+            </button>
+          </td>
+          <td>
+            <a class="oi oi-x small" (click)="removeField(i)"></a>
           </td>
         </tr>
         </tbody>
@@ -70,6 +77,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
@@ -100,6 +108,31 @@
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Formula
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <ace-editor [theme]="'tomorrow'" style="min-height: 200px; width:100%; overflow: auto;" [mode]="'javascript'"
+                    class="form-control" columns="60" placeholder="example: upper(this)" rows="8" spellcheck="false"
+                    [(ngModel)]="textfield">
+          </ace-editor>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="applyOption()">Apply</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>

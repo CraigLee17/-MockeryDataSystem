@@ -15,7 +15,8 @@ const schemaSchema = mongoose.Schema({
         dataType: {
             type: mongoose.Schema.ObjectId,
             ref: 'DataType'
-        }
+        },
+        option: String
     }],
     fileFormat: String
 });

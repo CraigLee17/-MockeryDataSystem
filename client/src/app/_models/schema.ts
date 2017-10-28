@@ -8,7 +8,8 @@ export class Schema {
   count: Number;
   fields: [{
     name: String;
-    dataType: DataType
+    dataType: DataType,
+    option: String
   }];
   fileFormat: String;
 }

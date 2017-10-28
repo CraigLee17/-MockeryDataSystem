@@ -38,7 +38,6 @@ function buildTypes() {
         "date.future",
         "date.between",
         "date.recent",
-        "date.soon",
         "date.month",
         "date.weekday",
         "finance.account",
