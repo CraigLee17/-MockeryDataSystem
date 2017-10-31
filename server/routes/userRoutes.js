@@ -116,8 +116,11 @@ router.get("/schemas/:id/download", function (req, res, next) {
 router.get("/schemas/:schemaid/preview", function (req, res, next) {
     const id = req.params.schemaid;
     schemaService.findByID(id, function (err, schema) {
-        dataGenerator.generateBySchema(schema, function (result) {
-            res.json(result);
+        dataGenerator.generateBySchema(schema, function (err, result) {
+            if (err)
+                res.send(err);
+            else
+                res.json(result);
         });
     });
 });
@@ -163,7 +166,8 @@ router.get("/init", function (req, res, next) {
         const types = buildTypes();
         for (let i in types) {
             let type = {name: types[i]};
-            dataTypeService.create(type, function (type) {})
+            dataTypeService.create(type, function (type) {
+            })
         }
         res.send("success");
     });

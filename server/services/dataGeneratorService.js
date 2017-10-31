@@ -24,7 +24,7 @@ function buildOption(option) {
 
 function generateBySchema(schema, cb) {
     const dataSchema = buildFields(schema.fields);
-    mocker().schema(schema.name, dataSchema, schema.count).build(data => cb(data[schema.name]));
+    mocker().schema(schema.name, dataSchema, schema.count).build().then(data => cb(data[schema.name]), err => cb(err));
 };
 
 module.exports.generateBySchema = generateBySchema;

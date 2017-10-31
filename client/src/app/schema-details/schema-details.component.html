@@ -65,6 +65,7 @@
       </div>
       <div class="modal-body container">
         <pre *ngFor="let data of previewData" [innerHTML]="data | json"></pre>
+        <div class="alert-danger" *ngIf="error">{{error}}</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

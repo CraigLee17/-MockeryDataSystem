@@ -11,9 +11,11 @@ import {Schema} from "../_models/schema";
 export class SchemaDetailsComponent implements OnInit {
   schema: Schema;
   previewData;
-  userid;
+  userid: string;
+  error;
 
-  constructor(private route: ActivatedRoute, private schemaService: SchemaService) {}
+  constructor(private route: ActivatedRoute, private schemaService: SchemaService) {
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -29,7 +31,8 @@ export class SchemaDetailsComponent implements OnInit {
   preview() {
     this.schemaService.previewBySchemaId(this.schema.id).subscribe(
       data => this.previewData = data,
-      error => console.log(error));
+      error => this.error = error.error.text
+    )
   }
 
 }
