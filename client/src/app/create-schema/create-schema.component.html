@@ -21,13 +21,10 @@
                    [value]=field.value.dataType.name (click)="selectedIndex = i">
           </td>
           <td>
-            <button class="btn btn-secondary" data-placement="bottom" rel="tooltip"
-                    type="button" data-toggle="modal" data-target="#optionModal" (click)="fillTextfield(i)">
-              <i class="oi oi-pencil"></i>
-            </button>
+              <i class="fa fa-pencil ml-4"  data-toggle="modal" data-target="#optionModal" (click)="fillTextfield(i)"></i>
           </td>
           <td>
-            <a class="oi oi-x small" (click)="removeField(i)"></a>
+            <i class="fa fa-times" (click)="removeField(i)"></i>
           </td>
         </tr>
         </tbody>
@@ -69,11 +66,9 @@
     </div>
     <div class="form-group">
       <div class="col-md-12">
-        <button class="btn btn-outline-info col-sm-12 col-md-8 mb-1" (click)="createSchema(createSchemaForm.value)"
+        <button class="btn btn-outline-info col-sm-12 col-md-8" (click)="createSchema(createSchemaForm.value)"
                 [disabled]="createSchemaForm.invalid">Save Schema
         </button>
-        <button class="btn btn-outline-primary col-sm-12 col-md-8 mb-1">Preview</button>
-        <button class="btn btn-outline-success  col-sm-12 col-md-8">Download</button>
       </div>
     </div>
   </div>

@@ -88,24 +88,24 @@ function buildTypes() {
     ];
 }
 
-router.get("/schemas/:id/download", function (req, res, next) {
+router.get("/schemas/:id/file", function (req, res, next) {
     const id = req.params.id;
     schemaService.findByID(id, function (err, schema) {
-        dataGenerator.generateBySchema(schema, function (result) {
+        dataGenerator.generateBySchema(schema, schema.count, function (result) {
             switch (schema.fileFormat.toLowerCase()) {
                 case "xml":
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.xml');
                     res.set("Content-Type", "text/xml");
                     res.send(js2xmlparser.parse("record", result));
                     break;
                 case "json":
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.json');
                     res.json(result);
                     break;
                 case "csv":
-                    var fields = [];
-                    for (let i = 0; i < schema.fields.length; i++) {
-                        fields.push(schema.fields[i].name);
-                    }
-                    var csv = json2csv({data: result, fields: fields});
+                    const fields = schema.fields.map(field => field.name);
+                    const csv = json2csv({data: result, fields: fields});
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.csv');
                     res.set("Content-Type", "text/csv");
                     res.send(csv);
             }
@@ -116,7 +116,8 @@ router.get("/schemas/:id/download", function (req, res, next) {
 router.get("/schemas/:schemaid/preview", function (req, res, next) {
     const id = req.params.schemaid;
     schemaService.findByID(id, function (err, schema) {
-        dataGenerator.generateBySchema(schema, function (err, result) {
+        const previewCount = schema.count > 10 ? 10 : schema.count;
+        dataGenerator.generateBySchema(schema, previewCount, function (err, result) {
             if (err)
                 res.send(err);
             else

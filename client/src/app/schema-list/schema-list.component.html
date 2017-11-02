@@ -14,7 +14,9 @@
         <span class="mr-3 text-secondary" *ngFor="let field of schema?.fields">{{field?.name}}</span>
       </div>
     </td>
-    <td><a class="oi oi-x" style="margin-top: 8px" (click)="deleteSchema(i)"></a></td>
+    <td>
+      <i class="fa fa-times mt-1" (click)="deleteSchema(i)"></i>
+    </td>
   </tr>
   </tbody>
 </table>

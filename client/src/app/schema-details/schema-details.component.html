@@ -48,7 +48,10 @@
         <button class="btn btn-outline-primary col-sm-12 col-md-8 mb-1"
                 data-toggle="modal" data-target="#modal" (click)="preview()">Preview
         </button>
-        <button class="btn btn-outline-success col-sm-12 col-md-8 mb-1">Download</button>
+        <a class="btn btn-outline-success col-sm-12 col-md-8 mb-1"
+                href='/mockdata/api/v1/schemas/{{schema?.id}}/file'>
+          Download
+        </a>
       </div>
     </div>
   </div>

@@ -3,9 +3,13 @@
   background-color: white;
 }
 
-a.oi {
+i.fa {
   margin-top: 8px;
   cursor: pointer;
+}
+
+i.fa-pencil {
+  color: #006b80;
 }
 
 .type {
