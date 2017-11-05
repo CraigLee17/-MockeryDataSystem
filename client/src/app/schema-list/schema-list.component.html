@@ -5,6 +5,7 @@
   <tr>
     <th>Schema</th>
     <th>&nbsp;</th>
+    <th>&nbsp;</th>
   </tr>
   </thead>
   <tbody>
@@ -13,6 +14,9 @@
       <div>
         <span class="mr-3 text-secondary" *ngFor="let field of schema?.fields">{{field?.name}}</span>
       </div>
+    </td>
+    <td>
+      <i class="fa fa-pencil mt-1" [routerLink]="['/schemas', schema?.id, 'update']"></i>
     </td>
     <td>
       <i class="fa fa-times mt-1" (click)="deleteSchema(i)"></i>

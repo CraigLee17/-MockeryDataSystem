@@ -1,5 +1,5 @@
 export class DataType {
-  id: number;
+  _id: String;
   name: String;
   description: String;
 }

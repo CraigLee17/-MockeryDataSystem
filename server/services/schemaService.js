@@ -27,9 +27,9 @@ function findByID(id, cb) {
 
 module.exports.findByID = findByID;
 
-function update(schema, cb) {
-    Schema.update({_id: schema._id}, {$set: schema}, function (err, numAffected) {
-        findByID(schema._id, cb);
+function update(id, schema, cb) {
+    Schema.update({_id: id}, {$set: schema}, function (err, numAffected) {
+        findByID(schema.id, cb);
     });
 }
 

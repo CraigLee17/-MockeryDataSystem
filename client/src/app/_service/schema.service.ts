@@ -28,6 +28,10 @@ export class SchemaService {
     return this.http.delete(`/mockdata/api/v1/schemas/${id}`);
   }
 
+  update(schema) {
+    return this.http.put(`/mockdata/api/v1/schemas/${schema.id}`, schema);
+  }
+
   previewBySchemaId(id) {
     return this.http.get(`/mockdata/api/v1/schemas/${id}/preview`);
   }

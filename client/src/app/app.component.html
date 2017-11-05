@@ -14,16 +14,16 @@
       <ul class="nav navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">
-            Home</a>
+            HOME</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="users" *ngIf="sessionService.hasRole('admin')">
-            Users
+            USERS
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="schemas" *ngIf="sessionService.isLogin() && sessionService.hasRole('user')">
-            Schemas
+            SCHEMAS
           </a>
         </li>
         <li class="nav-item dropdown" *ngIf="sessionService.isLogin()">
@@ -32,15 +32,15 @@
             Hi, {{sessionService.getUser().username}}
           </a>
           <div class="dropdown-menu" aria-labelledby="userDropdown">
-            <a class="dropdown-item">Profile</a>
-            <a class="dropdown-item" routerLink="logout">Logout</a>
+            <a class="dropdown-item">PROFILE</a>
+            <a class="dropdown-item" routerLink="logout">LOGOUT</a>
           </div>
         </li>
         <li class="nav-item" *ngIf="!sessionService.isLogin()">
-          <a class="nav-link" routerLink="login">Login</a>
+          <a class="nav-link" routerLink="login">LOGIN</a>
         </li>
         <li class="nav-item" *ngIf="!sessionService.isLogin()">
-          <a class="nav-link" routerLink="register">Register</a>
+          <a class="nav-link" routerLink="register">REGISTER</a>
         </li>
       </ul>
     </div>

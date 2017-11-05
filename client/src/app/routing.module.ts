@@ -10,6 +10,7 @@ import {SchemaDetailsComponent} from "./schema-details/schema-details.component"
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {UsersComponent} from "./users/users.component";
 import {UserDetailsComponent} from "./user-details/user-details.component";
+import {UpdateSchemaComponent} from "./update-schema/update-schema.component";
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'user/:id/schemas', component: SchemaListComponent},
   {path: 'schemas', component: SchemaListComponent},
   {path: 'schemas/new', component: CreateSchemaComponent},
+  {path: 'schemas/:id/update', component: UpdateSchemaComponent},
   {path: 'users/:userid/schemas/:id', component: SchemaDetailsComponent},
   {path: 'users', component: UsersComponent},
   {path: 'users/:id', component: UserDetailsComponent},

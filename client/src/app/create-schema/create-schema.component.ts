@@ -8,6 +8,7 @@ import {SessionService} from "../_service/session.service";
 
 import 'brace';
 import 'brace/theme/tomorrow';
+import {Field} from "../_models/field";
 
 
 @Component({
@@ -16,11 +17,11 @@ import 'brace/theme/tomorrow';
   styleUrls: ['./create-schema.component.css']
 })
 export class CreateSchemaComponent implements OnInit {
-  private dataTypes = {};
-  private createSchemaForm: FormGroup;
-  private selectedIndex;
-  private textfield = '';
-  private category = ["address", "company", "date", "finance", "internet", "name", "phone", "random", "system"];
+  dataTypes = {};
+  createSchemaForm: FormGroup;
+  selectedIndex;
+  textfield = '';
+  category = ["address", "company", "date", "finance", "internet", "name", "phone", "random", "system"];
 
 
   constructor(private sessionService: SessionService,
@@ -51,48 +52,48 @@ export class CreateSchemaComponent implements OnInit {
   }
 
   buildFields() {
-    return this.fb.array([
-      this.fb.group({
-        name: ['firstName', Validators.required],
-        dataType: this.fb.group({
-          name: ['firstName', Validators.required],
-          _id: ['59eabbc83bb4472dcc1f6c1a', Validators.required]
-        }),
+    const fields = [
+      {
+        name: 'firstName',
+        dataType: {
+          name: 'firstName',
+          _id: '59eabbc83bb4472dcc1f6c1a'
+        },
         option: ''
-      }),
-      this.fb.group({
-        name: ['lastName', Validators.required],
-        dataType: this.fb.group({
-          name: ['lastName', Validators.required],
-          _id: ['59eabbc83bb4472dcc1f6c1b', Validators.required]
-        }),
+      }, {
+        name: 'lastName',
+        dataType: {
+          name: 'lastName',
+          _id: '59eabbc83bb4472dcc1f6c1b'
+        },
         option: ''
-      }),
-      this.fb.group({
-        name: ['email', Validators.required],
-        dataType: this.fb.group({
-          name: ['email', Validators.required],
-          _id: ['59eabbc83bb4472dcc1f6c12', Validators.required]
-        }),
+      }, {
+        name: 'email',
+        dataType: {
+          name: 'email',
+          _id: '59eabbc83bb4472dcc1f6c12'
+        },
         option: ''
-      }),
-      this.fb.group({
-        name: ['country', Validators.required],
-        dataType: this.fb.group({
-          name: ['country', Validators.required],
-          _id: ['59eabbc83bb4472dcc1f6bf8', Validators.required]
-        }),
+      }, {
+        name: 'country',
+        dataType: {
+          name: 'country',
+          _id: '59eabbc83bb4472dcc1f6bf8'
+        },
         option: ''
-      }),
-      this.fb.group({
-        name: ['date', Validators.required],
-        dataType: this.fb.group({
-          name: ['past', Validators.required],
-          _id: ['59eabbc83bb4472dcc1f6c02', Validators.required]
-        }),
+      }, {
+        name: 'date',
+        dataType: {
+          name: 'past',
+          _id: '59eabbc83bb4472dcc1f6c02'
+        },
         option: ''
-      })
-    ])
+      }
+    ];
+    const fieldGroup = fields.map(
+      field => new Field(field.name, field.dataType.name, field.dataType._id, field.option, this.fb).buildField()
+    );
+    return this.fb.array(fieldGroup);
   }
 
   buildForm() {

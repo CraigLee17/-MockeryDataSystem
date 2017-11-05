@@ -23,6 +23,7 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {UsersComponent} from './users/users.component';
 import {Ng2SmartTableModule} from "ng2-smart-table";
 import {UserDetailsComponent} from './user-details/user-details.component';
+import {UpdateSchemaComponent} from './update-schema/update-schema.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {UserDetailsComponent} from './user-details/user-details.component';
     SchemaDetailsComponent,
     NotFoundComponent,
     UsersComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    UpdateSchemaComponent
   ],
   imports: [
     AceEditorModule,

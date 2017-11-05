@@ -10,10 +10,10 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./schema-list.component.css']
 })
 export class SchemaListComponent implements OnInit {
-  private schemas: [Schema];
+  schemas: [Schema];
   private id;
 
-  constructor(private route: ActivatedRoute, private schemaService: SchemaService, private sessionService: SessionService) {
+  constructor(private route: ActivatedRoute, private schemaService: SchemaService, public sessionService: SessionService) {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       if (!this.id) {

@@ -1,0 +1,135 @@
+<div class="row" *ngIf="schema" [formGroup]="updateSchemaForm">
+  <div class="col-md-7 col-sm-12">
+    <h3><strong>Update Schema</strong></h3>
+    <div class="card">
+      <table class="table table-sm table-striped table-responsive">
+        <thead>
+        <tr>
+          <th>Field Name</th>
+          <th>Type</th>
+          <th>Options</th>
+        </tr>
+        </thead>
+        <tbody formArrayName="fields">
+        <tr *ngFor="let field of updateSchemaForm.controls.fields.controls; let i = index" [formGroupName]="i">
+          <td>
+            <input class="form-control" formControlName="name">
+          </td>
+          <td>
+            <input class="form-control type-input" readonly
+                   data-toggle="modal" data-target="#modal"
+                   [value]=field.value.dataType.name (click)="selectedIndex = i">
+          </td>
+          <td>
+            <i class="fa fa-pencil ml-4"  data-toggle="modal" data-target="#optionModal" (click)="fillTextfield(i)"></i>
+          </td>
+          <td>
+            <i class="fa fa-times" (click)="removeField(i)"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-outline-dark col-md-5 col-sm-12" (click)="addField()">Add another field</button>
+  </div>
+
+  <div class="container col-md-5">
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">#Rows:</label>
+      <div class="col-md-8">
+        <input class="form-control" placeholder="number of rows" formControlName="count">
+        <div class="alert alert-danger"
+             *ngIf="updateSchemaForm.controls['count'].dirty && updateSchemaForm.controls['count'].invalid">
+          Rows should be a positive integer!
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">Format:</label>
+      <div class="col-md-8">
+        <select class="custom-select form-control" formControlName="fileFormat">
+          <option selected>JSON</option>
+          <option>CSV</option>
+          <option>XML</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-4 col-form-label">Schema Name:</label>
+      <div class="col-md-8">
+        <input class="form-control" placeholder="schema name" formControlName="name">
+        <div class="alert alert-danger"
+             *ngIf="updateSchemaForm.controls['name'].dirty && updateSchemaForm.controls['name'].invalid">
+          Schema name is required!
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12">
+        <button class="btn btn-outline-info col-sm-12 col-md-8"
+                (click)="updateSchema(updateSchemaForm.value)"
+                [disabled]="updateSchemaForm.invalid">Update Schema
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">
+          Choose a Type
+        </h5>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-pills">
+          <li class="nav-item" *ngFor="let key of category; let i = index">
+            <a class="nav-link text-uppercase" [ngClass]="{active: i==0}" data-toggle="tab" href="#{{key}}" role="tab"
+               aria-controls=key aria-selected="true">{{key}}</a>
+          </li>
+        </ul>
+        <div class="tab-content container">
+          <div class="tab-pane fade show" [ngClass]="{active: i==0}" id={{key}}
+               *ngFor="let key of category; let i = index">
+            <div class="type" *ngFor="let type of dataTypes[key]" (click)="selectType(type)"
+                 data-dismiss="modal">
+              <div class="type-name">{{type.name}}</div>
+              <div class="type-description">{{type.description}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Formula
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <ace-editor [theme]="'tomorrow'" style="min-height: 200px; width:100%; overflow: auto;" [mode]="'javascript'"
+                      class="form-control" columns="60" placeholder="example: upper(this)" rows="8" spellcheck="false"
+                      [(ngModel)]="textfield">
+          </ace-editor>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="applyOption()">Apply</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

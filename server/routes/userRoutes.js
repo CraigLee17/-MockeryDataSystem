@@ -174,7 +174,7 @@ router.get("/init", function (req, res, next) {
     });
 });
 
-/*-------------------------schemas------------------------------------------*/
+/*-------------------------------------------------schemas-------------------------------------------------*/
 router.get("/users/:userid/schemas", function (req, res, next) {
     const userid = req.params.userid;
     schemaService.findByUserId(userid, function (err, schemas) {
@@ -213,6 +213,19 @@ router.delete("/schemas/:schemaid", function (req, res, next) {
     const id = req.params.schemaid;
     schemaService.remove(id, function (err, schema) {
         if (err) {
+            res.send(err);
+        } else {
+            res.json(schema);
+        }
+    });
+});
+
+router.put("/schemas/:schemaid", function (req, res, next) {
+    const update = req.body;
+    const id = req.params.schemaid;
+    schemaService.update(id, update, function (err, schema) {
+        if (err) {
+            console.log(err);
             res.send(err);
         } else {
             res.json(schema);
