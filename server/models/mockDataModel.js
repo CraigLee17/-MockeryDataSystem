@@ -15,5 +15,13 @@ const mockDataSchema = mongoose.Schema({
     data: {}
 });
 
+mockDataSchema.set('toJSON', {
+    transform: function (doc, result, options) {
+        result.id = result._id;
+        delete result._id;
+    }
+});
+
+
 const MockData = mongoose.model('MockData', mockDataSchema);
 module.exports = MockData;

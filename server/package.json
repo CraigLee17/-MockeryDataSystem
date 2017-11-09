@@ -16,7 +16,7 @@
     "jade": "~1.11.0",
     "js2xmlparser": "~3.0.0",
     "json2csv": "~3.9.0",
-    "mocker-data-generator": "^2.4.9",
+    "mocker-data-generator": "^2.5.0",
     "mongoose": "~4.10.8",
     "morgan": "~1.7.0",
     "ms": "~0.7.1",

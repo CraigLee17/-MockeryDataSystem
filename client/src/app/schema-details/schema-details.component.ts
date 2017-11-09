@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SchemaService} from "../_service/schema.service";
 import {Schema} from "../_models/schema";
+import {MockData} from "../_models/mock.data";
 
 @Component({
   selector: 'app-schema-details',
@@ -12,12 +13,10 @@ export class SchemaDetailsComponent implements OnInit {
   schema: Schema;
   previewData;
   userid: string;
-  error;
+  previewError;
+  schemaError;
 
   constructor(private route: ActivatedRoute, private schemaService: SchemaService) {
-  }
-
-  ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.userid = params['userid'];
@@ -28,17 +27,23 @@ export class SchemaDetailsComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+  }
+
   preview() {
     this.schemaService.previewBySchemaId(this.schema.id).subscribe(
-      data => this.previewData = data,
-      error => this.error = error.error.text
+      mockData => {
+        this.previewData = mockData.data;
+        this.previewError = null;
+      },
+      error => this.previewError = error.error.text
     )
   }
 
   generate() {
     this.schemaService.generate(this.schema.id).subscribe(
       data => console.log(data),
-      error => console.log(error)
+      error => this.schemaError = error.error.text
     )
   }
 }

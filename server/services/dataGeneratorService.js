@@ -20,13 +20,13 @@ function buildFields(fields) {
 
 function buildOption(option) {
     option = option.replace(/this/ig, "this.object");
-  //  option = option.replace(/\/this.object/ig, "this");
+    //  option = option.replace(/\/this.object/ig, "this");
     return new Function("return " + option);
 }
 
 function generateBySchema(schema, count, cb) {
     const dataSchema = buildFields(schema.fields);
-    mocker().schema(schema.name, dataSchema, count).build().then(data => cb(data[schema.name]), err => cb(err));
+    mocker().schema(schema.name, dataSchema, count).build((err, data) => cb(err, err ? null : data[schema.name]));
 };
 
 module.exports.generateBySchema = generateBySchema;

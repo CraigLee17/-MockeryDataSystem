@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SessionService} from "./session.service";
 import {Schema} from "../_models/schema";
+import {MockData} from "../_models/mock.data";
 
 @Injectable()
 export class SchemaService {
@@ -32,7 +33,7 @@ export class SchemaService {
   }
 
   previewBySchemaId(id) {
-    return this.http.get(`/mockdata/api/v1/schemas/${id}/preview`);
+    return this.http.get<MockData>(`/mockdata/api/v1/schemas/${id}/preview`);
   }
 
   generate(id) {
