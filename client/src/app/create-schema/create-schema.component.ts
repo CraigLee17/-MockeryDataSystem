@@ -120,10 +120,8 @@ export class CreateSchemaComponent implements OnInit {
   }
 
   applyOption() {
-    if (this.textfield != '') {
-      const fields = <FormArray>this.createSchemaForm.controls['fields'];
-      fields.controls[this.selectedIndex].patchValue({option: this.textfield});
-    }
+    const fields = <FormArray>this.createSchemaForm.controls['fields'];
+    fields.controls[this.selectedIndex].patchValue({option: this.textfield});
   }
 
   selectType(type: DataType) {

@@ -19,6 +19,8 @@ function buildFields(fields) {
 }
 
 function buildOption(option) {
+    option = option.replace(/this/ig, "this.object");
+  //  option = option.replace(/\/this.object/ig, "this");
     return new Function("return " + option);
 }
 

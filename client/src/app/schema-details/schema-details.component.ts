@@ -34,4 +34,11 @@ export class SchemaDetailsComponent implements OnInit {
       error => this.error = error.error.text
     )
   }
+
+  generate() {
+    this.schemaService.generate(this.schema.id).subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    )
+  }
 }

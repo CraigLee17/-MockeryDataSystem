@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {User} from "../_models/user";
 import {SessionService} from "./session.service";
 import {Schema} from "../_models/schema";
 
@@ -34,5 +33,9 @@ export class SchemaService {
 
   previewBySchemaId(id) {
     return this.http.get(`/mockdata/api/v1/schemas/${id}/preview`);
+  }
+
+  generate(id) {
+    return this.http.get(`/mockdata/api/v1/schemas/${id}/generate`);
   }
 }

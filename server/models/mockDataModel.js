@@ -8,7 +8,7 @@ const mockDataSchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
-    schema: {
+    dataSchema: {
         type: mongoose.Schema.ObjectId,
         ref: 'Schema'
     },

@@ -7,6 +7,7 @@ const dataGenerator = require("./../services/dataGeneratorService");
 const schemaService = require("./../services/schemaService");
 const dataTypeService = require("./../services/dataTypeService");
 const userService = require("./../services/userService");
+const mockDataService = require("./../services/mockDataService");
 const mongoose = require("mongoose");
 const js2xmlparser = require("js2xmlparser");
 const json2csv = require("json2csv");
@@ -113,15 +114,34 @@ router.get("/schemas/:id/file", function (req, res, next) {
     });
 });
 
-router.get("/schemas/:schemaid/preview", function (req, res, next) {
-    const id = req.params.schemaid;
+router.get("/schemas/:id/preview", function (req, res, next) {
+    const id = req.params.id;
     schemaService.findByID(id, function (err, schema) {
         const previewCount = schema.count > 10 ? 10 : schema.count;
-        dataGenerator.generateBySchema(schema, previewCount, function (err, result) {
-            if (err)
-                res.send(err);
-            else
-                res.json(result);
+        dataGenerator.generateBySchema(schema, previewCount, result => res.json(result));
+    });
+});
+
+router.get("/schemas/:id/generate", function (req, res, next) {
+    const id = req.params.id;
+    schemaService.findByID(id, function (err, schema) {
+        dataGenerator.generateBySchema(schema, schema.count, function (result) {
+                if (Array.isArray(result)) {
+                    const mockData = {
+                        user: req.session.user.id,
+                        dataSchema: id,
+                        data: result
+                    };
+                    mockDataService.create(mockData, function (err, mockData) {
+                        if (err) {
+                            res.send(err);
+                        }
+                        res.json(mockData);
+                    });
+                } else {
+                    // schema is invalid, data generation fails
+                    res.send(result);
+                }
         });
     });
 });
@@ -175,8 +195,8 @@ router.get("/init", function (req, res, next) {
 });
 
 /*-------------------------------------------------schemas-------------------------------------------------*/
-router.get("/users/:userid/schemas", function (req, res, next) {
-    const userid = req.params.userid;
+router.get("/users/:id/schemas", function (req, res, next) {
+    const userid = req.params.id;
     schemaService.findByUserId(userid, function (err, schemas) {
         if (err) {
             res.send(err);
@@ -209,8 +229,8 @@ router.post("/schemas", function (req, res, next) {
     });
 });
 
-router.delete("/schemas/:schemaid", function (req, res, next) {
-    const id = req.params.schemaid;
+router.delete("/schemas/:id", function (req, res, next) {
+    const id = req.params.id;
     schemaService.remove(id, function (err, schema) {
         if (err) {
             res.send(err);
@@ -220,9 +240,9 @@ router.delete("/schemas/:schemaid", function (req, res, next) {
     });
 });
 
-router.put("/schemas/:schemaid", function (req, res, next) {
+router.put("/schemas/:id", function (req, res, next) {
     const update = req.body;
-    const id = req.params.schemaid;
+    const id = req.params.id;
     schemaService.update(id, update, function (err, schema) {
         if (err) {
             console.log(err);
