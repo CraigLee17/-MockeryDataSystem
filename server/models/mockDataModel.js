@@ -10,7 +10,8 @@ const mockDataSchema = mongoose.Schema({
     },
     dataSchema: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Schema'
+        ref: 'Schema',
+        index: true
     },
     data: {}
 });

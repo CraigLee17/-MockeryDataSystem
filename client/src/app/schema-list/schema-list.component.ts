@@ -27,7 +27,7 @@ export class SchemaListComponent implements OnInit {
   }
 
   deleteSchema(index) {
-    if (confirm("Are you sure to delete this schema?")) {
+    if (confirm("Are you sure to delete this schema? Related mock data will be removed!")) {
       this.schemaService.remove(this.schemas[index].id)
         .subscribe(
           schema => console.log(schema),

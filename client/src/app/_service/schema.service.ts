@@ -35,8 +35,4 @@ export class SchemaService {
   previewBySchemaId(id) {
     return this.http.get<MockData>(`/mockdata/api/v1/schemas/${id}/preview`);
   }
-
-  generate(id) {
-    return this.http.get(`/mockdata/api/v1/schemas/${id}/generate`);
-  }
 }

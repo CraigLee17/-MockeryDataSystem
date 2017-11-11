@@ -3,17 +3,23 @@
  */
 const MockData = require('./../models/mockDataModel');
 
-function create(dataType, cb) {
-    new MockData(dataType).save(cb);
+function create(mockData, cb) {
+    new MockData(mockData).save(cb);
 }
 
 module.exports.create = create;
 
 function remove(id, cb) {
-    MockData.remove({_id: id}, cb);
+    MockData.remove({id: id}, cb);
 }
 
 module.exports.remove = remove;
+
+function removeBySchemaId(id, cb) {
+    MockData.remove({dataSchema: id}, cb);
+}
+
+module.exports.removeBySchemaId = removeBySchemaId;
 
 function findById(id, cb) {
     MockData.findById(id, cb);
@@ -21,17 +27,17 @@ function findById(id, cb) {
 
 module.exports.findById = findById;
 
-function findByUserIdAndSchemaId_preview(userId, schemaId, cb) {
-    MockData.findOne({user: userId, dataSchema: schemaId}, {data: {$slice: 10}}).exec(cb);
+function findBySchemaId_preview(schemaId, cb) {
+    MockData.findOne({dataSchema: schemaId}, {data: {$slice: 10}}).exec(cb);
 }
 
-module.exports.findByUserIdAndSchemaId_preview = findByUserIdAndSchemaId_preview;
+module.exports.findBySchemaId_preview = findBySchemaId_preview;
 
-function findByUserIdAndSchemaId(userId, schemaId, cb) {
-    MockData.findOne({user: userId, dataSchema: schemaId}, 'data').exec(cb);
+function findBySchemaId(schemaId, cb) {
+    MockData.findOne({dataSchema: schemaId}).populate('dataSchema').exec(cb);
 }
 
-module.exports.findByUserIdAndSchemaId = findByUserIdAndSchemaId;
+module.exports.findBySchemaId = findBySchemaId;
 
 function findByUserId(userId, cb) {
     MockData.find({user: userId}, cb);

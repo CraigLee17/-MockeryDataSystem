@@ -22,6 +22,7 @@ export class CreateSchemaComponent implements OnInit {
   selectedIndex;
   textfield = '';
   category = ["address", "company", "date", "finance", "internet", "name", "phone", "random", "system"];
+  schemaError;
 
 
   constructor(private sessionService: SessionService,
@@ -137,11 +138,8 @@ export class CreateSchemaComponent implements OnInit {
 
   createSchema(newSchema) {
     this.schemaService.create(newSchema).subscribe(
-      data => {
-        this.router.navigate(['/user', this.sessionService.getUser().id, 'schemas']);
-      },
-      error => {
-        console.log(error);
-      });
+      data => this.router.navigate(['/user', this.sessionService.getUser().id, 'schemas']),
+      error => this.schemaError = error.error.text
+    );
   }
 }

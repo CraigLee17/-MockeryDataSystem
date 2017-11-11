@@ -2,6 +2,8 @@
  * Created by Zhiyuan Li on 2017/6/27.
  */
 const mocker = require('mocker-data-generator').default;
+const mockDataService = require("./../services/mockDataService");
+const schemaService = require("./../services/schemaService");
 
 function buildFields(fields) {
     const dataSchema = {};
@@ -24,9 +26,33 @@ function buildOption(option) {
     return new Function("return " + option);
 }
 
-function generateBySchema(schema, count, cb) {
+function storeMockData(schema, data, cb) {
+    const mockData = {
+        user: schema.user,
+        dataSchema: schema.id,
+        data: data[schema.name]
+    };
+    // store mock data to DB
+    mockDataService.create(mockData, function (err, mockData) {
+        cb(err, mockData.data);
+    });
+}
+
+function removeSchema(schemaErr, schema, cb) {
+    schemaService.remove(schema.id, function (error, result) {
+        cb(schemaErr, null);
+    });
+}
+
+function generateBySchema(schema, cb) {
     const dataSchema = buildFields(schema.fields);
-    mocker().schema(schema.name, dataSchema, count).build((err, data) => cb(err, err ? null : data[schema.name]));
+    mocker().schema(schema.name, dataSchema, schema.count).build((err, data) => {
+        if (err) {
+            removeSchema(err, schema, cb);
+        } else {
+            storeMockData(schema, data, cb);
+        }
+    });
 };
 
 module.exports.generateBySchema = generateBySchema;

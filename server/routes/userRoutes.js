@@ -89,79 +89,53 @@ function buildTypes() {
     ];
 }
 
-router.get("/schemas/:id/file", function (req, res, next) {
-    const schemaid = req.params.id;
-    const userid = req.session.user.id;
-    schemaService.findByID(schemaid, function (err, schema) {
-        mockDataService.findByUserIdAndSchemaId(userid, schemaid, function (err, mockData) {
-            if (err) {
-                res.send(err);
-            } else {
-                const data = mockData ? mockData.data : "You haven' t generated data with this schema!";
-                switch (schema.fileFormat.toLowerCase()) {
-                    case "xml":
-                        res.set('Content-disposition', 'attachment; filename=' + schema.name + '.xml');
-                        res.set("Content-Type", "text/xml");
-                        res.send(js2xmlparser.parse("record", data));
-                        break;
-                    case "json":
-                        res.set('Content-disposition', 'attachment; filename=' + schema.name + '.json');
-                        res.json(data);
-                        break;
-                    case "csv":
-                        const fields = schema.fields.map(field => field.name);
-                        const csv = json2csv({data: data, fields: fields});
-                        res.set('Content-disposition', 'attachment; filename=' + schema.name + '.csv');
-                        res.set("Content-Type", "text/csv");
-                        res.send(csv);
-                }
-            }
-        });
-    });
-});
-
-router.get("/schemas/:id/preview", function (req, res, next) {
-    const schemaid = req.params.id;
-    const userid = req.session.user.id;
-    mockDataService.findByUserIdAndSchemaId_preview(userid, schemaid, function (err, mockData) {
+router.get("/schemas/:id/mockdata", function (req, res, next) {
+    const schemaId = req.params.id;
+    mockDataService.findBySchemaId(schemaId, function (err, data) {
         if (err) {
             res.send(err);
-        } else if (!mockData) {
-            res.send("You haven' t generated data with this schema!");
         } else {
-            res.json(mockData);
+            res.json(data);
         }
     });
 });
 
-router.get("/schemas/:id/generate", function (req, res, next) {
+router.get("/schemas/:id/file", function (req, res, next) {
     const schemaId = req.params.id;
-    const userId = req.session.user.id;
-    schemaService.findByID(schemaId, function (err, schema) {
-        mockDataService.findByUserIdAndSchemaId(userId, schemaId, function (err, data) {
-           if (data) {
-               res.send("Mock data has already been generated!");
-           } else {
-               dataGenerator.generateBySchema(schema, schema.count, function (err, result) {
-                   if (err) {
-                       res.send("Schema is invalid!");
-                   } else {
-                       const mockData = {
-                           user: req.session.user.id,
-                           dataSchema: schemaId,
-                           data: result
-                       };
-                       mockDataService.create(mockData, function (err, mockData) {
-                           if (err) {
-                               res.send(err);
-                           } else {
-                               res.send("Mock data is generated successfully!");
-                           }
-                       });
-                   }
-               });
-           }
-        });
+    mockDataService.findBySchemaId(schemaId, function (err, mockData) {
+        if (err) {
+            res.send(err);
+        } else {
+            const schema = mockData.dataSchema;
+            switch (schema.fileFormat.toLowerCase()) {
+                case "xml":
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.xml');
+                    res.set("Content-Type", "text/xml");
+                    res.send(js2xmlparser.parse("record", mockData.data));
+                    break;
+                case "json":
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.json');
+                    res.json(JSON.stringify(mockData.data));
+                    break;
+                case "csv":
+                    const fields = schema.fields.map(field => field.name);
+                    const csv = json2csv({data: mockData.data, fields: fields});
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.csv');
+                    res.set("Content-Type", "text/csv");
+                    res.send(csv);
+            }
+        }
+    });
+});
+
+router.get("/schemas/:id/preview", function (req, res, next) {
+    const schemaId = req.params.id;
+    mockDataService.findBySchemaId_preview(schemaId, function (err, mockData) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(mockData);
+        }
     });
 });
 
@@ -215,8 +189,8 @@ router.get("/init", function (req, res, next) {
 
 /*-------------------------------------------------schemas-------------------------------------------------*/
 router.get("/users/:id/schemas", function (req, res, next) {
-    const userid = req.params.id;
-    schemaService.findByUserId(userid, function (err, schemas) {
+    const userId = req.params.id;
+    schemaService.findByUserId(userId, function (err, schemas) {
         if (err) {
             res.send(err);
         } else {
@@ -237,24 +211,30 @@ router.get("/schemas/:id", function (req, res, next) {
 });
 
 router.post("/schemas", function (req, res, next) {
-    let schema = req.body;
+    const schema = req.body;
     schema.user = req.session.user.id;
     schemaService.create(schema, function (err, schema) {
         if (err) {
             res.status(400).send("Invalid schema supplied");
         } else {
-            res.json(schema);
+            dataGenerator.generateBySchema(schema, function (err, result) {
+                if (err) {
+                    res.send("Schema is invalid!");
+                } else {
+                    res.json(schema);
+                }
+            });
         }
     });
 });
 
 router.delete("/schemas/:id", function (req, res, next) {
     const id = req.params.id;
-    schemaService.remove(id, function (err, schema) {
+    schemaService.remove(id, function (err, result) {
         if (err) {
             res.send(err);
         } else {
-            res.json(schema);
+            res.json(result);
         }
     });
 });
@@ -264,7 +244,6 @@ router.put("/schemas/:id", function (req, res, next) {
     const id = req.params.id;
     schemaService.update(id, update, function (err, schema) {
         if (err) {
-            console.log(err);
             res.send(err);
         } else {
             res.json(schema);

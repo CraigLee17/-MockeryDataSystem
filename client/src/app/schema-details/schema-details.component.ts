@@ -13,8 +13,6 @@ export class SchemaDetailsComponent implements OnInit {
   schema: Schema;
   previewData;
   userid: string;
-  previewError;
-  schemaError;
 
   constructor(private route: ActivatedRoute, private schemaService: SchemaService) {
     this.route.params.subscribe(params => {
@@ -32,18 +30,8 @@ export class SchemaDetailsComponent implements OnInit {
 
   preview() {
     this.schemaService.previewBySchemaId(this.schema.id).subscribe(
-      mockData => {
-        this.previewData = mockData.data;
-        this.previewError = null;
-      },
-      error => this.previewError = error.error.text
-    )
-  }
-
-  generate() {
-    this.schemaService.generate(this.schema.id).subscribe(
-      data => console.log(data),
-      error => this.schemaError = error.error.text
+      mockData => this.previewData = mockData.data,
+      error => console.log(error)
     )
   }
 }

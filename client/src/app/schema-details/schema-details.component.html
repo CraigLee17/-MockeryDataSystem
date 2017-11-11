@@ -5,7 +5,6 @@
 <div class="row">
   <div class="col-md-7 col-sm-12">
     <h3><strong>{{schema?.name}}</strong></h3>
-    <div class="alert-danger" *ngIf="schemaError">{{schemaError}}</div>
     <div class="card">
       <table class="table table-sm table-striped table-responsive">
         <thead>
@@ -49,8 +48,6 @@
         <button class="btn btn-outline-info col-sm-12 col-md-8 mb-1"
                 data-toggle="modal" data-target="#modal" (click)="preview()">Preview
         </button>
-        <button class="btn btn-outline-primary col-sm-12 col-md-8 mb-1" (click)="generate()">Generate
-        </button>
         <a class="btn btn-outline-success col-sm-12 col-md-8 mb-1"
                 href='/mockdata/api/v1/schemas/{{schema?.id}}/file'>
           Download
@@ -66,7 +63,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title text-primary" id="modalLabel">
-          Preview (JSON Format)
+          Preview First 10 Or Less(JSON Format)
         </h5>
       </div>
       <div class="modal-body container">
