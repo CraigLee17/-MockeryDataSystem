@@ -1,11 +1,11 @@
 <h3><strong>Schemas</strong></h3>
 <a class="btn btn-outline-primary" routerLink="/schemas/new" *ngIf="sessionService.hasRole('user')">Create a Schema</a>
-<table class="table" *ngIf="schemas?.length != 0">
+<table class="table table-responsive" *ngIf="schemas?.length != 0">
   <thead>
   <tr>
-    <th>Schema</th>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
+    <th class="col-md-8">Schema</th>
+    <th class="col-md-2">&nbsp;</th>
+    <th class="col-md-2">&nbsp;</th>
   </tr>
   </thead>
   <tbody>

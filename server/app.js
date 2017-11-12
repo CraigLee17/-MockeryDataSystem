@@ -42,6 +42,7 @@ connect().on('error', console.log).on('disconneted', connect);
 
 function connect() {
     var options = {server: {socketOptions: {keepAlive: 1}}};
+    mongoose.Promise = Promise;
     return mongoose.connect('mongodb://localhost:27017/mockerydata', options).connection;
 }
 

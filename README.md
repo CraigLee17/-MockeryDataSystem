@@ -1,10 +1,17 @@
 # Mockery Data System
 
-* Author: [Zhiyuan Li](http://ec2-34-212-105-251.us-west-2.compute.amazonaws.com/)
-* Tutor: [Kenny Hunt](http://charity.cs.uwlax.edu/)
+## Outline
+This system is used to mock your back-end API by providing realistic data and endpoint access.
 
-## Tech Stack: MEAN
-This project uses the [MEAN stack](https://en.wikipedia.org/wiki/MEAN_(software_bundle)):
+## Why you need this?
+* Test data is a vital requirement throughout the entire development of any web application.
+* The data must be real; not in the sense of the data having any type of semantic correlation to the external world; but real in the sense of its syntactic structure and internal references.
+* Generating this data can be a time-consuming process that is subject to a great deal of change, especially early in the software development cycle.
+* This tool provides you real supported back-end.
+* It lets you focusing on developing UI prototype more faster and interacting with mock data much simpler.
+* By making real requests to mock back-end, you'll uncover problems with application flow, timing, and API design early, improving the quality of both API and the user experience. 
+
+## Tech Stack: [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle))
 * [**M**ongoose.js](http://www.mongoosejs.com) ([MongoDB](https://www.mongodb.com)): database
 * [**E**xpress.js](http://expressjs.com): backend framework
 * [**A**ngular 4+](https://angular.io): frontend framework
@@ -24,3 +31,7 @@ Other tools and technologies used:
 ## Please open an issue if
 * you have any suggestion to improve this project
 * you noticed any problem or error
+
+## Author
+* Author: [Zhiyuan Li](http://ec2-34-212-105-251.us-west-2.compute.amazonaws.com/)
+* Tutor: [Kenny Hunt](http://charity.cs.uwlax.edu/)

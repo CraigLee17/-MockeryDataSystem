@@ -39,6 +39,12 @@ function findBySchemaId(schemaId, cb) {
 
 module.exports.findBySchemaId = findBySchemaId;
 
+function findDataBySchemaId(schemaId, cb) {
+    MockData.findOne({dataSchema: schemaId}, 'data').exec(cb);
+}
+
+module.exports.findDataBySchemaId = findDataBySchemaId;
+
 function findByUserId(userId, cb) {
     MockData.find({user: userId}, cb);
 }

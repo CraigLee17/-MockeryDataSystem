@@ -91,11 +91,11 @@ function buildTypes() {
 
 router.get("/schemas/:id/mockdata", function (req, res, next) {
     const schemaId = req.params.id;
-    mockDataService.findBySchemaId(schemaId, function (err, data) {
+    mockDataService.findDataBySchemaId(schemaId, function (err, data) {
         if (err) {
             res.send(err);
         } else {
-            res.json(data);
+            res.json(data.data);
         }
     });
 });
