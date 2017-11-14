@@ -9,11 +9,11 @@ function buildFields(fields) {
     const dataSchema = {};
     for (let i = 0; i < fields.length; i++) {
         const name = fields[i].name;
-        const type = fields[i].dataType.name;
         const option = fields[i].option;
         if (option != "") {
             dataSchema[name] = {function: buildOption(option)};
         } else {
+            const type = fields[i].dataType.name;
             dataSchema[name] = {faker: type};
         }
     }
@@ -21,8 +21,7 @@ function buildFields(fields) {
 }
 
 function buildOption(option) {
-    option = option.replace(/this/ig, "this.object");
-    //  option = option.replace(/\/this.object/ig, "this");
+    option = option.replace(/this(?!\.(?:faker|chance|casual))/ig, "this.object");
     return new Function("return " + option);
 }
 

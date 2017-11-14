@@ -89,56 +89,6 @@ function buildTypes() {
     ];
 }
 
-router.get("/schemas/:id/mockdata", function (req, res, next) {
-    const schemaId = req.params.id;
-    mockDataService.findDataBySchemaId(schemaId, function (err, data) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(data.data);
-        }
-    });
-});
-
-router.get("/schemas/:id/file", function (req, res, next) {
-    const schemaId = req.params.id;
-    mockDataService.findBySchemaId(schemaId, function (err, mockData) {
-        if (err) {
-            res.send(err);
-        } else {
-            const schema = mockData.dataSchema;
-            switch (schema.fileFormat.toLowerCase()) {
-                case "xml":
-                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.xml');
-                    res.set("Content-Type", "text/xml");
-                    res.send(js2xmlparser.parse("record", mockData.data));
-                    break;
-                case "json":
-                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.json');
-                    res.json(JSON.stringify(mockData.data));
-                    break;
-                case "csv":
-                    const fields = schema.fields.map(field => field.name);
-                    const csv = json2csv({data: mockData.data, fields: fields});
-                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.csv');
-                    res.set("Content-Type", "text/csv");
-                    res.send(csv);
-            }
-        }
-    });
-});
-
-router.get("/schemas/:id/preview", function (req, res, next) {
-    const schemaId = req.params.id;
-    mockDataService.findBySchemaId_preview(schemaId, function (err, mockData) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(mockData);
-        }
-    });
-});
-
 router.get("/users/:id", function (req, res, next) {
     const id = req.params.id;
     userService.findById(id, function (err, user) {
@@ -247,6 +197,65 @@ router.put("/schemas/:id", function (req, res, next) {
             res.send(err);
         } else {
             res.json(schema);
+        }
+    });
+});
+
+router.get("/schemas/:id/mockdata", function (req, res, next) {
+    const schemaId = req.params.id;
+    mockDataService.findDataBySchemaId(schemaId, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(data.data);
+        }
+    });
+});
+
+/*
+router.delete("/schemas/:id/mockdata", function (req, res, next) {
+    const schemaId = req.params.id;
+    const queries = Object.entries(req.query);
+
+
+});
+*/
+
+router.get("/schemas/:id/file", function (req, res, next) {
+    const schemaId = req.params.id;
+    mockDataService.findBySchemaId(schemaId, function (err, mockData) {
+        if (err) {
+            res.send(err);
+        } else {
+            const schema = mockData.dataSchema;
+            switch (schema.fileFormat.toLowerCase()) {
+                case "xml":
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.xml');
+                    res.set("Content-Type", "text/xml");
+                    res.send(js2xmlparser.parse("record", mockData.data));
+                    break;
+                case "json":
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.json');
+                    res.json(mockData.data);
+                    break;
+                case "csv":
+                    const fields = schema.fields.map(field => field.name);
+                    const csv = json2csv({data: mockData.data, fields: fields});
+                    res.set('Content-disposition', 'attachment; filename=' + schema.name + '.csv');
+                    res.set("Content-Type", "text/csv");
+                    res.send(csv);
+            }
+        }
+    });
+});
+
+router.get("/schemas/:id/preview", function (req, res, next) {
+    const schemaId = req.params.id;
+    mockDataService.findBySchemaId_preview(schemaId, function (err, mockData) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(mockData);
         }
     });
 });
