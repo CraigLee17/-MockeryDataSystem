@@ -11,7 +11,8 @@ import {MockData} from "../_models/mock.data";
 })
 export class SchemaDetailsComponent implements OnInit {
   schema: Schema;
-  previewData;
+  rows;
+  headers;
   userid: string;
 
   constructor(private route: ActivatedRoute, private schemaService: SchemaService) {
@@ -29,9 +30,24 @@ export class SchemaDetailsComponent implements OnInit {
   }
 
   preview() {
-    this.schemaService.previewBySchemaId(this.schema.id).subscribe(
-      mockData => this.previewData = mockData.data,
-      error => console.log(error)
-    )
+    if (!this.rows) {
+      this.schemaService.previewBySchemaId(this.schema.id).subscribe(
+        mockData => {
+          this.rows = mockData.data;
+          this.buildHeaders();
+        },
+        error => console.log(error)
+      );
+    }
   }
+
+  // build headers for table base on mock data fields name
+  buildHeaders() {
+    const headers = [];
+    for (let name in this.rows[0]) {
+      headers.push({prop: name});
+    }
+    this.headers = headers;
+  }
+
 }

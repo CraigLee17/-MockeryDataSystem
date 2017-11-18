@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../_service/user.service";
 import {User} from "../_models/user";
 import {Router} from "@angular/router";
-import {LocalDataSource} from 'ng2-smart-table';
+import {DatatableComponent} from "@swimlane/ngx-datatable";
 
 @Component({
   selector: 'app-users',
@@ -10,51 +10,35 @@ import {LocalDataSource} from 'ng2-smart-table';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  source: LocalDataSource;
-
-  settings = {
-    columns: {
-      username: {
-        title: 'Username'
-      },
-      firstName: {
-        title: 'First name'
-      },
-      lastName: {
-        title: 'Last name'
-      },
-      email: {
-        title: 'Email'
-      },
-      role: {
-        title: 'Role',
-        filter: false
-      },
-      status: {
-        title: 'Status',
-        filter: false
-      }
-    },
-    actions: {
-      add: false,
-      edit: false,
-      delete: false
-    },
-    pager: {
-      perPage: 9
-    },
-    noDataMessage: "Not user found!"
-  };
+  users: [User];
+  temp: [User];
+  table: DatatableComponent;
 
   constructor(private userService: UserService, private router: Router) {
-    userService.getAllUsers().subscribe(users => this.source = new LocalDataSource(users));
+    userService.getAllUsers().subscribe(
+      users => {
+        this.users = users;
+        this.temp = users;
+      });
   }
 
   ngOnInit() {
   }
 
   selectUser(event) {
-    const user: User = event.data;
-    this.router.navigate(['/users', user.id]);
+    if (event.type == 'click') {
+      const user: User = event.row;
+      this.router.navigate(['/users', user.id]);
+    }
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    const temp = <[User]>this.temp.filter(function (user) {
+      return user.username.toLowerCase().indexOf(val) !== -1 || user.firstName.toLowerCase().indexOf(val) !== -1 ||
+        user.lastName.toLowerCase().indexOf(val) !== -1 || user.email.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+    this.users = temp;
+    this.table.offset = 0;
   }
 }

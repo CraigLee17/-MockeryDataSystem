@@ -30,7 +30,7 @@ i.fa-pencil {
   margin-bottom: 2px;
 }
 
-.type:hover{
+.type:hover {
   background-color: #f0f0f0;
 }
 
@@ -39,8 +39,12 @@ i.fa-pencil {
   font-size: 12px;
 }
 
-.tab-content{
+.tab-content {
   overflow: auto;
   height: 300px;
   width: inherit;
+}
+
+.datatable-scroll {
+  width: 100% !important;
 }

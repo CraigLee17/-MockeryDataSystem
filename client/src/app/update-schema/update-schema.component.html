@@ -1,8 +1,9 @@
 <div class="row" *ngIf="schema" [formGroup]="updateSchemaForm">
   <div class="col-md-7 col-sm-12">
     <h3><strong>Update Schema</strong></h3>
+    <div class="alert-danger" *ngIf="schemaError">{{schemaError}}</div>
     <div class="card">
-      <table class="table table-sm table-striped table-responsive">
+      <table class="table table-sm table-striped">
         <thead>
         <tr>
           <th>Field Name</th>

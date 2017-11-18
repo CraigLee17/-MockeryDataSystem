@@ -32,14 +32,17 @@ function findByID(id, cb) {
 module.exports.findByID = findByID;
 
 function update(id, schema, cb) {
-    Schema.update({_id: id}, {$set: schema}, function (err, numAffected) {
-        // Remove old mock data
-        mockDataService.removeBySchemaId(id, function (err, numAffected) {
-            findByID(schema.id, function (err, schema) {
-                // Regenerate new mock data base on updated schema
-                dataGeneratorService.generateBySchema(schema, function (err, mockData) {
+    Schema.findOneAndUpdate({_id: id}, {$set: schema}, function (err, oldSchema) {
+        findByID(schema.id, function (err, schema) {
+            dataGeneratorService.generateBySchema(schema, function (schemaErr, mockData) {
+                if (schemaErr) {
+                    // If the update schema is invalid, recover the previous schema
+                    Schema.update({_id: id}, oldSchema, function (err, numAffected) {
+                        cb(schemaErr, null);
+                    })
+                } else {
                     cb(err, schema);
-                });
+                }
             });
         });
     });

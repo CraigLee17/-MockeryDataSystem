@@ -169,7 +169,10 @@ router.post("/schemas", function (req, res, next) {
         } else {
             dataGenerator.generateBySchema(schema, function (err, result) {
                 if (err) {
-                    res.send("Schema is invalid!");
+                    // Remove the invalid schema
+                    schemaService.remove(schema.id, function (err, numAffected) {
+                        res.send("Schema is invalid!");
+                    });
                 } else {
                     res.json(schema);
                 }
@@ -194,7 +197,7 @@ router.put("/schemas/:id", function (req, res, next) {
     const id = req.params.id;
     schemaService.update(id, update, function (err, schema) {
         if (err) {
-            res.send(err);
+            res.send("Schema is invalid");
         } else {
             res.json(schema);
         }
@@ -212,14 +215,51 @@ router.get("/schemas/:id/mockdata", function (req, res, next) {
     });
 });
 
-/*
 router.delete("/schemas/:id/mockdata", function (req, res, next) {
     const schemaId = req.params.id;
-    const queries = Object.entries(req.query);
-
-
+    const query = req.query;
+    mockDataService.removeDataByQuery(schemaId, query, function (err, updatedMockData) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(updatedMockData.data);
+        }
+    });
 });
-*/
+
+router.put("/schemas/:id/mockdata", function (req, res, next) {
+    const schemaId = req.params.id;
+    const query = req.query;
+    const row = req.body;
+    mockDataService.updateDataByQuery(query, schemaId, row, function (err, updatedMockData) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(updatedMockData);
+        }
+    });
+});
+
+router.post("/schemas/:id/mockdata", function (req, res, next) {
+    const schemaId = req.params.id;
+    const row = req.body;
+    schemaService.findByID(schemaId, function (err, schema) {
+        mockDataService.findDataBySchemaId(schemaId, function (err, mockData) {
+            // Check if the amount of data reaches the count limit
+            if (mockData.data.length < schema.count) {
+                mockDataService.addData(schemaId, row, function (err, updatedMockData) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.json(updatedMockData);
+                    }
+                });
+            } else {
+                res.send("The amount of mock data reaches the count limit of its related schema!")
+            }
+        });
+    });
+});
 
 router.get("/schemas/:id/file", function (req, res, next) {
     const schemaId = req.params.id;

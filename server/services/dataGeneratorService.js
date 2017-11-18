@@ -21,25 +21,25 @@ function buildFields(fields) {
 }
 
 function buildOption(option) {
+    option = option.replace(/faker/ig, "this.faker");
+    option = option.replace(/chance/ig, "this.chance");
+    option = option.replace(/casual/ig, "this.casual");
     option = option.replace(/this(?!\.(?:faker|chance|casual))/ig, "this.object");
     return new Function("return " + option);
 }
 
-function storeMockData(schema, data, cb) {
+function removeOldAndStoreNewMockData(schema, data, cb) {
     const mockData = {
         user: schema.user,
         dataSchema: schema.id,
         data: data[schema.name]
     };
     // store mock data to DB
-    mockDataService.create(mockData, function (err, mockData) {
-        cb(err, mockData.data);
-    });
-}
-
-function removeSchema(schemaErr, schema, cb) {
-    schemaService.remove(schema.id, function (error, result) {
-        cb(schemaErr, null);
+    mockDataService.removeBySchemaId(schema.id, function (err, numAffected) {
+        console.log(err + " " + numAffected);
+        mockDataService.create(mockData, function (err, mockData) {
+            cb(err, mockData.data);
+        });
     });
 }
 
@@ -47,9 +47,10 @@ function generateBySchema(schema, cb) {
     const dataSchema = buildFields(schema.fields);
     mocker().schema(schema.name, dataSchema, schema.count).build((err, data) => {
         if (err) {
-            removeSchema(err, schema, cb);
+            cb(err, null);
         } else {
-            storeMockData(schema, data, cb);
+            // If this schema already have mock data, then remove it
+            removeOldAndStoreNewMockData(schema, data, cb);
         }
     });
 };

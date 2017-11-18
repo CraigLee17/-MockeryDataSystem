@@ -24,6 +24,7 @@ export class UpdateSchemaComponent implements OnInit {
   textfield = '';
   category = ["address", "company", "date", "finance", "internet", "name", "phone", "random", "system"];
   schema: Schema;
+  schemaError;
 
   constructor(private fb: FormBuilder,
               private dataTypeService: DataTypeService,
@@ -115,8 +116,8 @@ export class UpdateSchemaComponent implements OnInit {
       updateSchema.id = this.schema.id;
       this.schemaService.update(updateSchema).subscribe(
         schema => this.router.navigate(['/users', this.sessionService.getUser().id, 'schemas', this.schema.id]),
-        error => console.log(error))
-      ;
+        error => this.schemaError = error.error.text
+      );
     }
   }
 }

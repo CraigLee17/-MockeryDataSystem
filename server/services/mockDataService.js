@@ -50,3 +50,40 @@ function findByUserId(userId, cb) {
 }
 
 module.exports.findByUserId = findByUserId;
+
+function removeDataByQuery(schemaId, query, cb) {
+    MockData.findOneAndUpdate({dataSchema: schemaId}, {$pull: {data: query}}, {multi: true, new: true}, cb);
+}
+
+module.exports.removeDataByQuery = removeDataByQuery;
+
+function updateDataByQuery(query, schemaId, row, cb) {
+    const modifiedQuery = constructQuery(query, schemaId);
+    const modifiedRow = constructUpdatedData(row);
+    MockData.findOneAndUpdate(modifiedQuery, {$set: modifiedRow}, {multi: true, new: true}, cb)
+}
+
+module.exports.updateDataByQuery = updateDataByQuery;
+
+function addData(schemaId, row, cb) {
+    MockData.findOneAndUpdate({dataSchema: schemaId}, {$push: {data: row}}, {multi: true, new: true}, cb)
+}
+
+module.exports.addData = addData;
+
+function constructQuery(query, schemaId) {
+    const modifiedQuery = {};
+    for (let name in query) {
+        modifiedQuery['data.' + name] = query[name];
+    }
+    modifiedQuery.dataSchema = schemaId;
+    return modifiedQuery;
+}
+
+function constructUpdatedData(row) {
+    const modifiedRow = {};
+    for (let name in row) {
+        modifiedRow['data.$.' + name] = row[name];
+    }
+    return modifiedRow;
+}

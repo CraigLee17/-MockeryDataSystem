@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {RoutingModule} from './routing.module';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {AceEditorModule} from 'ng2-ace-editor';
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 
 import {AuthenticationService} from './_service/authentication.service';
 import {UserService} from "./_service/user.service";
@@ -21,7 +22,6 @@ import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
 import {SchemaDetailsComponent} from './schema-details/schema-details.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {UsersComponent} from './users/users.component';
-import {Ng2SmartTableModule} from "ng2-smart-table";
 import {UserDetailsComponent} from './user-details/user-details.component';
 import {UpdateSchemaComponent} from './update-schema/update-schema.component';
 
@@ -46,13 +46,13 @@ import {UpdateSchemaComponent} from './update-schema/update-schema.component';
     RoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    Ng2SmartTableModule,
     FormsModule,
     // attach csrf token to post and put request
     HttpClientXsrfModule.withOptions({
       headerName: 'csrf-token',
       cookieName: 'csrf-token'
     }),
+    NgxDatatableModule
   ],
   providers: [AuthenticationService, UserService, SessionService, DataTypeService, SchemaService],
   bootstrap: [AppComponent]

@@ -1,8 +1,17 @@
 <div class="col-md-12">
   <h3><strong>Users</strong></h3>
-  <div class="card">
-    <ng2-smart-table class="table-hover table-striped table-responsive"
-                     [settings]="settings" [source]="source" (userRowSelect)="selectUser($event)">
-    </ng2-smart-table>
-  </div>
+  <input placeholder='Type to filter the username/first name/last name/email'
+         (keyup)='updateFilter($event)' type="text"/>
+  <ngx-datatable
+    #table
+    class="material"
+    [rows]="users"
+    [columns]="[{name:'Username'},{name:'First Name', prop:'firstName'},{name:'Last Name', prop:'lastName'}, {name: 'Email'}, {name:'Role'}, {name:'Status'}]"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="45"
+    [limit]="6"
+    (activate)="selectUser($event)">
+  </ngx-datatable>
 </div>
