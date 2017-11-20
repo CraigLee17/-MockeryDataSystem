@@ -28,7 +28,7 @@
         <li class="nav-item dropdown" *ngIf="sessionService.isLogin()">
           <a class="nav-link dropdown-toggle" id="userDropdown"
              data-toggle="dropdown" aria-expanded="false">
-            Hi, {{sessionService.getUser().username}}
+            HI, {{sessionService.getUser().username | uppercase}}
           </a>
           <div class="dropdown-menu" aria-labelledby="userDropdown">
             <a class="dropdown-item">PROFILE</a>

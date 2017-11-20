@@ -113,11 +113,25 @@ export class UpdateSchemaComponent implements OnInit {
 
   updateSchema(updateSchema) {
     if (confirm("Are you sure to change it? Mock data related with this old schema will be removed!")) {
+      // Check if same name occurs in different column
+      if (!this.checkFieldName(updateSchema.fields)) return;
       updateSchema.id = this.schema.id;
       this.schemaService.update(updateSchema).subscribe(
         schema => this.router.navigate(['/users', this.sessionService.getUser().id, 'schemas', this.schema.id]),
         error => this.schemaError = error.error.text
       );
     }
+  }
+
+  checkFieldName(fields) {
+    const set = new Set();
+    for (let i in fields) {
+      if (set.has(fields[i].name)) {
+        this.schemaError = "Different column cannot have the same name!";
+        return false;
+      }
+      set.add(fields[i].name);
+    }
+    return true;
   }
 }

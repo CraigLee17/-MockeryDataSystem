@@ -137,9 +137,23 @@ export class CreateSchemaComponent implements OnInit {
   }
 
   createSchema(newSchema) {
+    // Check if same name occurs in different column
+    if (!this.checkFieldName(newSchema.fields)) return;
     this.schemaService.create(newSchema).subscribe(
       data => this.router.navigate(['/user', this.sessionService.getUser().id, 'schemas']),
       error => this.schemaError = error.error.text
     );
+  }
+
+  checkFieldName(fields) {
+    const set = new Set();
+    for (let i in fields) {
+      if (set.has(fields[i].name)) {
+        this.schemaError = "Different column cannot have the same name!";
+        return false;
+      }
+      set.add(fields[i].name);
+    }
+    return true;
   }
 }

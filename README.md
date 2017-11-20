@@ -33,5 +33,5 @@ Other tools and technologies used:
 * you noticed any problem or error
 
 ## Author
-* Author: [Zhiyuan Li](http://ec2-34-212-105-251.us-west-2.compute.amazonaws.com/)
+* Author: [Zhiyuan Li](https://craiglee17.github.io/)
 * Tutor: [Kenny Hunt](http://charity.cs.uwlax.edu/)

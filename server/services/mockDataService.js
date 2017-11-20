@@ -28,7 +28,7 @@ function findById(id, cb) {
 module.exports.findById = findById;
 
 function findBySchemaId_preview(schemaId, cb) {
-    MockData.findOne({dataSchema: schemaId}, {data: {$slice: 10}}).exec(cb);
+    MockData.findOne({dataSchema: schemaId}, {data: {$slice: 100}}).exec(cb);
 }
 
 module.exports.findBySchemaId_preview = findBySchemaId_preview;
