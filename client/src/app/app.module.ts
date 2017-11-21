@@ -9,6 +9,7 @@ import {AuthenticationService} from './_service/authentication.service';
 import {UserService} from "./_service/user.service";
 import {SessionService} from "./_service/session.service";
 import {DataTypeService} from "./_service/data.type.service";
+import {VisitorService} from "./_service/visitor.service";
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
@@ -54,7 +55,7 @@ import {UpdateSchemaComponent} from './update-schema/update-schema.component';
     }),
     NgxDatatableModule
   ],
-  providers: [AuthenticationService, UserService, SessionService, DataTypeService, SchemaService],
+  providers: [AuthenticationService, UserService, SessionService, DataTypeService, SchemaService, VisitorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

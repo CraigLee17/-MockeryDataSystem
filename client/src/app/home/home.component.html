@@ -3,8 +3,7 @@
     <div class="card">
       <h6 class="card-body">
         Need some mock data to test your app?<br>
-        Mockery Data lets you generate up to 1,000 rows of realistic test data in JSON, CSV, SQL, and Excel
-        formats.
+        Mockery Data lets you generate up to 1,000 rows of realistic test data in JSON, CSV, and XML formats.
         <div>
           Need more data? <a [routerLink]="['/register']">Sign up now!</a>
         </div>
@@ -20,24 +19,44 @@
         </thead>
         <tbody>
         <tr>
-          <td><input class="form-control" value="id"></td>
-          <td><input class="form-control" value="number" style="cursor: pointer"></td>
+          <td>
+            <div class="form-control">id</div>
+          </td>
+          <td>
+            <div class="form-control">number</div>
+          </td>
         </tr>
         <tr>
-          <td><input class="form-control" value="name"></td>
-          <td><input class="form-control" value="name" style="cursor: pointer"></td>
+          <td>
+            <div class="form-control">firstName</div>
+          </td>
+          <td>
+            <div class="form-control">firstName</div>
+          </td>
         </tr>
         <tr>
-          <td><input class="form-control" value="email"></td>
-          <td><input class="form-control" value="email" style="cursor: pointer"></td>
+          <td>
+            <div class="form-control">lastName</div>
+          </td>
+          <td>
+            <div class="form-control">lastName</div>
+          </td>
         </tr>
         <tr>
-          <td><input class="form-control" value="nationality"></td>
-          <td><input class="form-control" value="country" style="cursor: pointer"></td>
+          <td>
+            <div class="form-control">email</div>
+          </td>
+          <td>
+            <div class="form-control">email</div>
+          </td>
         </tr>
         <tr>
-          <td><input class="form-control" value="gender"></td>
-          <td><input class="form-control" value="gender" style="cursor: pointer"></td>
+          <td>
+            <div class="form-control">nationality</div>
+          </td>
+          <td>
+            <div class="form-control">country</div>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -47,23 +66,67 @@
     <div class="form-group">
       <label class="col-md-3 col-form-label">#Rows:</label>
       <div class="col-md-8">
-        <input class="form-control" placeholder="number of rows">
+        <div class="form-control">1000</div>
       </div>
     </div>
     <div class="form-group">
       <label class="col-md-3 col-form-label">Format:</label>
       <div class="col-md-8">
-        <select class="custom-select form-control">
-          <option selected>JSON</option>
-          <option>CSV</option>
-          <option>XML</option>
-        </select>
+        <div class="form-control">JSON</div>
       </div>
     </div>
     <div class="form-group">
       <div class="col-md-12">
-        <button class="btn btn-outline-primary col-sm-12 col-md-8 mb-1">Preview</button>
-        <button class="btn btn-outline-success col-sm-12 col-md-8 mb-1">Download Data</button>
+        <button class="btn btn-outline-primary col-sm-12 col-md-8 mb-1" data-toggle="modal" data-target="#modal"
+                (click)="preview()">Preview</button>
+        <a class="btn btn-outline-success col-sm-12 col-md-8 mb-1"
+           href='/mockdata/api/v1/visitor/file'>Download Data</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-primary" id="modalLabel">
+          Preview (Up to 100)
+        </h5>
+      </div>
+      <div class="modal-body container">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#table" role="tab">Table</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#json" role="tab">Json</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <br/>
+          <div class="tab-pane fade show active" id="table" role="tabpanel">
+            <ngx-datatable
+              #table
+              class="material"
+              [loadingIndicator]="loadingIndicator"
+              [rows]="rows"
+              [columns]="headers"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'auto'"
+              [limit]="5"
+              [scrollbarH]="true">
+            </ngx-datatable>
+          </div>
+          <div class="tab-pane fade" id="json" role="tabpanel" style="overflow: auto;height: 310px; width: inherit;">
+            <pre *ngFor="let row of rows" [innerHTML]="row | json"></pre>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

@@ -6,10 +6,8 @@ import {MockData} from "../_models/mock.data";
 
 @Injectable()
 export class SchemaService {
-  private sessionService: SessionService;
 
-  constructor(private http: HttpClient, sessionService: SessionService) {
-    this.sessionService = sessionService;
+  constructor(private http: HttpClient) {
   }
 
   getSchemasByUserId(id) {

@@ -89,6 +89,27 @@ function buildTypes() {
     ];
 }
 
+router.get("/visitor/preview", function (req, res, next) {
+    dataGenerator.previewBySampleSchema(100, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(data);
+        }
+    });
+});
+
+router.get("/visitor/file", function (req, res, next) {
+    dataGenerator.previewBySampleSchema(1000, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.set('Content-disposition', 'attachment; filename=sample.json');
+            res.json(data);
+        }
+    });
+});
+
 router.get("/users/:id", function (req, res, next) {
     const id = req.params.id;
     userService.findById(id, function (err, user) {

@@ -66,3 +66,34 @@ function generateBySchemas(schemas, cb) {
     mock.build(data => cb(data));
 };
 module.exports.generateBySchemas = generateBySchemas;
+
+function previewBySampleSchema(count, cb) {
+    const sampleSchema = {
+        id: {
+            faker: 'random.number'
+        },
+        firstName: {
+            faker: 'name.firstName'
+        },
+        lastName: {
+            faker: 'name.lastName'
+        },
+        email: {
+            function: function () {
+                return this.object.firstName.substring(0, 1) + this.object.lastName + '@' + this.faker.internet.domainName();
+            }
+        },
+        nationality: {
+            faker: 'address.country'
+        }
+    };
+    mocker().schema('sample', sampleSchema, count).build((err, data) => {
+        if (err) {
+            cb(err, null);
+        } else {
+            cb(err, data['sample']);
+        }
+    });
+}
+
+module.exports.previewBySampleSchema = previewBySampleSchema;
