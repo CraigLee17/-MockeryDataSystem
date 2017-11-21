@@ -1,3 +1,9 @@
 #userDropdown {
   cursor: pointer !important;
 }
+
+footer {
+  position: absolute;
+  bottom: 5%;
+  width: 100%
+}
