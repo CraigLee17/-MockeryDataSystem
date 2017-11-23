@@ -13,7 +13,6 @@ const js2xmlparser = require("js2xmlparser");
 const json2csv = require("json2csv");
 const passport = require('../services/passport.js');
 
-
 function buildTypes() {
     return [
         "address.zipCode",
@@ -227,11 +226,12 @@ router.put("/schemas/:id", function (req, res, next) {
 
 router.get("/schemas/:id/mockdata", function (req, res, next) {
     const schemaId = req.params.id;
-    mockDataService.findDataBySchemaId(schemaId, function (err, data) {
+    const query = req.query;
+    mockDataService.findDataBySchemaIdAndQuery(schemaId, query, function (err, data) {
         if (err) {
             res.send(err);
         } else {
-            res.json(data.data);
+            res.json(data);
         }
     });
 });
@@ -239,11 +239,13 @@ router.get("/schemas/:id/mockdata", function (req, res, next) {
 router.delete("/schemas/:id/mockdata", function (req, res, next) {
     const schemaId = req.params.id;
     const query = req.query;
-    mockDataService.removeDataByQuery(schemaId, query, function (err, updatedMockData) {
+    mockDataService.removeDataByQuery(schemaId, query, function (err, deletedData) {
         if (err) {
             res.send(err);
+        } else if (deletedData.length == 0) {
+            res.status(404).send("Data Not Found!")
         } else {
-            res.json(updatedMockData.data);
+            res.json(deletedData);
         }
     });
 });
@@ -264,19 +266,12 @@ router.put("/schemas/:id/mockdata", function (req, res, next) {
 router.post("/schemas/:id/mockdata", function (req, res, next) {
     const schemaId = req.params.id;
     const row = req.body;
-    schemaService.findByID(schemaId, function (err, schema) {
-        mockDataService.findDataBySchemaId(schemaId, function (err, mockData) {
-            // Check if the amount of data reaches the count limit
-            if (mockData.data.length < schema.count) {
-                mockDataService.addData(schemaId, row, function (err, updatedMockData) {
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        res.json(updatedMockData);
-                    }
-                });
+    mockDataService.findDataBySchemaIdAndQuery(schemaId, {}, function (err, data) {
+        mockDataService.addData(schemaId, row, function (err, updatedMockData) {
+            if (err) {
+                res.send(err);
             } else {
-                res.send("The amount of mock data reaches the count limit of its related schema!")
+                res.json(updatedMockData);
             }
         });
     });

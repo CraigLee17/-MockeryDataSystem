@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53766845-77c7-4cff-b8c6-677ba42ddc63" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/src/app/_service/visitor.service.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/_service/index.ts" afterPath="$PROJECT_DIR$/client/src/app/_service/index.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/_service/schema.service.ts" afterPath="$PROJECT_DIR$/client/src/app/_service/schema.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/app.component.css" afterPath="$PROJECT_DIR$/client/src/app/app.component.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/app.component.html" afterPath="$PROJECT_DIR$/client/src/app/app.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/app.module.ts" afterPath="$PROJECT_DIR$/client/src/app/app.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/home/home.component.css" afterPath="$PROJECT_DIR$/client/src/app/home/home.component.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/home/home.component.html" afterPath="$PROJECT_DIR$/client/src/app/home/home.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/home/home.component.ts" afterPath="$PROJECT_DIR$/client/src/app/home/home.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/index.html" afterPath="$PROJECT_DIR$/client/src/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/styles.css" afterPath="$PROJECT_DIR$/client/src/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/models/mockDataModel.js" afterPath="$PROJECT_DIR$/server/models/mockDataModel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/userRoutes.js" afterPath="$PROJECT_DIR$/server/routes/userRoutes.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/services/dataGeneratorService.js" afterPath="$PROJECT_DIR$/server/services/dataGeneratorService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/services/mockDataService.js" afterPath="$PROJECT_DIR$/server/services/mockDataService.js" />
     </list>
     <list id="323c578c-c3ab-48ae-b791-49cb55446d51" name="Register page gets response from server" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -32,7 +23,39 @@
     <favorites_list name="mockeryData" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="userRoutes.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/routes/userRoutes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-398">
+              <caret line="13" column="52" lean-forward="false" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
+              <folding>
+                <element signature="e#648#2592#0" expanded="false" />
+                <element signature="e#2654#2834#0" expanded="false" />
+                <element signature="e#2892#3153#0" expanded="false" />
+                <element signature="e#3208#3402#0" expanded="false" />
+                <element signature="e#3290#3398#0" expanded="false" />
+                <element signature="e#3454#3837#0" expanded="false" />
+                <element signature="e#3888#4053#0" expanded="false" />
+                <element signature="e#4103#4415#0" expanded="false" />
+                <element signature="e#4588#4802#0" expanded="false" />
+                <element signature="e#4859#5059#0" expanded="false" />
+                <element signature="e#5113#5768#0" expanded="false" />
+                <element signature="e#5828#6026#0" expanded="false" />
+                <element signature="e#5912#6022#0" expanded="false" />
+                <element signature="e#6083#6334#0" expanded="false" />
+                <element signature="e#6400#6664#0" expanded="false" />
+                <element signature="e#6733#7100#0" expanded="false" />
+                <element signature="e#7166#7474#0" expanded="false" />
+                <element signature="e#7541#7923#0" expanded="false" />
+                <element signature="e#7985#9159#0" expanded="false" />
+                <element signature="e#9224#9456#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -43,7 +66,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>span</find>
       <find>cu</find>
       <find>cur</find>
       <find>csrf</find>
@@ -73,6 +95,7 @@
       <find>generateBySchema</find>
       <find>ngx</find>
       <find>handlebars</find>
+      <find>.data</find>
     </findStrings>
     <replaceStrings>
       <replace>modal</replace>
@@ -96,14 +119,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/client/src/app/register/register.component.ts" />
         <option value="$PROJECT_DIR$/server/services/userService.js" />
         <option value="$PROJECT_DIR$/client/src/app/_models/user.ts" />
         <option value="$PROJECT_DIR$/client/src/app/user-details/user-details.component.html" />
         <option value="$PROJECT_DIR$/server/routes/adminRoutes.js" />
         <option value="$PROJECT_DIR$/client/src/app/user-details/user-details.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/_models/schema.ts" />
-        <option value="$PROJECT_DIR$/server/models/schemaModel.js" />
         <option value="$PROJECT_DIR$/client/src/app/schema-list/schema-list.component.css" />
         <option value="$PROJECT_DIR$/client/src/app/routing.module.ts" />
         <option value="$PROJECT_DIR$/client/src/app/_models/data.type.ts" />
@@ -112,7 +133,6 @@
         <option value="$PROJECT_DIR$/client/src/app/_models/index.ts" />
         <option value="$PROJECT_DIR$/client/src/app/_models/mock.data.ts" />
         <option value="$PROJECT_DIR$/server/node_modules/mocker-data-generator/build/main/lib/Mocker.js" />
-        <option value="$PROJECT_DIR$/server/models/mockDataModel.js" />
         <option value="$PROJECT_DIR$/client/src/app/schema-list/schema-list.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/schema-list/schema-list.component.html" />
         <option value="$PROJECT_DIR$/server/app.js" />
@@ -129,7 +149,6 @@
         <option value="$PROJECT_DIR$/client/src/app/update-schema/update-schema.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/update-schema/update-schema.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/create-schema/create-schema.component.ts" />
-        <option value="$PROJECT_DIR$/server/services/mockDataService.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/client/src/app/schema-details/schema-details.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/_service/index.ts" />
@@ -141,12 +160,16 @@
         <option value="$PROJECT_DIR$/client/src/app/schema-details/schema-details.component.css" />
         <option value="$PROJECT_DIR$/client/src/app/home/home.component.css" />
         <option value="$PROJECT_DIR$/client/src/app/home/home.component.ts" />
-        <option value="$PROJECT_DIR$/server/routes/userRoutes.js" />
-        <option value="$PROJECT_DIR$/server/services/dataGeneratorService.js" />
         <option value="$PROJECT_DIR$/client/src/app/app.component.html" />
         <option value="$PROJECT_DIR$/client/src/app/app.component.css" />
         <option value="$PROJECT_DIR$/client/src/index.html" />
         <option value="$PROJECT_DIR$/client/src/styles.css" />
+        <option value="$PROJECT_DIR$/server/services/dataGeneratorService.js" />
+        <option value="$PROJECT_DIR$/server/models/schemaModel.js" />
+        <option value="$PROJECT_DIR$/server/models/userModel.js" />
+        <option value="$PROJECT_DIR$/server/models/mockDataModel.js" />
+        <option value="$PROJECT_DIR$/server/services/mockDataService.js" />
+        <option value="$PROJECT_DIR$/server/routes/userRoutes.js" />
       </list>
     </option>
   </component>
@@ -189,8 +212,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -201,17 +222,20 @@
             <path>
               <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
               <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
               <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -379,7 +403,10 @@
       <workItem from="1511132443666" duration="1293000" />
       <workItem from="1511141961177" duration="686000" />
       <workItem from="1511203578398" duration="989000" />
-      <workItem from="1511280048423" duration="10543000" />
+      <workItem from="1511280048423" duration="10880000" />
+      <workItem from="1511298892454" duration="584000" />
+      <workItem from="1511377509183" duration="3000000" />
+      <workItem from="1511453766879" duration="13013000" />
     </task>
     <task id="LOCAL-00001" summary="Adding register form validation">
       <created>1506027108325</created>
@@ -626,11 +653,18 @@
       <option name="project" value="LOCAL" />
       <updated>1511281793774</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Fix bug(footer blocks content) and modify home component">
+      <created>1511290711160</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1511290711160</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="420067000" />
+    <option name="totallyTimeSpent" value="437001000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -643,17 +677,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267857" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29673827" sideWeight="0.49156627" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15433572" sideWeight="0.49156627" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34464285" sideWeight="0.2124105" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29285714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3875" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28214285" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Quokka" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23571429" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21428572" sideWeight="0.7875895" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3857143" sideWeight="0.7875895" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10739857" sideWeight="0.50843376" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -663,6 +697,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
@@ -757,8 +792,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create-schema component data type modal added" />
-    <MESSAGE value="Schema list component pull out schemas base user id from back end" />
     <MESSAGE value="CSRF token is applied in &quot;POST&quot; and &quot;PUT&quot; methods using HttpClient" />
     <MESSAGE value="Schema details component is added" />
     <MESSAGE value="Preview mock data is added" />
@@ -782,53 +815,17 @@
     <MESSAGE value="Add table view to preview mock data" />
     <MESSAGE value="Update README" />
     <MESSAGE value="Stick the footer to bottom of page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Stick the footer to bottom of page" />
+    <MESSAGE value="Fix bug(footer blocks content)" />
+    <MESSAGE value="Fix bug(footer blocks content) and modify home component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug(footer blocks content) and modify home component" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/node_modules/@swimlane/ngx-datatable/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/node_modules/@swimlane/ngx-datatable/src/components/datatable.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="21" column="1" lean-forward="false" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/node_modules/@swimlane/ngx-datatable/release/themes/material.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1456">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/node_modules/@swimlane/ngx-datatable/src/datatable.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="87" column="13" lean-forward="false" selection-start-line="87" selection-start-column="13" selection-end-line="87" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/node_modules/@angular/common/http/src/module.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="40" column="21" lean-forward="false" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/node_modules/@swimlane/ngx-datatable/assets/app.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -899,13 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/services/schemaService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="33" column="9" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/update-schema/update-schema.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -931,13 +921,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="116" column="60" lean-forward="false" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/services/mockDataService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="30" column="63" lean-forward="false" selection-start-line="30" selection-start-column="63" selection-end-line="30" selection-end-column="63" />
         </state>
       </provider>
     </entry>
@@ -976,7 +959,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -984,9 +966,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -994,9 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-280">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1004,7 +980,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-136">
           <caret line="9" column="41" lean-forward="false" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,7 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1020,9 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-112">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#48#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1030,7 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
           <caret line="123" column="50" lean-forward="true" selection-start-line="123" selection-start-column="50" selection-end-line="123" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1038,7 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2112">
           <caret line="142" column="45" lean-forward="false" selection-start-line="142" selection-start-column="45" selection-end-line="142" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1046,9 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1056,7 +1022,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
           <caret line="4" column="33" lean-forward="true" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,7 +1029,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-520">
           <caret line="11" column="58" lean-forward="false" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1072,9 +1036,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1082,7 +1043,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="48" column="57" lean-forward="false" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1090,7 +1050,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1098,7 +1057,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1106,9 +1064,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
           <caret line="122" column="70" lean-forward="false" selection-start-line="122" selection-start-column="70" selection-end-line="122" selection-end-column="70" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1116,7 +1071,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1124,15 +1078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/services/dataGeneratorService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="90" column="18" lean-forward="true" selection-start-line="90" selection-start-column="18" selection-end-line="90" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1140,34 +1085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="26" column="3" lean-forward="false" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#48#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/routes/userRoutes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="92" column="34" lean-forward="false" selection-start-line="92" selection-start-column="34" selection-end-line="92" selection-end-column="34" />
-          <folding>
-            <element signature="e#649#2593#0" expanded="false" />
-            <element signature="e#3209#3403#0" expanded="false" />
-            <element signature="e#3291#3399#0" expanded="false" />
-            <element signature="e#3455#3838#0" expanded="false" />
-            <element signature="e#3889#4054#0" expanded="false" />
-            <element signature="e#4104#4416#0" expanded="false" />
-            <element signature="e#4589#4803#0" expanded="false" />
-            <element signature="e#4860#5060#0" expanded="false" />
-            <element signature="e#5114#5769#0" expanded="false" />
-            <element signature="e#5829#6027#0" expanded="false" />
-            <element signature="e#6084#6335#0" expanded="false" />
-            <element signature="e#6401#6626#0" expanded="false" />
-            <element signature="e#6695#6977#0" expanded="false" />
-            <element signature="e#7043#7351#0" expanded="false" />
-            <element signature="e#7418#8182#0" expanded="false" />
-            <element signature="e#9483#9715#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1175,9 +1092,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#55#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1185,9 +1099,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
           <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding>
-            <marker date="1511289731940" expanded="true" signature="0:1954" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1195,7 +1106,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" column="1" lean-forward="false" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1203,7 +1113,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="15" column="9" lean-forward="false" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1211,7 +1120,104 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="10" column="5" lean-forward="false" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-232">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/node_modules/shortid/index.js" />
+    <entry file="file://$PROJECT_DIR$/server/services/dataGeneratorService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="40" column="11" lean-forward="false" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/models/userModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-313">
+          <caret line="6" column="36" lean-forward="true" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/models/schemaModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/models/mockDataModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/services/schemaService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="52" column="9" lean-forward="false" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/services/mockDataService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="75" column="60" lean-forward="false" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="60" />
+          <folding>
+            <element signature="n#!!block;n#create#0" expanded="false" />
+            <element signature="n#!!block;n#remove#0" expanded="false" />
+            <element signature="n#!!block;n#removeBySchemaId#0" expanded="false" />
+            <element signature="n#!!block;n#findById#0" expanded="false" />
+            <element signature="n#!!block;n#findBySchemaId_preview#0" expanded="false" />
+            <element signature="n#!!block;n#findBySchemaId#0" expanded="false" />
+            <element signature="n#!!block;n#findDataBySchemaIdAndQuery#0" expanded="false" />
+            <element signature="n#!!block;n#findByUserId#0" expanded="false" />
+            <element signature="n#!!block;n#removeDataByQuery#0" expanded="false" />
+            <element signature="n#!!block;n#updateDataByQuery#0" expanded="false" />
+            <element signature="n#!!block;n#addData#0" expanded="false" />
+            <element signature="n#!!block;n#constructQuery#0" expanded="false" />
+            <element signature="n#!!block;n#constructUpdatedData#0" expanded="false" />
+            <element signature="n#!!block;n#filter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/routes/userRoutes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-398">
+          <caret line="13" column="52" lean-forward="false" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
+          <folding>
+            <element signature="e#648#2592#0" expanded="false" />
+            <element signature="e#2654#2834#0" expanded="false" />
+            <element signature="e#2892#3153#0" expanded="false" />
+            <element signature="e#3208#3402#0" expanded="false" />
+            <element signature="e#3290#3398#0" expanded="false" />
+            <element signature="e#3454#3837#0" expanded="false" />
+            <element signature="e#3888#4053#0" expanded="false" />
+            <element signature="e#4103#4415#0" expanded="false" />
+            <element signature="e#4588#4802#0" expanded="false" />
+            <element signature="e#4859#5059#0" expanded="false" />
+            <element signature="e#5113#5768#0" expanded="false" />
+            <element signature="e#5828#6026#0" expanded="false" />
+            <element signature="e#5912#6022#0" expanded="false" />
+            <element signature="e#6083#6334#0" expanded="false" />
+            <element signature="e#6400#6664#0" expanded="false" />
+            <element signature="e#6733#7100#0" expanded="false" />
+            <element signature="e#7166#7474#0" expanded="false" />
+            <element signature="e#7541#7923#0" expanded="false" />
+            <element signature="e#7985#9159#0" expanded="false" />
+            <element signature="e#9224#9456#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

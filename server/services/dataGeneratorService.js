@@ -36,7 +36,6 @@ function removeOldAndStoreNewMockData(schema, data, cb) {
     };
     // store mock data to DB
     mockDataService.removeBySchemaId(schema.id, function (err, numAffected) {
-        console.log(err + " " + numAffected);
         mockDataService.create(mockData, function (err, mockData) {
             cb(err, mockData.data);
         });

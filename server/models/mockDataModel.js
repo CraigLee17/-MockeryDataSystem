@@ -13,7 +13,7 @@ const mockDataSchema = mongoose.Schema({
         ref: 'Schema',
         index: true
     },
-    data: {}
+    data: []
 });
 
 mockDataSchema.set('toJSON', {
