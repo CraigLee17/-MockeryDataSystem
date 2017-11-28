@@ -9,7 +9,7 @@ export class UserService {
   }
 
   create(user: User) {
-    return this.http.post('/mockdata/api/v1/users', user);
+    return this.http.post(`/mockdata/api/v1/users`, user);
   }
 
   getAllUsers() {
@@ -26,5 +26,9 @@ export class UserService {
 
   updateUserRole(id: String, role: String) {
     return this.http.put<User>(`/mockdata/api/v1/users/${id}/role`, {role: role});
+  }
+
+  updateUser(id: String, user: User) {
+    return this.http.put(`/mockdata/api/v1/users/${id}`, user);
   }
 }

@@ -25,6 +25,7 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {UsersComponent} from './users/users.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
 import {UpdateSchemaComponent} from './update-schema/update-schema.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {UpdateSchemaComponent} from './update-schema/update-schema.component';
     NotFoundComponent,
     UsersComponent,
     UserDetailsComponent,
-    UpdateSchemaComponent
+    UpdateSchemaComponent,
+    ProfileComponent
   ],
   imports: [
     AceEditorModule,

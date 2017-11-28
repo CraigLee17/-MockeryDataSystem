@@ -14,7 +14,7 @@ This system is used to mock your back-end API by providing realistic data and en
 ## Tech Stack: [MEAN](https://en.wikipedia.org/wiki/MEAN_(software_bundle))
 * [**M**ongoose.js](http://www.mongoosejs.com) ([MongoDB](https://www.mongodb.com)): database
 * [**E**xpress.js](http://expressjs.com): backend framework
-* [**A**ngular 4+](https://angular.io): frontend framework
+* [**A**ngular 5+](https://angular.io): frontend framework
 * [**N**ode.js](https://nodejs.org): runtime environment
 
 Other tools and technologies used:

@@ -77,7 +77,7 @@ function updateDataByQuery(query, schemaId, updatedRow, cb) {
     const modifiedQuery = constructQuery(query, schemaId);
     const modifiedRow = constructUpdatedData(updatedRow);
     MockData.findOneAndUpdate(modifiedQuery, {$set: modifiedRow}, {multi: true, new: true}).exec((err, mockData) => {
-        if (err) {
+        if (err || !mockData) {
             cb(err, null);
         } else {
             // filter mock data base on query
@@ -91,7 +91,11 @@ module.exports.updateDataByQuery = updateDataByQuery;
 
 function addData(schemaId, row, cb) {
     findBySchemaId(schemaId, function (err, mockData) {
-        if (mockData.dataSchema.count <= mockData.data.length) {
+        if (err) {
+            cb(err, null)
+        } else if (!mockData) {
+            cb(null, null);
+        } else if (mockData.dataSchema.count <= mockData.data.length) {
             cb("The amount of mock data reaches the count limit of its related schema!", null);
         } else {
             mockData.update({$push: {data: row}}).exec((err, numAffected) => {

@@ -1,0 +1,71 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="panel panel-default">
+    <div class="panel-heading"><h3 class="panel-title"><strong>Profile</strong></h3></div>
+    <div class="panel-body">
+      <form [formGroup]="profileForm">
+        <div class="alert alert-danger" *ngIf="profileForm.invalid">
+          <li *ngIf="profileForm.controls['firstName'].invalid">
+            First name is required!
+          </li>
+          <li *ngIf="profileForm.controls['lastName'].invalid">
+            Last name is required!
+          </li>
+          <li *ngIf="profileForm.controls['username'].invalid">
+            Length of username should between 3 and 10!
+          </li>
+          <li *ngIf="profileForm.controls['email'].hasError('email')">
+            Email format wrong!
+          </li>
+          <li *ngIf="profileForm.controls['password'].invalid">
+            Password is required!
+          </li>
+          <li *ngIf="profileForm.hasError('pswNotMatch')">
+            Password and confirm password are different!
+          </li>
+        </div>
+        <div class="alert alert-danger" *ngIf="error">
+          {{error}}
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <label class="col-form-label"><strong>First Name:</strong></label>
+              <input type="text" formControlName="firstName" class="form-control">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <label class="col-form-label"><strong>Last Name:</strong></label>
+              <input type="text" formControlName="lastName" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-form-label"><strong>Username:</strong></label>
+          <input type="text" formControlName="username" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="col-form-label"><strong>Email:</strong></label>
+          <input type="email" formControlName="email" class="form-control">
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <label class="col-form-label"><strong>Password:</strong></label>
+              <input type="password" formControlName="password" class="form-control">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="form-group">
+              <label class="col-form-label"><strong>Confirm password:</strong></label>
+              <input type="password" formControlName="confirmedPassword" class="form-control">
+            </div>
+          </div>
+        </div>
+        <button (click)="update(profileForm.value)" class="btn btn-primary" [disabled]="profileForm.invalid">
+          Update
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

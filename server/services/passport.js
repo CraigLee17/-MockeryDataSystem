@@ -128,7 +128,6 @@ passport.use('signup', new LocalStrategy({
                 }
             });
         });
-
     }));
 
 module.exports = passport;

@@ -30,9 +30,10 @@ function findByEmail(email, cb) {
 module.exports.findByEmail = findByEmail;
 
 function updateUser(id, newUser, cb) {
-    User.update({"_id": id}, newUser, function (err, numAffected) {
-        findById(id, cb);
-    });
+    if (newUser.password) {
+        newUser.password = new User(newUser).generateHash(newUser.password);
+    }
+    User.findOneAndUpdate({"_id": id}, {$set: newUser}, {new: true}, cb);
 }
 
 module.exports.updateUser = updateUser;

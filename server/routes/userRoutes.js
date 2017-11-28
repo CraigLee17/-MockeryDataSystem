@@ -135,6 +135,19 @@ router.post("/users", function (req, res, next) {
     })(req, res, next);
 });
 
+
+router.put("/users/:id", function (req, res, next) {
+    const id = req.params.id;
+    const updatedUser = req.body;
+    userService.updateUser(id, updatedUser, function (err, newUser) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(newUser);
+        }
+    });
+});
+
 router.get("/types", function (req, res, next) {
     dataTypeService.findAll(function (err, types) {
         if (err) {
@@ -243,7 +256,7 @@ router.delete("/schemas/:id/mockdata", function (req, res, next) {
         if (err) {
             res.send(err);
         } else if (deletedData.length == 0) {
-            res.status(404).send("Data Not Found!")
+            res.status(404).send("Not Found!")
         } else {
             res.json(deletedData);
         }
@@ -257,6 +270,8 @@ router.put("/schemas/:id/mockdata", function (req, res, next) {
     mockDataService.updateDataByQuery(query, schemaId, row, function (err, updatedMockData) {
         if (err) {
             res.send(err);
+        } else if (!updatedMockData) {
+            res.status(404).send("Not Found!");
         } else {
             res.json(updatedMockData);
         }
@@ -266,14 +281,14 @@ router.put("/schemas/:id/mockdata", function (req, res, next) {
 router.post("/schemas/:id/mockdata", function (req, res, next) {
     const schemaId = req.params.id;
     const row = req.body;
-    mockDataService.findDataBySchemaIdAndQuery(schemaId, {}, function (err, data) {
-        mockDataService.addData(schemaId, row, function (err, updatedMockData) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.json(updatedMockData);
-            }
-        });
+    mockDataService.addData(schemaId, row, function (err, updatedMockData) {
+        if (err) {
+            res.send(err);
+        } else if (!updatedMockData) {
+            res.status(404).send("Schema Id Not Found!");
+        } else {
+            res.json(updatedMockData);
+        }
     });
 });
 
