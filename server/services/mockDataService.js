@@ -74,16 +74,17 @@ function removeDataByQuery(schemaId, query, cb) {
 module.exports.removeDataByQuery = removeDataByQuery;
 
 function updateDataByQuery(query, schemaId, updatedRow, cb) {
-    const modifiedQuery = constructQuery(query, schemaId);
-    const modifiedRow = constructUpdatedData(updatedRow);
-    MockData.findOneAndUpdate(modifiedQuery, {$set: modifiedRow}, {multi: true, new: true}).exec((err, mockData) => {
-        if (err || !mockData) {
-            cb(err, null);
-        } else {
-            // filter mock data base on query
-            const result = filter(query, mockData.data);
-            cb(err, result);
-        }
+    findBySchemaId(schemaId, function (err, mockData) {
+        const data = updateData(mockData.data, query, updatedRow);
+        mockData.update({$set: {data: data}}, function (err, numAffected) {
+            if (err) {
+                cb(err, null);
+            } else {
+                // filter mock data base on query
+                const result = filter(query, data);
+                cb(err, result);
+            }
+        })
     });
 }
 
@@ -107,23 +108,6 @@ function addData(schemaId, row, cb) {
 
 module.exports.addData = addData;
 
-function constructQuery(query, schemaId) {
-    const modifiedQuery = {};
-    for (let name in query) {
-        modifiedQuery['data.' + name] = query[name];
-    }
-    modifiedQuery.dataSchema = schemaId;
-    return modifiedQuery;
-}
-
-function constructUpdatedData(row) {
-    const modifiedRow = {};
-    for (let name in row) {
-        modifiedRow['data.$.' + name] = row[name];
-    }
-    return modifiedRow;
-}
-
 function filter(query, data) {
     const result = data.filter((data) => {
         for (const p in query) {
@@ -134,4 +118,22 @@ function filter(query, data) {
         return true;
     });
     return result;
+}
+
+function updateData(data, query, updatedRow) {
+    return data.map(row => {
+        let flag = true;
+        for (let p in query) {
+            if (row[p] != query[p]) {
+                flag = false;
+                continue;
+            }
+        }
+        if (flag) {
+            for (let p in updatedRow) {
+                row[p] = updatedRow[p];
+            }
+        }
+        return row;
+    });
 }
