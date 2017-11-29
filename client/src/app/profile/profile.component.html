@@ -16,12 +16,6 @@
           <li *ngIf="profileForm.controls['email'].hasError('email')">
             Email format wrong!
           </li>
-          <li *ngIf="profileForm.controls['password'].invalid">
-            Password is required!
-          </li>
-          <li *ngIf="profileForm.hasError('pswNotMatch')">
-            Password and confirm password are different!
-          </li>
         </div>
         <div class="alert alert-danger" *ngIf="error">
           {{error}}
@@ -48,24 +42,51 @@
           <label class="col-form-label"><strong>Email:</strong></label>
           <input type="email" formControlName="email" class="form-control">
         </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6">
-            <div class="form-group">
-              <label class="col-form-label"><strong>Password:</strong></label>
-              <input type="password" formControlName="password" class="form-control">
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6">
-            <div class="form-group">
-              <label class="col-form-label"><strong>Confirm password:</strong></label>
-              <input type="password" formControlName="confirmedPassword" class="form-control">
-            </div>
-          </div>
+        <div class="form-group">
+          <button data-toggle="modal" data-target="#pswModal" class="form-control col-md-2 btn btn-primary">Change Password</button>
         </div>
-        <button (click)="update(profileForm.value)" class="btn btn-primary" [disabled]="profileForm.invalid">
+        <button (click)="update(profileForm.value)" class="pull-right btn btn-success " [disabled]="profileForm.invalid">
           Update
         </button>
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="pswModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Update password
+        </h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="alert alert-danger" *ngIf="psw != confirmedPsw">
+            Password and confirm password are different!
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="col-form-label"><strong>New password:</strong></label>
+              <input type="password" [(ngModel)]="psw" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="col-form-label"><strong>Confirm password:</strong></label>
+              <input type="password" [(ngModel)]="confirmedPsw" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                (click)="update({password:psw})" [disabled]="!(psw.length > 0 && psw == confirmedPsw)">Update
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

@@ -11,6 +11,8 @@ import {SessionService} from "../_service/session.service";
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   error: string;
+  psw: String;
+  confirmedPsw: String;
 
   constructor(private userService: UserService, private sessionService: SessionService) {
   }
@@ -20,24 +22,12 @@ export class ProfileComponent implements OnInit {
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       username: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(10)])),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required),
-      confirmedPassword: new FormControl('', Validators.required)
-    }, this.formGroupValidator);
+      email: new FormControl('', [Validators.required, Validators.email])
+    });
     this.profileForm.patchValue(this.sessionService.getUser());
   }
 
-  formGroupValidator(formGroup: FormGroup) {
-    const res = {pswNotMatch: false};
-    // check password equality
-    if (formGroup.controls['password'].value != formGroup.controls['confirmedPassword'].value) {
-      res.pswNotMatch = true;
-    }
-    return !res.pswNotMatch ? null : res;
-  }
-
   update(updateUser) {
-    delete updateUser.confirmedPassword;
     this.userService.updateUser(this.sessionService.getUser().id, updateUser)
       .subscribe(
         data => {
@@ -48,6 +38,4 @@ export class ProfileComponent implements OnInit {
           this.error = error._body;
         });
   }
-
-
 }
