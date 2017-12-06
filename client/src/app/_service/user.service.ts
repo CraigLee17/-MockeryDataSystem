@@ -29,6 +29,6 @@ export class UserService {
   }
 
   updateUser(id: String, user: User) {
-    return this.http.put(`/mockdata/api/v1/users/${id}`, user);
+    return this.http.put<User>(`/mockdata/api/v1/users/${id}`, user);
   }
 }

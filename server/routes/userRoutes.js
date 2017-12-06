@@ -196,22 +196,26 @@ router.get("/schemas/:id", function (req, res, next) {
 router.post("/schemas", function (req, res, next) {
     const schema = req.body;
     schema.user = req.session.user.id;
-    schemaService.create(schema, function (err, schema) {
-        if (err) {
-            res.status(400).send("Invalid schema supplied");
-        } else {
-            dataGenerator.generateBySchema(schema, function (err, result) {
-                if (err) {
-                    // Remove the invalid schema
-                    schemaService.remove(schema.id, function (err, numAffected) {
-                        res.send("Schema is invalid!");
-                    });
-                } else {
-                    res.json(schema);
-                }
-            });
-        }
-    });
+    if (schema.count && schema.count > 100000) {
+        res.send("The upper limit of rows is 100,000");
+    } else {
+        schemaService.create(schema, function (err, schema) {
+            if (err) {
+                res.send("Invalid schema supplied");
+            } else {
+                dataGenerator.generateBySchema(schema, function (err, result) {
+                    if (err) {
+                        // Remove the invalid schema
+                        schemaService.remove(schema.id, function (err, numAffected) {
+                            res.send("Invalid schema supplied");
+                        });
+                    } else {
+                        res.json(schema);
+                    }
+                });
+            }
+        });
+    }
 });
 
 router.delete("/schemas/:id", function (req, res, next) {
@@ -328,6 +332,15 @@ router.get("/schemas/:id/preview", function (req, res, next) {
         } else {
             res.json(mockData);
         }
+    });
+});
+
+router.get("/test", function (req, res, next) {
+    dataGenerator.test(function (err, data) {
+        if (err)
+            res.json(err);
+        else
+            res.json(data);
     });
 });
 

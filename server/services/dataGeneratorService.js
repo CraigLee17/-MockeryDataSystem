@@ -96,3 +96,37 @@ function previewBySampleSchema(count, cb) {
 }
 
 module.exports.previewBySampleSchema = previewBySampleSchema;
+
+function test(cb) {
+    var user = {
+        firstName: {
+            faker: 'name.firstName'
+        },
+        lastName: {
+            faker: 'name.lastName'
+        },
+        country: {
+            faker: 'address.country'
+        },
+        createdAt: {
+            faker: 'date.past'
+        },
+        username: {
+            function: function () {
+                return this.object.lastName.substring(0, 5) + this.object.firstName.substring(0, 3) + Math.floor(Math.random() * 10)
+            }
+        }
+    };
+    var group = {
+        description: {
+            faker: 'lorem.paragraph'
+        },
+        users: {
+            hasOne: 'user',
+            get: 'firstName'
+        }
+    };
+    mocker().schema('user', user, 2).schema('group', group, 10).build(cb);
+}
+
+module.exports.test = test;

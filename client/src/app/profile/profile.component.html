@@ -83,7 +83,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal"
-                (click)="update({password:psw})" [disabled]="!(psw.length > 0 && psw == confirmedPsw)">Update
+                (click)="update({password:psw})" [disabled]="!(psw?.length > 0 && psw == confirmedPsw)">Update
         </button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>

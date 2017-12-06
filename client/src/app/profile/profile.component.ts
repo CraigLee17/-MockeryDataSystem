@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {UserService} from "../_service/index";
 import {SessionService} from "../_service/session.service";
+import {User} from "../_models/user";
 
 @Component({
   selector: 'app-profile',
@@ -30,8 +31,9 @@ export class ProfileComponent implements OnInit {
   update(updateUser) {
     this.userService.updateUser(this.sessionService.getUser().id, updateUser)
       .subscribe(
-        data => {
-          alert("Profile updated!")
+        user => {
+          this.sessionService.create(user);
+          alert("Profile updated!");
         },
         error => {
           console.log(error);
