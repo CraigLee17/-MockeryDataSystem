@@ -78,18 +78,21 @@ function previewBySampleSchema(count, cb) {
 module.exports.previewBySampleSchema = previewBySampleSchema;
 
 function validateSchema(schema, cb) {
-    if (schema.count > 100000) cb("The upper limit of rows is 100,000", null);
-    // Set the count to 1, it is used to test if the schema if valid
-    schema.count = 1;
-    schemaService.popuplateDataType(schema, function (err, schema) {
-        generateBySchema(schema, function (err, result) {
-            if (err) {
-                cb("Invalid schema supplied", null)
-            } else {
-                cb(null, "Schema is valid");
-            }
+    if (schema.count > 100000) {
+        cb("The upper limit of rows is 100,000", null);
+    } else {
+        // Set the count to 1, it is used to test if the schema if valid
+        schema.count = 1;
+        schemaService.popuplateDataType(schema, function (err, schema) {
+            generateBySchema(schema, function (err, result) {
+                if (err) {
+                    cb("Invalid schema supplied", null)
+                } else {
+                    cb(null, "Schema is valid");
+                }
+            });
         });
-    });
+    }
 }
 
 module.exports.validateSchema = validateSchema;

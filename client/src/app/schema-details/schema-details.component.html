@@ -2,6 +2,7 @@
   <a routerLink="/schemas" class="text-left" [routerLink]="['/user', userid, 'schemas']">
     Schema List </a>&nbsp;> {{schema?.name}}
 </div>
+<ng4-loading-spinner *ngIf="spinner"></ng4-loading-spinner>
 <div class="row">
   <div class="col-md-7 col-sm-12">
     <h3><strong>{{schema?.name}}</strong></h3>
@@ -49,11 +50,11 @@
                 data-toggle="modal" data-target="#modal" (click)="preview()">Preview
         </button>
         <a *ngIf="exist" class="btn btn-outline-success col-sm-12 col-md-8 mb-1"
-           href='/mockdata/api/v1/schemas/{{schema?.id}}/file' >
+           href='/mockdata/api/v1/schemas/{{schema?.id}}/file'>
           Download
         </a>
         <button *ngIf="!exist" class="btn btn-outline-info col-sm-12 col-md-8"
-               (click)="generate()">Generate
+                (click)="generate()">Generate
         </button>
       </div>
     </div>

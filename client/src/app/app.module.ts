@@ -4,6 +4,9 @@ import {RoutingModule} from './routing.module';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {AceEditorModule} from 'ng2-ace-editor';
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+import {NgProgressModule} from '@ngx-progressbar/core';
+import {NgProgressRouterModule} from '@ngx-progressbar/router';
 
 import {AuthenticationService} from './_service/authentication.service';
 import {UserService} from "./_service/user.service";
@@ -25,7 +28,7 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {UsersComponent} from './users/users.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
 import {UpdateSchemaComponent} from './update-schema/update-schema.component';
-import { ProfileComponent } from './profile/profile.component';
+import {ProfileComponent} from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { ProfileComponent } from './profile/profile.component';
     ProfileComponent
   ],
   imports: [
+    Ng4LoadingSpinnerModule.forRoot(),
+    NgProgressModule.forRoot(),
+    NgProgressRouterModule,
     AceEditorModule,
     BrowserModule,
     RoutingModule,

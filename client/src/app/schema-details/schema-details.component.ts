@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SchemaService} from "../_service/schema.service";
 import {Schema} from "../_models/schema";
-import {MockData} from "../_models/mock.data";
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-schema-details',
@@ -15,8 +15,9 @@ export class SchemaDetailsComponent implements OnInit {
   headers;
   userid: string;
   exist: boolean;
+  spinner: boolean = false;
 
-  constructor(private route: ActivatedRoute, private schemaService: SchemaService) {
+  constructor(private route: ActivatedRoute, private schemaService: SchemaService, private spinnerService: Ng4LoadingSpinnerService) {
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.userid = params['userid'];
@@ -24,6 +25,7 @@ export class SchemaDetailsComponent implements OnInit {
         schema => {
           this.schema = schema;
           this.checkIfGenerate();
+          this.spinner = true;
         },
         error => console.log(error)
       );
@@ -34,8 +36,10 @@ export class SchemaDetailsComponent implements OnInit {
   }
 
   generate() {
+    this.spinnerService.show();
     this.schemaService.generateMockData(this.schema.id).subscribe(
       data => {
+        this.spinnerService.hide();
         this.exist = true;
         alert("Data generation is done!");
       },
