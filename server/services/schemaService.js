@@ -13,8 +13,12 @@ function create(schema, cb) {
             cb(err, null);
         } else {
             schema.count = count;
-            new Schema(schema).save(function (err, schema) {
-                schema.populate('fields.dataType', cb);
+            new Schema(schema).save(function (err, schemaInDB) {
+                if (err) {
+                    cb("Fail! Your already have schema named " + schema.name + ".", null);
+                } else {
+                    schemaInDB.populate('fields.dataType', cb);
+                }
             });
         }
     });

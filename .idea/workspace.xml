@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="53766845-77c7-4cff-b8c6-677ba42ddc63" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/_service/schema.service.ts" afterPath="$PROJECT_DIR$/client/src/app/_service/schema.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/schema-details/schema-details.component.html" afterPath="$PROJECT_DIR$/client/src/app/schema-details/schema-details.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/schema-details/schema-details.component.ts" afterPath="$PROJECT_DIR$/client/src/app/schema-details/schema-details.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/models/mockDataModel.js" afterPath="$PROJECT_DIR$/server/models/mockDataModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/userRoutes.js" afterPath="$PROJECT_DIR$/server/routes/userRoutes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/services/mockDataService.js" afterPath="$PROJECT_DIR$/server/services/mockDataService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/models/schemaModel.js" afterPath="$PROJECT_DIR$/server/models/schemaModel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/services/schemaService.js" afterPath="$PROJECT_DIR$/server/services/schemaService.js" />
     </list>
     <list id="323c578c-c3ab-48ae-b791-49cb55446d51" name="Register page gets response from server" comment="" />
@@ -26,20 +21,7 @@
     <favorites_list name="mockeryData" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="userRoutes.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/server/routes/userRoutes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-155">
-              <caret line="250" column="26" lean-forward="true" selection-start-line="250" selection-start-column="26" selection-end-line="250" selection-end-column="26" />
-              <folding>
-                <element signature="n#!!block;n#buildTypes#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -92,9 +74,9 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="zhiyuan li" />
         <option value="Zhiyuan Li" />
         <option value="Zhiyuan L" />
-        <option value="zhiyuan li" />
       </list>
     </option>
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -133,7 +115,6 @@
         <option value="$PROJECT_DIR$/client/src/app/app.component.css" />
         <option value="$PROJECT_DIR$/client/src/index.html" />
         <option value="$PROJECT_DIR$/client/src/styles.css" />
-        <option value="$PROJECT_DIR$/server/models/schemaModel.js" />
         <option value="$PROJECT_DIR$/server/models/userModel.js" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/client/src/app/app.component.html" />
@@ -146,7 +127,6 @@
         <option value="$PROJECT_DIR$/client/src/app/profile/profile.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/_service/user.service.ts" />
         <option value="$PROJECT_DIR$/server/services/dataTypeService.js" />
-        <option value="$PROJECT_DIR$/server/services/schemaService.js" />
         <option value="$PROJECT_DIR$/server/services/dataGeneratorService.js" />
         <option value="$PROJECT_DIR$/server/models/mockDataModel.js" />
         <option value="$PROJECT_DIR$/client/src/app/_service/schema.service.ts" />
@@ -154,6 +134,8 @@
         <option value="$PROJECT_DIR$/client/src/app/schema-details/schema-details.component.ts" />
         <option value="$PROJECT_DIR$/server/services/mockDataService.js" />
         <option value="$PROJECT_DIR$/server/routes/userRoutes.js" />
+        <option value="$PROJECT_DIR$/server/models/schemaModel.js" />
+        <option value="$PROJECT_DIR$/server/services/schemaService.js" />
       </list>
     </option>
   </component>
@@ -206,33 +188,13 @@
             <path>
               <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
               <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="schema-details" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
               <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -424,7 +386,7 @@
       <workItem from="1512446687971" duration="784000" />
       <workItem from="1512575014702" duration="842000" />
       <workItem from="1512590133602" duration="13399000" />
-      <workItem from="1512658238984" duration="6954000" />
+      <workItem from="1512658238984" duration="8061000" />
     </task>
     <task id="LOCAL-00001" summary="Adding register form validation">
       <created>1506027108325</created>
@@ -720,11 +682,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512616907922</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Check if mock data exists before generating and saving data">
+      <created>1512669221404</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1512669221404</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490763000" />
+    <option name="totallyTimeSpent" value="491870000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -737,14 +706,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267857" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26809865" sideWeight="0.49156627" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34464285" sideWeight="0.2124105" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29285714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21785714" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41964287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Quokka" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.23571429" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.70714283" sideWeight="0.7875895" order="7" side_tool="false" content_ui="tabs" />
@@ -852,7 +820,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="User details component finished." />
     <MESSAGE value="Support random US ssn and states" />
     <MESSAGE value="Update data generator service" />
     <MESSAGE value="Update data generator using mocker-data-generator" />
@@ -877,7 +844,8 @@
     <MESSAGE value="Update profile component(use modal view to change password)" />
     <MESSAGE value="Fix bug(profile is updated in session storage)" />
     <MESSAGE value="Remove mock data generation when user creates/updates schema" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove mock data generation when user creates/updates schema" />
+    <MESSAGE value="Check if mock data exists before generating and saving data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Check if mock data exists before generating and saving data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1168,21 +1136,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/models/schemaModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="5" column="37" lean-forward="false" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/models/mockDataModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="15" column="16" lean-forward="false" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/_service/schema.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1237,18 +1190,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/models/schemaModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/services/schemaService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="49" column="43" lean-forward="false" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="43" />
+        <state relative-caret-position="208">
+          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/models/mockDataModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="13" column="45" lean-forward="true" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/routes/userRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-155">
-          <caret line="250" column="26" lean-forward="true" selection-start-line="250" selection-start-column="26" selection-end-line="250" selection-end-column="26" />
+        <state relative-caret-position="-1268">
+          <caret line="275" column="16" lean-forward="true" selection-start-line="275" selection-start-column="16" selection-end-line="275" selection-end-column="16" />
           <folding>
             <element signature="n#!!block;n#buildTypes#0" expanded="false" />
           </folding>

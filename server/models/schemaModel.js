@@ -4,7 +4,10 @@
 const mongoose = require('mongoose');
 
 const schemaSchema = mongoose.Schema({
-    name: String,
+    name: {
+        type:String,
+        unique: true
+    },
     user: {
         type: mongoose.Schema.ObjectId,
         ref: 'User'
