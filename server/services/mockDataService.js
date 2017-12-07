@@ -4,7 +4,14 @@
 const MockData = require('./../models/mockDataModel');
 
 function create(mockData, cb) {
-    new MockData(mockData).save(cb);
+    checkExistBySchemaId(mockData.dataSchema.id, function (err, count) {
+        if (count == 0) {
+            new MockData(mockData).save(cb);
+        } else {
+            cb("The mock data with this schema already been generated!", null);
+        }
+    });
+
 }
 
 module.exports.create = create;
@@ -20,6 +27,12 @@ function removeBySchemaId(id, cb) {
 }
 
 module.exports.removeBySchemaId = removeBySchemaId;
+
+function checkExistBySchemaId(id, cb) {
+    MockData.count({dataSchema: id}, cb);
+}
+
+module.exports.checkExistBySchemaId = checkExistBySchemaId;
 
 function findById(id, cb) {
     MockData.findById(id, cb);

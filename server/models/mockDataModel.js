@@ -11,9 +11,9 @@ const mockDataSchema = mongoose.Schema({
     dataSchema: {
         type: mongoose.Schema.ObjectId,
         ref: 'Schema',
-        index: true
+        index: {unique: true, dropDups: true}
     },
-    data: []
+    data: Object
 });
 
 mockDataSchema.set('toJSON', {

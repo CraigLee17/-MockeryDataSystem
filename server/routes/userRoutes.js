@@ -88,7 +88,7 @@ function buildTypes() {
     ];
 }
 
-router.get("/visitor/preview", function (req, res, next) {
+router.get("/visitor/preview", function (req, res) {
     dataGenerator.previewBySampleSchema(100, function (err, data) {
         if (err) {
             res.send(err);
@@ -98,7 +98,7 @@ router.get("/visitor/preview", function (req, res, next) {
     });
 });
 
-router.get("/visitor/file", function (req, res, next) {
+router.get("/visitor/file", function (req, res) {
     dataGenerator.previewBySampleSchema(1000, function (err, data) {
         if (err) {
             res.send(err);
@@ -109,7 +109,7 @@ router.get("/visitor/file", function (req, res, next) {
     });
 });
 
-router.get("/users/:id", function (req, res, next) {
+router.get("/users/:id", function (req, res) {
     const id = req.params.id;
     userService.findById(id, function (err, user) {
         if (err) {
@@ -120,7 +120,7 @@ router.get("/users/:id", function (req, res, next) {
     });
 });
 
-router.post("/users", function (req, res, next) {
+router.post("/users", function (req, res) {
     if (!(req.user && req.user.role == 'admin')) {
         req.body = userService.defaultRoleAndStatusForNewUser(req.body);
     }
@@ -132,11 +132,11 @@ router.post("/users", function (req, res, next) {
             return res.status(400).send(info);
         }
         return res.json(user);
-    })(req, res, next);
+    })(req, res);
 });
 
 
-router.put("/users/:id", function (req, res, next) {
+router.put("/users/:id", function (req, res) {
     const id = req.params.id;
     const updatedUser = req.body;
     userService.updateUser(id, updatedUser, function (err, newUser) {
@@ -148,7 +148,7 @@ router.put("/users/:id", function (req, res, next) {
     });
 });
 
-router.get("/types", function (req, res, next) {
+router.get("/types", function (req, res) {
     dataTypeService.findAll(function (err, types) {
         if (err) {
             res.send(err);
@@ -158,7 +158,7 @@ router.get("/types", function (req, res, next) {
     });
 });
 
-router.get("/init", function (req, res, next) {
+router.get("/init", function (req, res) {
     mongoose.connection.db.dropCollection("datatypes", function (err, result) {
         const types = buildTypes();
         for (let i in types) {
@@ -171,7 +171,8 @@ router.get("/init", function (req, res, next) {
 });
 
 /*-------------------------------------------------schemas-------------------------------------------------*/
-router.get("/users/:id/schemas", function (req, res, next) {
+
+router.get("/users/:id/schemas", function (req, res) {
     const userId = req.params.id;
     schemaService.findByUserId(userId, function (err, schemas) {
         if (err) {
@@ -182,7 +183,19 @@ router.get("/users/:id/schemas", function (req, res, next) {
     });
 });
 
-router.get("/schemas/:id", function (req, res, next) {
+router.get("/schemas/:id/exist", function (req, res) {
+    const id = req.params.id;
+    mockDataService.checkExistBySchemaId(id, function (err, count) {
+        if (err) {
+            res.send(err);
+        } else {
+            count == 0 ? res.send(false) : res.send(true);
+        }
+    });
+});
+
+
+router.get("/schemas/:id", function (req, res) {
     const id = req.params.id;
     schemaService.findByID(id, function (err, schema) {
         if (err) {
@@ -193,7 +206,7 @@ router.get("/schemas/:id", function (req, res, next) {
     });
 });
 
-router.post("/schemas", function (req, res, next) {
+router.post("/schemas", function (req, res) {
     const schema = req.body;
     schema.user = req.session.user.id;
     schemaService.create(schema, function (err, schema) {
@@ -205,7 +218,7 @@ router.post("/schemas", function (req, res, next) {
     });
 });
 
-router.delete("/schemas/:id", function (req, res, next) {
+router.delete("/schemas/:id", function (req, res) {
     const id = req.params.id;
     schemaService.remove(id, function (err, result) {
         if (err) {
@@ -216,19 +229,45 @@ router.delete("/schemas/:id", function (req, res, next) {
     });
 });
 
-router.put("/schemas/:id", function (req, res, next) {
+router.put("/schemas/:id", function (req, res) {
     const update = req.body;
     const id = req.params.id;
     schemaService.updateSchema(id, update, function (err, schema) {
         if (err) {
             res.send("Schema is invalid");
         } else {
-            res.json(schema);
+            // remove the mock data with the old schema
+            mockDataService.removeBySchemaId(schema.id, function (err, removeInfo) {
+                res.json(schema);
+            });
         }
     });
 });
 
-router.get("/schemas/:id/mockdata", function (req, res, next) {
+router.get("/schemas/:id/generate", function (req, res) {
+    const id = req.params.id;
+    schemaService.findByID(id, function (err, schema) {
+        if (err) {
+            res.send(err);
+        } else if (!schema) {
+            res.status(404).send("No schema found!");
+        }
+        else {
+            dataGenerator.generateBySchema(schema, function (err, data) {
+                const mockData = {user: schema.user, dataSchema: schema, data: data[schema.name]};
+                mockDataService.create(mockData, function (err, mockData) {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.json(mockData.data);
+                    }
+                })
+            });
+        }
+    });
+});
+
+router.get("/schemas/:id/mockdata", function (req, res) {
     const schemaId = req.params.id;
     const query = req.query;
     mockDataService.findDataBySchemaIdAndQuery(schemaId, query, function (err, data) {
@@ -240,7 +279,7 @@ router.get("/schemas/:id/mockdata", function (req, res, next) {
     });
 });
 
-router.delete("/schemas/:id/mockdata", function (req, res, next) {
+router.delete("/schemas/:id/mockdata", function (req, res) {
     const schemaId = req.params.id;
     const query = req.query;
     mockDataService.removeDataByQuery(schemaId, query, function (err, deletedData) {
@@ -254,7 +293,7 @@ router.delete("/schemas/:id/mockdata", function (req, res, next) {
     });
 });
 
-router.put("/schemas/:id/mockdata", function (req, res, next) {
+router.put("/schemas/:id/mockdata", function (req, res) {
     const schemaId = req.params.id;
     const query = req.query;
     const row = req.body;
@@ -269,7 +308,7 @@ router.put("/schemas/:id/mockdata", function (req, res, next) {
     });
 });
 
-router.post("/schemas/:id/mockdata", function (req, res, next) {
+router.post("/schemas/:id/mockdata", function (req, res) {
     const schemaId = req.params.id;
     const row = req.body;
     mockDataService.addData(schemaId, row, function (err, updatedMockData) {
@@ -283,7 +322,7 @@ router.post("/schemas/:id/mockdata", function (req, res, next) {
     });
 });
 
-router.get("/schemas/:id/file", function (req, res, next) {
+router.get("/schemas/:id/file", function (req, res) {
     const schemaId = req.params.id;
     mockDataService.findBySchemaId(schemaId, function (err, mockData) {
         if (err) {
@@ -311,7 +350,7 @@ router.get("/schemas/:id/file", function (req, res, next) {
     });
 });
 
-router.get("/schemas/:id/preview", function (req, res, next) {
+router.get("/schemas/:id/preview", function (req, res) {
     const schemaId = req.params.id;
     mockDataService.findBySchemaId_preview(schemaId, function (err, mockData) {
         if (err) {
@@ -322,7 +361,7 @@ router.get("/schemas/:id/preview", function (req, res, next) {
     });
 });
 
-router.get("/test", function (req, res, next) {
+router.get("/test", function (req, res) {
     dataGenerator.test(function (err, data) {
         if (err)
             res.json(err);

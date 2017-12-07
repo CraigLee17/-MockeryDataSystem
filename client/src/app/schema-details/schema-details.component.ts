@@ -14,19 +14,40 @@ export class SchemaDetailsComponent implements OnInit {
   rows;
   headers;
   userid: string;
+  exist: boolean;
 
   constructor(private route: ActivatedRoute, private schemaService: SchemaService) {
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.userid = params['userid'];
       this.schemaService.getSchemaById(id).subscribe(
-        schema => this.schema = schema,
+        schema => {
+          this.schema = schema;
+          this.checkIfGenerate();
+        },
         error => console.log(error)
       );
     });
   }
 
   ngOnInit() {
+  }
+
+  generate() {
+    this.schemaService.generateMockData(this.schema.id).subscribe(
+      data => {
+        this.exist = true;
+        alert("Data generation is done!");
+      },
+      error => console.log(error)
+    );
+  }
+
+  checkIfGenerate() {
+    this.schemaService.checkIfGenerate(this.schema.id).subscribe(
+      res => this.exist = res,
+      error => console.log(error)
+    );
   }
 
   preview() {

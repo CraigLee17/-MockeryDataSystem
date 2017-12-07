@@ -7,6 +7,7 @@ const dataGeneratorService = require("./../services/dataGeneratorService");
 
 function create(schema, cb) {
     const count = schema.count;
+    // validate schema first
     dataGeneratorService.validateSchema(schema, function (err, info) {
         if (err) {
             cb(err, null);
