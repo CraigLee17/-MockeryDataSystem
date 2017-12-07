@@ -196,26 +196,13 @@ router.get("/schemas/:id", function (req, res, next) {
 router.post("/schemas", function (req, res, next) {
     const schema = req.body;
     schema.user = req.session.user.id;
-    if (schema.count && schema.count > 100000) {
-        res.send("The upper limit of rows is 100,000");
-    } else {
-        schemaService.create(schema, function (err, schema) {
-            if (err) {
-                res.send("Invalid schema supplied");
-            } else {
-                dataGenerator.generateBySchema(schema, function (err, result) {
-                    if (err) {
-                        // Remove the invalid schema
-                        schemaService.remove(schema.id, function (err, numAffected) {
-                            res.send("Invalid schema supplied");
-                        });
-                    } else {
-                        res.json(schema);
-                    }
-                });
-            }
-        });
-    }
+    schemaService.create(schema, function (err, schema) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(schema);
+        }
+    });
 });
 
 router.delete("/schemas/:id", function (req, res, next) {
@@ -232,7 +219,7 @@ router.delete("/schemas/:id", function (req, res, next) {
 router.put("/schemas/:id", function (req, res, next) {
     const update = req.body;
     const id = req.params.id;
-    schemaService.update(id, update, function (err, schema) {
+    schemaService.updateSchema(id, update, function (err, schema) {
         if (err) {
             res.send("Schema is invalid");
         } else {

@@ -4,6 +4,7 @@
 const mocker = require('mocker-data-generator').default;
 const mockDataService = require("./../services/mockDataService");
 const schemaService = require("./../services/schemaService");
+const dataTypeService = require("./../services/dataTypeService");
 
 function buildFields(fields) {
     const dataSchema = {};
@@ -28,30 +29,9 @@ function buildOption(option) {
     return new Function("return " + option);
 }
 
-function removeOldAndStoreNewMockData(schema, data, cb) {
-    const mockData = {
-        user: schema.user,
-        dataSchema: schema.id,
-        data: data[schema.name]
-    };
-    // store mock data to DB
-    mockDataService.removeBySchemaId(schema.id, function (err, numAffected) {
-        mockDataService.create(mockData, function (err, mockData) {
-            cb(err, mockData.data);
-        });
-    });
-}
-
 function generateBySchema(schema, cb) {
     const dataSchema = buildFields(schema.fields);
-    mocker().schema(schema.name, dataSchema, schema.count).build((err, data) => {
-        if (err) {
-            cb(err, null);
-        } else {
-            // If this schema already have mock data, then remove it
-            removeOldAndStoreNewMockData(schema, data, cb);
-        }
-    });
+    mocker().schema(schema.name, dataSchema, schema.count).build(cb);
 };
 
 module.exports.generateBySchema = generateBySchema;
@@ -96,6 +76,23 @@ function previewBySampleSchema(count, cb) {
 }
 
 module.exports.previewBySampleSchema = previewBySampleSchema;
+
+function validateSchema(schema, cb) {
+    if (schema.count > 100000) cb("The upper limit of rows is 100,000", null);
+    // Set the count to 1, it is used to test if the schema if valid
+    schema.count = 1;
+    schemaService.popuplateDataType(schema, function (err, schema) {
+        generateBySchema(schema, function (err, result) {
+            if (err) {
+                cb("Invalid schema supplied", null)
+            } else {
+                cb(null, "Schema is valid");
+            }
+        });
+    });
+}
+
+module.exports.validateSchema = validateSchema;
 
 function test(cb) {
     var user = {

@@ -6,8 +6,16 @@ const mockDataService = require("./../services/mockDataService");
 const dataGeneratorService = require("./../services/dataGeneratorService");
 
 function create(schema, cb) {
-    new Schema(schema).save(function (err, schema) {
-        schema.populate('fields.dataType', cb);
+    const count = schema.count;
+    dataGeneratorService.validateSchema(schema, function (err, info) {
+        if (err) {
+            cb(err, null);
+        } else {
+            schema.count = count;
+            new Schema(schema).save(function (err, schema) {
+                schema.populate('fields.dataType', cb);
+            });
+        }
     });
 }
 
@@ -31,15 +39,15 @@ function findByID(id, cb) {
 
 module.exports.findByID = findByID;
 
-function update(id, schema, cb) {
+function updateSchema(id, schema, cb) {
     Schema.findOneAndUpdate({_id: id}, {$set: schema}, function (err, oldSchema) {
         findByID(schema.id, function (err, schema) {
-            dataGeneratorService.generateBySchema(schema, function (schemaErr, mockData) {
+            dataGeneratorService.validateSchema(schema, function (schemaErr, info) {
                 if (schemaErr) {
                     // If the update schema is invalid, recover the previous schema
                     Schema.update({_id: id}, oldSchema, function (err, numAffected) {
                         cb(schemaErr, null);
-                    })
+                    });
                 } else {
                     cb(err, schema);
                 }
@@ -48,7 +56,7 @@ function update(id, schema, cb) {
     });
 }
 
-module.exports.update = update;
+module.exports.updateSchema = updateSchema;
 
 function remove(id, cb) {
     // Delete related mock data with schema
@@ -56,3 +64,9 @@ function remove(id, cb) {
 }
 
 module.exports.remove = remove;
+
+function popuplateDataType(schema, cb) {
+    new Schema(schema).populate('fields.dataType', cb);
+}
+
+module.exports.popuplateDataType = popuplateDataType;
