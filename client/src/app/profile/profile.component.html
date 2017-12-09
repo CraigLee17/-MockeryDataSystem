@@ -1,4 +1,4 @@
-<div class="col-md-10 col-md-offset-1">
+<div class="col-md-7 col-md-offset-1">
   <div class="panel panel-default">
     <div class="panel-heading"><h3 class="panel-title"><strong>Profile</strong></h3></div>
     <div class="panel-body">
@@ -43,11 +43,14 @@
           <input type="email" formControlName="email" class="form-control">
         </div>
         <div class="form-group">
-          <button data-toggle="modal" data-target="#pswModal" class="form-control col-md-2 btn btn-primary">Change Password</button>
+          <button data-toggle="modal" data-target="#pswModal" class="form-control col-md-3 btn btn-primary">Change
+            Password
+          </button>
+          <button (click)="update(profileForm.value)" class="pull-right btn btn-success  col-md-3"
+                  [disabled]="profileForm.invalid">
+            Update
+          </button>
         </div>
-        <button (click)="update(profileForm.value)" class="pull-right btn btn-success " [disabled]="profileForm.invalid">
-          Update
-        </button>
       </form>
     </div>
   </div>

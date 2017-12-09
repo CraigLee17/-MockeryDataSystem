@@ -123,6 +123,12 @@ export class CreateSchemaComponent implements OnInit {
   applyOption() {
     const fields = <FormArray>this.createSchemaForm.controls['fields'];
     fields.controls[this.selectedIndex].patchValue({option: this.textfield});
+    fields.controls[this.selectedIndex].patchValue({
+      dataType: {
+        _id: "5a2b5ca6bbeb612e307415f7",
+        name: "self-defined"
+      }
+    });
   }
 
   selectType(type: DataType) {
