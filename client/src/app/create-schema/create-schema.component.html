@@ -22,7 +22,7 @@
                    [value]=field.value.dataType.name (click)="selectedIndex = i">
           </td>
           <td>
-              <i class="fa fa-pencil ml-4"  data-toggle="modal" data-target="#optionModal" (click)="fillTextfield(i)"></i>
+            <i class="fa fa-pencil ml-4" data-toggle="modal" data-target="#optionModal" (click)="fillTextfield(i)"></i>
           </td>
           <td>
             <i class="fa fa-times" (click)="removeField(i)"></i>
@@ -120,10 +120,22 @@
         </h5>
       </div>
       <div class="modal-body">
+        <div style="font-size: 95%">
+          <p>Alter the value of this field using Mockery formula syntax. Use this to refer to the value of this
+            schema.</p>
+          Example: <br>
+          <p><code>this.firstname</code> => refer to the value of firstname which is defined in schema</p>
+          <p><code>faker.name.firstname()</code> => use the <a href="https://github.com/Marak/faker.js" target="_blank">faker</a>
+            generator to generate random first name</p>
+          <p><code>Chance.first()</code> => use the <a href="https://github.com/chancejs/chancejs" target="_blank">Chance</a>
+            generator to generate random first name</p>
+          <p><code>casual.first_name</code> => use the <a href="https://github.com/boo1ean/casual" target="_blank">casual</a>
+            generator to generate random first name</p>
+        </div>
         <div class="container">
-          <ace-editor [theme]="'tomorrow'" style="min-height: 200px; width:100%; overflow: auto;" [mode]="'javascript'"
-                    class="form-control" columns="60" placeholder="example: upper(this)" rows="8" spellcheck="false"
-                    [(ngModel)]="textfield">
+          <ace-editor [theme]="'tomorrow'" style="min-height: 100px; width:100%; overflow: auto;" [mode]="'javascript'"
+                      class="form-control" columns="60" placeholder="example: upper(this)" rows="4" spellcheck="false"
+                      [(ngModel)]="textfield">
           </ace-editor>
         </div>
       </div>
