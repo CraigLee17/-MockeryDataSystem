@@ -185,11 +185,11 @@ router.get("/users/:id/schemas", function (req, res) {
 
 router.get("/schemas/:id/exist", function (req, res) {
     const id = req.params.id;
-    mockDataService.checkExistBySchemaId(id, function (err, count) {
+    mockDataService.checkExistBySchemaId(id, function (err, exist) {
         if (err) {
             res.send(err);
         } else {
-            count == 0 ? res.send(false) : res.send(true);
+            res.send(exist);
         }
     });
 });
@@ -251,9 +251,8 @@ router.get("/schemas/:id/generate", function (req, res) {
             res.send(err);
         } else if (!schema) {
             res.status(404).send("No schema found!");
-        }
-        else {
-            dataGenerator.generateBySchema(schema, function (err, data) {
+        } else {
+            dataGenerator.generate(schema, function (err, data) {
                 const mockData = {user: schema.user, dataSchema: schema, data: data[schema.name]};
                 mockDataService.create(mockData, function (err, mockData) {
                     if (err) {
@@ -261,7 +260,7 @@ router.get("/schemas/:id/generate", function (req, res) {
                     } else {
                         res.json(mockData.data);
                     }
-                })
+                });
             });
         }
     });
@@ -358,15 +357,6 @@ router.get("/schemas/:id/preview", function (req, res) {
         } else {
             res.json(mockData);
         }
-    });
-});
-
-router.get("/test", function (req, res) {
-    dataGenerator.test(function (err, data) {
-        if (err)
-            res.json(err);
-        else
-            res.json(data);
     });
 });
 

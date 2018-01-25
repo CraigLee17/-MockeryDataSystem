@@ -29,7 +29,13 @@ function removeBySchemaId(id, cb) {
 module.exports.removeBySchemaId = removeBySchemaId;
 
 function checkExistBySchemaId(id, cb) {
-    MockData.count({dataSchema: id}, cb);
+    MockData.count({dataSchema: id}, function (err, count) {
+        if (err) {
+            cb(err, null);
+        } else {
+            count == 0 ? cb(err, false) : cb(err, true);
+        }
+    });
 }
 
 module.exports.checkExistBySchemaId = checkExistBySchemaId;

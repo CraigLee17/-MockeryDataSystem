@@ -26,17 +26,35 @@ function create(schema, cb) {
 
 module.exports.create = create;
 
+function findByIDs(ids, cb) {
+    Schema.find({_id: {$in: ids}}).populate('fields.dataType').exec(cb);
+}
+
+module.exports.findByIDs = findByIDs;
+
 function findByUserId(id, cb) {
     Schema.find({user: id}, cb);
 }
 
 module.exports.findByUserId = findByUserId;
 
+function findSchemaNamesByUserId(id, cb) {
+    Schema.find({user: id}).select({name: 1, _id: 0}).exec(cb);
+}
+
+module.exports.findSchemaNamesByUserId = findSchemaNamesByUserId;
+
 function findByName(name, cb) {
     Schema.find({name: name}, cb);
 }
 
 module.exports.findByName = findByName;
+
+function findByNameAndUserId(names, userid, cb) {
+    Schema.find({name: {$in: names}, user: userid}, cb);
+}
+
+module.exports.findByNameAndUserId = findByNameAndUserId;
 
 function findByID(id, cb) {
     Schema.findById(id).populate('fields.dataType').exec(cb);

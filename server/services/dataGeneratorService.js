@@ -12,7 +12,7 @@ function buildFields(fields) {
         const name = fields[i].name;
         const option = fields[i].option;
         if (option != "") {
-            dataSchema[name] = {function: buildOption(option)};
+            dataSchema[name] = {eval: buildOption(option)};
         } else {
             const type = fields[i].dataType.name;
             dataSchema[name] = {faker: type};
@@ -22,31 +22,61 @@ function buildFields(fields) {
 }
 
 function buildOption(option) {
-    option = option.replace(/faker/ig, "this.faker");
-    option = option.replace(/chance/ig, "this.chance");
-    option = option.replace(/casual/ig, "this.casual");
-    option = option.replace(/this(?!\.(?:faker|chance|casual))/ig, "this.object");
-    return new Function("return " + option);
+    option = option.replace(/this/ig, "object");
+    return option;
 }
+
+function generate(schema, cb) {
+    const names = [];
+    schemaService.findSchemaNamesByUserId(schema.user, function (err, namesDB) {
+        for (let i in schema.fields) {
+            for (let j in namesDB) {
+                if (schema.fields[i].option && schema.fields[i].option.includes("db." + namesDB[j].name)) {
+                    names.push(namesDB[j].name);
+                    break;
+                }
+            }
+        }
+        if (names.length == 0) {
+            generateBySchema(schema, cb);
+        } else {
+            // This schema is related to some other schemas
+            // Find out other schemas by schema name and user id
+            // Generate mock data by a schema array
+            schemaService.findByNameAndUserId(names, schema.user, function (err, schemas) {
+                schemas.push(schema);
+                schemaService.findByIDs(schemas, function (err, schemasDB) {
+                    generateBySchemas(schemasDB, cb);
+                });
+            });
+        }
+    });
+}
+
+module.exports.generate = generate;
 
 function generateBySchema(schema, cb) {
     const dataSchema = buildFields(schema.fields);
     mocker().schema(schema.name, dataSchema, schema.count).build(cb);
-    mocker().restart();
-};
-
-module.exports.generateBySchema = generateBySchema;
+}
 
 function generateBySchemas(schemas, cb) {
     const mock = mocker();
     const dataSchemas = schemas.map(schema => buildFields(schema.fields));
     for (let i in schemas) {
-        mock.schema(schemas[i].name + i, dataSchemas[i], schemas[i].count);
+        mock.schema(schemas[i].name, dataSchemas[i], schemas[i].count);
     }
-    mock.build(data => cb(data));
-};
-module.exports.generateBySchemas = generateBySchemas;
+    /*mock.build(function (err, data) {
+        for (let i in schemas) {
+            const mockData = {user: schemas[i].user, dataSchema: schemas[i], data: data[schemas[i].name]};
+            mockDataService.create(mockData, function (err, mockdata) {});
+        }
+        cb(err, data);
+    });*/
+    mock.build(cb);
+}
 
+// Home page sample schema
 function previewBySampleSchema(count, cb) {
     const sampleSchema = {
         id: {
@@ -85,7 +115,7 @@ function validateSchema(schema, cb) {
         // Set the count to 1, it is used to test if the schema if valid
         schema.count = 1;
         schemaService.popuplateDataType(schema, function (err, schema) {
-            generateBySchema(schema, function (err, result) {
+            generate(schema, function (err, result) {
                 if (err) {
                     cb("Invalid schema supplied", null)
                 } else {
@@ -98,36 +128,27 @@ function validateSchema(schema, cb) {
 
 module.exports.validateSchema = validateSchema;
 
-function test(cb) {
-    var user = {
-        firstName: {
-            faker: 'name.firstName'
-        },
-        lastName: {
-            faker: 'name.lastName'
-        },
-        country: {
-            faker: 'address.country'
-        },
-        createdAt: {
-            faker: 'date.past'
-        },
-        username: {
-            function: function () {
-                return this.object.lastName.substring(0, 5) + this.object.firstName.substring(0, 3) + Math.floor(Math.random() * 10)
+/*
+function test(newSchema, cb) {
+    schemaService.findByID(newSchema, function (err, newSchema) {
+        const names = [];
+        schemaService.findSchemaNamesByUserId(newSchema.user, function (err, namesDB) {
+            for (let i in newSchema.fields) {
+                for (let j in namesDB) {
+                    if (newSchema.fields[i].option && newSchema.fields[i].option.includes("db." + namesDB[j].name)) {
+                        names.push(namesDB[j].name);
+                        break;
+                    }
+                }
             }
-        }
-    };
-    var group = {
-        description: {
-            faker: 'lorem.paragraph'
-        },
-        users: {
-            hasOne: 'user',
-            get: 'firstName'
-        }
-    };
-    mocker().schema('user', user, 2).schema('group', group, 10).build(cb);
+            schemaService.findByNameAndUserId(names, newSchema.user, function (err, schemas) {
+                schemas.push(newSchema);
+                schemaService.findByIDs(schemas, function (err, schemasDB) {
+                    generateBySchemas(schemasDB, cb);
+                });
+            });
+        });
+    });
 }
 
-module.exports.test = test;
+module.exports.test = test;*/
