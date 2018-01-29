@@ -12,6 +12,7 @@ import {UsersComponent} from "./users/users.component";
 import {UserDetailsComponent} from "./user-details/user-details.component";
 import {UpdateSchemaComponent} from "./update-schema/update-schema.component";
 import {ProfileComponent} from "./profile/profile.component";
+import {FormulaSyntaxComponent} from "./formula-syntax/formula-syntax.component";
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'users/:id', component: UserDetailsComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'syntax', component: FormulaSyntaxComponent},
   {path: 'notfound', component: NotFoundComponent},
   // otherwise redirect to not found
   {path: '**', redirectTo: 'notfound'}

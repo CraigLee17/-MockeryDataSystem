@@ -29,6 +29,7 @@ import {UsersComponent} from './users/users.component';
 import {UserDetailsComponent} from './user-details/user-details.component';
 import {UpdateSchemaComponent} from './update-schema/update-schema.component';
 import {ProfileComponent} from './profile/profile.component';
+import {FormulaSyntaxComponent} from './formula-syntax/formula-syntax.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {ProfileComponent} from './profile/profile.component';
     UsersComponent,
     UserDetailsComponent,
     UpdateSchemaComponent,
-    ProfileComponent
+    ProfileComponent,
+    FormulaSyntaxComponent
   ],
   imports: [
     Ng4LoadingSpinnerModule.forRoot(),

@@ -1,0 +1,35 @@
+<h3><strong>Formulas Syntax</strong></h3>
+<p class="lead">Formulas allow you to use Javascript code to generate data based on custom logic.</p>
+<h4>Operators</h4>
+<p><code>+ - * / %</code></p>
+<h4>Logic</h4>
+<p><code>&lt; &gt; &lt;= &gt;= == != and or</code></p>
+<h4>Functions</h4>
+<p>
+  Mockery data is built on top of
+  <a href="https://github.com/Marak/faker.js" target="_blank">faker</a>,
+  <a href="https://github.com/chancejs/chancejs" target="_blank">chance</a> and
+  <a href="https://github.com/boo1ean/casual" target="_blank">casual</a>.
+  You can easily make use of the functions provided by these libraries.
+</p>
+Examples:
+<h5>Faker</h5>
+<p class="mb-1"><code>faker.internet.email()</code></p>
+<p class="mb-1"><code>faker.company.companyName()</code></p>
+<p class="mb-1"><code>faker.date.past()</code></p>
+<p><code>faker.image.imageUrl()</code></p>
+<p class="mb-1">Please go the <a href="https://github.com/Marak/faker.js#api-methods" target="_blank">Faker.js</a> to see more
+  examples.</p>
+<h5>Chance</h5>
+<p class="mb-1"><code>chance.address()</code></p>
+<p class="mb-1"><code>chance.age({{ '{' + "type: 'child'" + '}'}})</code></p>
+<p class="mb-1"><code>chance.ipv6()</code></p>
+<p><code>chance.country()</code></p>
+<p>Please go the <a href="http://chancejs.com" target="_blank">Chance.js</a> to see more examples.</p>
+<h5>Casual</h5>
+<p class="mb-1"><code>casual.username</code></p>
+<p class="mb-1"><code>casual.rgb_hex</code></p>
+<p class="mb-1"><code>casual.domain</code></p>
+<p><code>casual.state</code></p>
+<p>Please go the <a href="https://github.com/boo1ean/casual#embedded-generators" target="_blank">Casual.js</a> to see
+  more examples.</p>
