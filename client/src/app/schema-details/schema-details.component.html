@@ -12,6 +12,7 @@
         <tr>
           <th>Field Name</th>
           <th>Type/Options</th>
+          <th>Blank</th>
         </tr>
         </thead>
         <tbody>
@@ -24,6 +25,9 @@
           </td>
           <td *ngIf="field?.option != ''">
             <div class="form-control text-info">{{field?.option}}</div>
+          </td>
+          <td>
+            <div class="form-control text-info">{{field?.blank}}</div>
           </td>
         </tr>
         </tbody>

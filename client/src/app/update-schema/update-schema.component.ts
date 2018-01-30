@@ -67,7 +67,7 @@ export class UpdateSchemaComponent implements OnInit {
 
   buildFields() {
     const fields = this.schema.fields.map(
-      field => new Field(field.name, field.dataType.name, field.dataType._id, field.option, this.fb).buildField()
+      field => new Field(field.name, field.dataType.name, field.dataType._id, field.option, field.blank, this.fb).buildField()
     );
     return this.fb.array(fields);
   }

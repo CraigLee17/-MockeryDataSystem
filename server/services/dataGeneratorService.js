@@ -38,7 +38,9 @@ function generate(schema, cb) {
             }
         }
         if (names.length == 0) {
-            generateBySchema(schema, cb);
+            generateBySchema(schema, function (err, data) {
+                err ? cb(err, null) : cb(null, applyBlank(schema, data));
+            });
         } else {
             // This schema is related to some other schemas
             // Find out other schemas by schema name and user id
@@ -46,7 +48,9 @@ function generate(schema, cb) {
             schemaService.findByNameAndUserId(names, schema.user, function (err, schemas) {
                 schemas.push(schema);
                 schemaService.findByIDs(schemas, function (err, schemasDB) {
-                    generateBySchemas(schemasDB, cb);
+                    generateBySchemas(schemasDB, function (err, data) {
+                        err ? cb(err, null) : cb(null, applyBlank(schema, data));
+                    });
                 });
             });
         }
@@ -54,6 +58,33 @@ function generate(schema, cb) {
 }
 
 module.exports.generate = generate;
+
+function applyBlank(schema, data) {
+    let rows = data[schema.name];
+    for (let i in schema.fields) {
+        if (schema.fields[i].blank) {
+            const fieldName = schema.fields[i].name;
+            const blankRows = schema.fields[i].blank * schema.count * 0.01;
+            for (let j = 0; j < blankRows; j++) {
+                rows[j][fieldName] = "";
+            }
+        }
+    }
+    data[schema.name] = shuffle(rows);
+    return data;
+}
+
+function shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
+}
 
 function generateBySchema(schema, cb) {
     const dataSchema = buildFields(schema.fields);

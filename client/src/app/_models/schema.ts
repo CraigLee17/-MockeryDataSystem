@@ -9,7 +9,8 @@ export class Schema {
   fields: [{
     name: String;
     dataType: DataType,
-    option: String
+    option: String,
+    blank: Number
   }];
   fileFormat: String;
 }

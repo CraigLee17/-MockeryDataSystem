@@ -44,6 +44,7 @@ export class CreateSchemaComponent implements OnInit {
 
   ngOnInit() {
     this.createSchemaForm = this.buildForm();
+
   }
 
   buildField() {
@@ -53,46 +54,49 @@ export class CreateSchemaComponent implements OnInit {
   }
 
   buildFields() {
-    const fields = [
-      {
+    const fields = [{
+      name: 'firstName',
+      dataType: {
         name: 'firstName',
-        dataType: {
-          name: 'firstName',
-          _id: '59eabbc83bb4472dcc1f6c1a'
-        },
-        option: ''
-      }, {
+        _id: '59eabbc83bb4472dcc1f6c1a'
+      },
+      option: '',
+      blank: 0
+    }, {
+      name: 'lastName',
+      dataType: {
         name: 'lastName',
-        dataType: {
-          name: 'lastName',
-          _id: '59eabbc83bb4472dcc1f6c1b'
-        },
-        option: ''
-      }, {
+        _id: '59eabbc83bb4472dcc1f6c1b'
+      },
+      option: '',
+      blank: 0
+    }, {
+      name: 'email',
+      dataType: {
         name: 'email',
-        dataType: {
-          name: 'email',
-          _id: '59eabbc83bb4472dcc1f6c12'
-        },
-        option: ''
-      }, {
+        _id: '59eabbc83bb4472dcc1f6c12'
+      },
+      option: '',
+      blank: 0
+    }, {
+      name: 'country',
+      dataType: {
         name: 'country',
-        dataType: {
-          name: 'country',
-          _id: '59eabbc83bb4472dcc1f6bf8'
-        },
-        option: ''
-      }, {
-        name: 'date',
-        dataType: {
-          name: 'past',
-          _id: '59eabbc83bb4472dcc1f6c02'
-        },
-        option: ''
-      }
-    ];
+        _id: '59eabbc83bb4472dcc1f6bf8'
+      },
+      option: '',
+      blank: 0
+    }, {
+      name: 'date',
+      dataType: {
+        name: 'past',
+        _id: '59eabbc83bb4472dcc1f6c02'
+      },
+      option: '',
+      blank: 0
+    }];
     const fieldGroup = fields.map(
-      field => new Field(field.name, field.dataType.name, field.dataType._id, field.option, this.fb).buildField()
+      field => new Field(field.name, field.dataType.name, field.dataType._id, field.option, field.blank, this.fb).buildField()
     );
     return this.fb.array(fieldGroup);
   }

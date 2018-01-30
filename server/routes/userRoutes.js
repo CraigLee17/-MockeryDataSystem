@@ -253,6 +253,7 @@ router.get("/schemas/:id/generate", function (req, res) {
             res.status(404).send("No schema found!");
         } else {
             dataGenerator.generate(schema, function (err, data) {
+                console.log(data[schema.name]);
                 const mockData = {user: schema.user, dataSchema: schema, data: data[schema.name]};
                 mockDataService.create(mockData, function (err, mockData) {
                     if (err) {

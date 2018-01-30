@@ -19,7 +19,8 @@ const schemaSchema = mongoose.Schema({
             type: mongoose.Schema.ObjectId,
             ref: 'DataType'
         },
-        option: String
+        option: String,
+        blank: Number
     }],
     fileFormat: String
 });

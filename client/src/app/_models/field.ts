@@ -1,7 +1,7 @@
 import {FormBuilder, Validators} from "@angular/forms";
 
 export class Field {
-  constructor(private fieldName, private dateTypeName, private _id, private option, private fb: FormBuilder) {
+  constructor(private fieldName, private dateTypeName, private _id, private option, private blank, private fb: FormBuilder) {
   }
 
   buildField() {
@@ -11,7 +11,8 @@ export class Field {
         name: [this.dateTypeName, Validators.required],
         _id: [this._id, Validators.required]
       }),
-      option: this.option
+      option: this.option,
+      blank: [this.blank, [Validators.required, Validators.pattern('^([0-9]|([1-9][0-9])|100)$')]]
     })
   }
 }

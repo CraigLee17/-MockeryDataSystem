@@ -8,6 +8,7 @@
         <tr>
           <th>Field Name</th>
           <th>Type</th>
+          <th>Blank(%)</th>
           <th>Options</th>
         </tr>
         </thead>
@@ -20,6 +21,9 @@
             <input class="form-control type-input" readonly
                    data-toggle="modal" data-target="#modal"
                    [value]=field.value.dataType.name (click)="selectedIndex = i">
+          </td>
+          <td>
+            <input class="form-control" formControlName="blank" style="width: 60px">
           </td>
           <td>
             <i class="fa fa-pencil ml-4"  data-toggle="modal" data-target="#optionModal" (click)="fillTextfield(i)"></i>
