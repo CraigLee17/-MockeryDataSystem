@@ -5,25 +5,16 @@ const express = require('express');
 const userService = require('./../services/userService');
 const router = express.Router();
 
-/*
-router.all('/:userid/!*', function (req, res, next) {
-    var csrfInreq = req.header("csrf_token");
-    var csrfInSession = req.session.csrf;
-    var authenticatedUser = req.session.user;
-    var userid = req.params.userid;
-    userService.findById(userid, function (error, pathUser) {
-        if (authenticatedUser && pathUser && authenticatedUser._id == pathUser._id && csrfInreq == csrfInSession) {
-            if (pathUser.role.toUpperCase() == "ADMIN") {
-                next();
-            }
-        } else {
-            req.session.regenerate(function (err) {
-                res.status(403).json({msg: 'Forbidden'});
-            });
-        }
-    });
+router.all('/*', function (req, res, next) {
+    const user = req.session.user;
+    if (user && user.status && user.role.toUpperCase() == "ADMIN") {
+        next();
+    } else {
+        req.session.regenerate(function (err) {
+            res.status(403).json({msg: 'Forbidden'});
+        });
+    }
 });
-*/
 
 router.get('/users', function (req, res, next) {
     userService.findAll(function (err, users) {

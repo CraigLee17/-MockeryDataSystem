@@ -8,8 +8,10 @@ const uuid = require('uuid');
 const passport = require('../services/passport.js');
 
 router.get('/logout', function (req, res, next) {
-    req.logout();
-    res.json({msg: "Successfully logout."});
+    req.session.regenerate(function (err) {
+        req.logout();
+        res.json({msg: "Successfully logout."});
+    });
 });
 
 router.post('/login', function (req, res, next) {

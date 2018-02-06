@@ -88,6 +88,18 @@ function buildTypes() {
     ];
 }
 
+router.get("/init", function (req, res) {
+    mongoose.connection.db.dropCollection("datatypes", function (err, result) {
+        const types = buildTypes();
+        for (let i in types) {
+            let type = {name: types[i]};
+            dataTypeService.create(type, function (type) {
+            })
+        }
+        res.send("success");
+    });
+});
+
 router.get("/visitor/preview", function (req, res) {
     dataGenerator.previewBySampleSchema(100, function (err, data) {
         if (err) {
@@ -109,13 +121,12 @@ router.get("/visitor/file", function (req, res) {
     });
 });
 
-router.get("/users/:id", function (req, res) {
-    const id = req.params.id;
-    userService.findById(id, function (err, user) {
+router.get("/types", function (req, res) {
+    dataTypeService.findAll(function (err, types) {
         if (err) {
             res.send(err);
         } else {
-            res.json(user);
+            res.json(types);
         }
     });
 });
@@ -135,6 +146,28 @@ router.post("/users", function (req, res) {
     })(req, res);
 });
 
+router.all('/users/:id*', function (req, res, next) {
+    const user = req.session.user;
+    const id = req.params.id;
+    if (user && user.role.toUpperCase() == "USER" && user.id == id) {
+        next();
+    } else {
+        req.session.regenerate(function (err) {
+            res.status(403).json({msg: 'Forbidden'});
+        });
+    }
+});
+
+router.get("/users/:id", function (req, res) {
+    const id = req.params.id;
+    userService.findById(id, function (err, user) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(user);
+        }
+    });
+});
 
 router.put("/users/:id", function (req, res) {
     const id = req.params.id;
@@ -147,30 +180,6 @@ router.put("/users/:id", function (req, res) {
         }
     });
 });
-
-router.get("/types", function (req, res) {
-    dataTypeService.findAll(function (err, types) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.json(types);
-        }
-    });
-});
-
-router.get("/init", function (req, res) {
-    mongoose.connection.db.dropCollection("datatypes", function (err, result) {
-        const types = buildTypes();
-        for (let i in types) {
-            let type = {name: types[i]};
-            dataTypeService.create(type, function (type) {
-            })
-        }
-        res.send("success");
-    });
-});
-
-/*-------------------------------------------------schemas-------------------------------------------------*/
 
 router.get("/users/:id/schemas", function (req, res) {
     const userId = req.params.id;
@@ -193,7 +202,6 @@ router.get("/schemas/:id/exist", function (req, res) {
         }
     });
 });
-
 
 router.get("/schemas/:id", function (req, res) {
     const id = req.params.id;
