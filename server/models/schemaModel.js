@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 
 const schemaSchema = mongoose.Schema({
     name: {
-        type:String,
-        unique: true
+        type:String
     },
     user: {
         type: mongoose.Schema.ObjectId,
@@ -24,6 +23,8 @@ const schemaSchema = mongoose.Schema({
     }],
     fileFormat: String
 });
+
+schemaSchema.index({name: 1, user: 1}, {unique: true});
 
 schemaSchema.set('toJSON', {
     transform: function (doc, result, options) {

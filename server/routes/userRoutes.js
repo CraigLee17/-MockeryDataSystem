@@ -146,7 +146,7 @@ router.post("/users", function (req, res) {
     })(req, res);
 });
 
-router.all('/users/:id*', function (req, res, next) {
+/*router.all('/users/:id*', function (req, res, next) {
     const user = req.session.user;
     const id = req.params.id;
     if (user && user.role.toUpperCase() == "USER" && user.id == id) {
@@ -156,7 +156,7 @@ router.all('/users/:id*', function (req, res, next) {
             res.status(403).json({msg: 'Forbidden'});
         });
     }
-});
+});*/
 
 router.get("/users/:id", function (req, res) {
     const id = req.params.id;
