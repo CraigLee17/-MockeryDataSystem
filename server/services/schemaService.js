@@ -38,11 +38,11 @@ function findByUserId(id, cb) {
 
 module.exports.findByUserId = findByUserId;
 
-function findSchemaNamesByUserId(id, cb) {
+function findSchemaByUserId(id, cb) {
     Schema.find({user: id}).select({name: 1, _id: 0}).exec(cb);
 }
 
-module.exports.findSchemaNamesByUserId = findSchemaNamesByUserId;
+module.exports.findSchemaByUserId = findSchemaByUserId;
 
 function findByName(name, cb) {
     Schema.find({name: name}, cb);
@@ -51,7 +51,7 @@ function findByName(name, cb) {
 module.exports.findByName = findByName;
 
 function findByNameAndUserId(names, userid, cb) {
-    Schema.find({name: {$in: names}, user: userid}, cb);
+    Schema.find({name: {$in: names}, user: userid}).populate('fields.dataType').exec(cb);
 }
 
 module.exports.findByNameAndUserId = findByNameAndUserId;

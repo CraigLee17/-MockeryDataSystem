@@ -146,18 +146,6 @@ router.post("/users", function (req, res) {
     })(req, res);
 });
 
-/*router.all('/users/:id*', function (req, res, next) {
-    const user = req.session.user;
-    const id = req.params.id;
-    if (user && user.role.toUpperCase() == "USER" && user.id == id) {
-        next();
-    } else {
-        req.session.regenerate(function (err) {
-            res.status(403).json({msg: 'Forbidden'});
-        });
-    }
-});*/
-
 router.get("/users/:id", function (req, res) {
     const id = req.params.id;
     userService.findById(id, function (err, user) {
@@ -261,15 +249,18 @@ router.get("/schemas/:id/generate", function (req, res) {
             res.status(404).send("No schema found!");
         } else {
             dataGenerator.generate(schema, function (err, data) {
-                console.log(data[schema.name]);
-                const mockData = {user: schema.user, dataSchema: schema, data: data[schema.name]};
-                mockDataService.create(mockData, function (err, mockData) {
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        res.json(mockData.data);
-                    }
-                });
+                if (data && data[schema.name]) {
+                    const mockData = {user: schema.user, dataSchema: schema, data: data[schema.name]};
+                    mockDataService.create(mockData, function (err, mockData) {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            res.json(mockData.data);
+                        }
+                    });
+                } else {
+                    res.send("Data generation fails!");
+                }
             });
         }
     });

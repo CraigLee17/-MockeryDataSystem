@@ -28,7 +28,7 @@ function buildOption(option) {
 
 function generate(schema, cb) {
     const names = [];
-    schemaService.findSchemaNamesByUserId(schema.user, function (err, namesDB) {
+    schemaService.findSchemaByUserId(schema.user, function (err, namesDB) {
         for (let i in schema.fields) {
             for (let j in namesDB) {
                 if (schema.fields[i].option && schema.fields[i].option.includes("db." + namesDB[j].name)) {
@@ -47,10 +47,8 @@ function generate(schema, cb) {
             // Generate mock data by a schema array
             schemaService.findByNameAndUserId(names, schema.user, function (err, schemas) {
                 schemas.push(schema);
-                schemaService.findByIDs(schemas, function (err, schemasDB) {
-                    generateBySchemas(schemasDB, function (err, data) {
-                        err ? cb(err, null) : cb(null, applyBlank(schema, data));
-                    });
+                generateBySchemas(schemas, function (err, data) {
+                    err ? cb(err, null) : cb(null, applyBlank(schema, data));
                 });
             });
         }
@@ -97,13 +95,6 @@ function generateBySchemas(schemas, cb) {
     for (let i in schemas) {
         mock.schema(schemas[i].name, dataSchemas[i], schemas[i].count);
     }
-    /*mock.build(function (err, data) {
-        for (let i in schemas) {
-            const mockData = {user: schemas[i].user, dataSchema: schemas[i], data: data[schemas[i].name]};
-            mockDataService.create(mockData, function (err, mockdata) {});
-        }
-        cb(err, data);
-    });*/
     mock.build(cb);
 }
 

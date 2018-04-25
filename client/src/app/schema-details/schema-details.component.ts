@@ -43,7 +43,11 @@ export class SchemaDetailsComponent implements OnInit {
         this.exist = true;
         alert("Data generation is done!");
       },
-      error => console.log(error)
+      error => {
+        this.spinnerService.hide();
+        alert("Data generation fails!");
+        console.log(error);
+      }
     );
   }
 
