@@ -12,18 +12,13 @@ function buildFields(fields) {
         const name = fields[i].name;
         const option = fields[i].option;
         if (option != "") {
-            dataSchema[name] = {eval: buildOption(option)};
+            dataSchema[name] = {eval: option};
         } else {
             const type = fields[i].dataType.name;
             dataSchema[name] = {faker: type};
         }
     }
     return dataSchema;
-}
-
-function buildOption(option) {
-    option = option.replace(/this/ig, "object");
-    return option;
 }
 
 function generate(schema, cb) {
