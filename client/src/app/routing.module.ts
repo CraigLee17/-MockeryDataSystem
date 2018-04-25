@@ -13,6 +13,7 @@ import {UserDetailsComponent} from "./user-details/user-details.component";
 import {UpdateSchemaComponent} from "./update-schema/update-schema.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {FormulaSyntaxComponent} from "./formula-syntax/formula-syntax.component";
+import {AuthGuardService} from "./_service/AuthGuardService";
 
 
 const routes: Routes = [
@@ -20,14 +21,14 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'user/:id/schemas', component: SchemaListComponent},
-  {path: 'schemas', component: SchemaListComponent},
-  {path: 'schemas/new', component: CreateSchemaComponent},
-  {path: 'schemas/:id/update', component: UpdateSchemaComponent},
-  {path: 'users/:userid/schemas/:id', component: SchemaDetailsComponent},
-  {path: 'users', component: UsersComponent},
-  {path: 'users/:id', component: UserDetailsComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'user/:id/schemas', component: SchemaListComponent, canActivate: [AuthGuardService]},
+  {path: 'schemas', component: SchemaListComponent, canActivate: [AuthGuardService]},
+  {path: 'schemas/new', component: CreateSchemaComponent, canActivate: [AuthGuardService]},
+  {path: 'schemas/:id/update', component: UpdateSchemaComponent, canActivate: [AuthGuardService]},
+  {path: 'users/:userid/schemas/:id', component: SchemaDetailsComponent, canActivate: [AuthGuardService]},
+  {path: 'users', component: UsersComponent, canActivate: [AuthGuardService]},
+  {path: 'users/:id', component: UserDetailsComponent, canActivate: [AuthGuardService]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
   {path: 'syntax', component: FormulaSyntaxComponent},
   {path: 'notfound', component: NotFoundComponent},
   // otherwise redirect to not found

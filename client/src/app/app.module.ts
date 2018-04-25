@@ -30,6 +30,7 @@ import {UserDetailsComponent} from './user-details/user-details.component';
 import {UpdateSchemaComponent} from './update-schema/update-schema.component';
 import {ProfileComponent} from './profile/profile.component';
 import {FormulaSyntaxComponent} from './formula-syntax/formula-syntax.component';
+import {AuthGuardService} from "./_service/AuthGuardService";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import {FormulaSyntaxComponent} from './formula-syntax/formula-syntax.component'
     }),
     NgxDatatableModule
   ],
-  providers: [AuthenticationService, UserService, SessionService, DataTypeService, SchemaService, VisitorService],
+  providers: [AuthGuardService, AuthenticationService, UserService, SessionService, DataTypeService, SchemaService, VisitorService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
