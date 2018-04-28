@@ -118,14 +118,18 @@ export class UpdateSchemaComponent implements OnInit {
   }
 
   updateSchema(updateSchema) {
-    if (confirm("Are you sure to change it? Mock data related with this old schema will be removed!")) {
-      // Check if same name occurs in different column
-      if (!this.checkFieldName(updateSchema.fields)) return;
-      updateSchema.id = this.schema.id;
-      this.schemaService.update(updateSchema).subscribe(
-        schema => this.router.navigate(['/users', this.sessionService.getUser().id, 'schemas', this.schema.id]),
-        error => this.schemaError = error.error.text
-      );
+    // Check if same name occurs in different column
+    if (!this.checkFieldName(updateSchema.fields)) return;
+    if (this.sessionService.getUser().id != this.schema.user) {
+      alert("You can't update the schema since you don't own this schema!");
+    } else {
+      if (confirm("Are you sure to change it? Mock data related with this old schema will be removed!")) {
+        updateSchema.id = this.schema.id;
+        this.schemaService.update(updateSchema).subscribe(
+          schema => this.router.navigate(['/users', this.sessionService.getUser().id, 'schemas', this.schema.id]),
+          error => this.schemaError = error.error.text
+        );
+      }
     }
   }
 

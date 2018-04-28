@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-outline-primary" [routerLink]="['/user', user?.id, 'schemas']">
+    <button type="button" *ngIf="user?.role.toUpperCase() == 'USER'" class="btn btn-outline-primary" [routerLink]="['/user', user?.id, 'schemas']">
       {{user?.username}}' s schemas
     </button>
   </div>

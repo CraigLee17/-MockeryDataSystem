@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {SchemaService} from "../_service/schema.service";
 import {Schema} from "../_models/schema";
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
+import {SessionService} from "../_service/session.service";
 
 @Component({
   selector: 'app-schema-details',
@@ -17,7 +18,8 @@ export class SchemaDetailsComponent implements OnInit {
   exist: boolean;
   spinner: boolean = false;
 
-  constructor(private route: ActivatedRoute, private schemaService: SchemaService, private spinnerService: Ng4LoadingSpinnerService) {
+  constructor(private route: ActivatedRoute, private schemaService: SchemaService, private sessionService: SessionService,
+              private spinnerService: Ng4LoadingSpinnerService) {
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.userid = params['userid'];
@@ -36,19 +38,23 @@ export class SchemaDetailsComponent implements OnInit {
   }
 
   generate() {
-    this.spinnerService.show();
-    this.schemaService.generateMockData(this.schema.id).subscribe(
-      data => {
-        this.spinnerService.hide();
-        this.exist = true;
-        alert("Data generation is done!");
-      },
-      error => {
-        this.spinnerService.hide();
-        alert("Data generation fails!");
-        console.log(error);
-      }
-    );
+    if (this.sessionService.getUser().id != this.userid) {
+      alert("You can't generate data since you don't own this schema!");
+    } else {
+      this.spinnerService.show();
+      this.schemaService.generateMockData(this.schema.id).subscribe(
+        data => {
+          this.spinnerService.hide();
+          this.exist = true;
+          alert("Data generation is done!");
+        },
+        error => {
+          this.spinnerService.hide();
+          alert("Data generation fails!");
+          console.log(error);
+        }
+      );
+    }
   }
 
   checkIfGenerate() {

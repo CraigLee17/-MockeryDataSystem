@@ -27,13 +27,17 @@ export class SchemaListComponent implements OnInit {
   }
 
   deleteSchema(index) {
-    if (confirm("Are you sure to delete this schema? Related mock data will be removed!")) {
-      this.schemaService.remove(this.schemas[index].id)
-        .subscribe(
-          schema => console.log(schema),
-          error => console.log(error)
-        );
-      this.schemas.splice(index, 1);
+    if (this.sessionService.getUser().id != this.schemas[index].user) {
+      alert("You can't delete the schema since you don't own this schema!");
+    } else {
+      if (confirm("Are you sure to delete this schema? Related mock data will be removed!")) {
+        this.schemaService.remove(this.schemas[index].id)
+          .subscribe(
+            msg => console.log(msg),
+            error => console.log(error)
+          );
+        this.schemas.splice(index, 1);
+      }
     }
   }
 }
