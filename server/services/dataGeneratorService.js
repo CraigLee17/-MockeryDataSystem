@@ -39,16 +39,15 @@ function generate(schema, cb) {
         }
         if (names.length == 0) {
             generateBySchema(schema, function (err, data) {
-                err ? cb(err, null) : cb(null, applyBlank(schema, data));
+                err ? cb(err, null) : cb(null, data, [schema]);
             });
         } else {
-            // This schema is related to some other schemas
-            // Find out other schemas by schema name and user id
+            // This schema is related to some other schemas, find out other schemas by schema name and user id
             // Generate mock data by a schema array
             schemaService.findByNameAndUserId(names, schema.user, function (err, schemas) {
                 schemas.push(schema);
                 generateBySchemas(schemas, function (err, data) {
-                    err ? cb(err, null) : cb(null, applyBlank(schema, data));
+                    err ? cb(err, null) : cb(null, data, schemas);
                 });
             });
         }
@@ -56,6 +55,23 @@ function generate(schema, cb) {
 }
 
 module.exports.generate = generate;
+
+function saveMockdata(schemas, data, cb) {
+    // recreate all mock data with schemas
+    const mockDatas = [];
+    const schemaIds = [];
+    for (let i in schemas) {
+        mockDatas.push({user: schemas[i].user, dataSchema: schemas[i], data: applyBlank(schemas[i], data)});
+        schemaIds.push({dataSchema: schemas[i].id});
+    }
+    mockDataService.deleteMultipleBySchemaIds(schemaIds, function (err, msg) {
+        mockDataService.createMultiple(mockDatas, function (err, mocks) {
+            cb(err, data);
+        });
+    });
+}
+
+module.exports.saveMockdata = saveMockdata;
 
 function applyBlank(schema, data) {
     let rows = data[schema.name];
@@ -69,7 +85,7 @@ function applyBlank(schema, data) {
         }
     }
     data[schema.name] = shuffle(rows);
-    return data;
+    return data[schema.name];
 }
 
 function shuffle(array) {

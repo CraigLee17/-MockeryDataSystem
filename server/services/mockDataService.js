@@ -11,10 +11,21 @@ function create(mockData, cb) {
             cb("The mock data with this schema already been generated!", null);
         }
     });
-
 }
 
 module.exports.create = create;
+
+function createMultiple(mockDatas, cb) {
+    MockData.insertMany(mockDatas, cb);
+}
+
+module.exports.createMultiple = createMultiple;
+
+function deleteMultipleBySchemaIds(schemaIds, cb) {
+    MockData.deleteMany(schemaIds, cb);
+}
+
+module.exports.deleteMultipleBySchemaIds = deleteMultipleBySchemaIds;
 
 function remove(id, cb) {
     MockData.remove({id: id}, cb);

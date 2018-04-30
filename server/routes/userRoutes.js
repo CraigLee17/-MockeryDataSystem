@@ -248,16 +248,11 @@ router.get("/schemas/:id/generate", function (req, res) {
         } else if (!schema) {
             res.status(404).send("No schema found!");
         } else {
-            dataGenerator.generate(schema, function (err, data) {
+            dataGenerator.generate(schema, function (err, data, schemas) {
                 if (data && data[schema.name]) {
-                    const mockData = {user: schema.user, dataSchema: schema, data: data[schema.name]};
-                    mockDataService.create(mockData, function (err, mockData) {
-                        if (err) {
-                            res.send(err);
-                        } else {
-                            res.json(mockData.data);
-                        }
-                    });
+                    dataGenerator.saveMockdata(schemas, data, function (err, data) {
+                        err ? res.send("Data generation fails!") : res.json(data[schema.name]);
+                    })
                 } else {
                     res.send("Data generation fails!");
                 }
