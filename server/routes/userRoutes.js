@@ -48,7 +48,7 @@ function buildTypes() {
         "finance.currencyCode",
         "finance.currencyName",
         "finance.currencySymbol",
-        "internet.avater",
+        "internet.avatar",
         "internet.email",
         "internet.userName",
         "internet.protocol",
@@ -77,13 +77,10 @@ function buildTypes() {
         "random.image",
         "random.locale",
         "random.alphaNumeric",
-        "random.hexaDecimal",
         "system.fileName",
         "system.mimeType",
         "system.fileType",
         "system.fileExt",
-        "system.directoryPath",
-        "system.filePath",
         "system.commonFileName"
     ];
 }
@@ -327,7 +324,13 @@ router.get("/schemas/:id/file", function (req, res) {
                 case "xml":
                     res.set('Content-disposition', 'attachment; filename=' + schema.name + '.xml');
                     res.set("Content-Type", "text/xml");
-                    res.send(js2xmlparser.parse("record", mockData.data));
+                    try {
+                        const file = js2xmlparser.parse("record", mockData.data);
+                        res.send(file);
+                    } catch (err) {
+                        const msg = {error: err};
+                        res.send(js2xmlparser.parse("msg", msg));
+                    }
                     break;
                 case "json":
                     res.set('Content-disposition', 'attachment; filename=' + schema.name + '.json');
