@@ -106,7 +106,7 @@ passport.use('signup', new LocalStrategy({
                         if (err)
                             return done(err);
                         if (user) {
-                            return done(null, false, 'That email already registered.');
+                            return done(null, false, 'That email has already been registered.');
                         } else {
                             var newUser = new User();
                             newUser.username = req.body.username;

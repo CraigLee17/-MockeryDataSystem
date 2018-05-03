@@ -121,7 +121,9 @@ export class CreateSchemaComponent implements OnInit {
 
   addField() {
     const fields = <FormArray>this.createSchemaForm.controls['fields'];
-    fields.push(this.buildField());
+    const lastField = this.buildField();
+    const newField = new Field("New" + lastField.value.name, lastField.value.dataType.name, lastField.value.dataType._id, '', 0, this.fb).buildField();
+    fields.push(newField);
   }
 
   applyOption() {
@@ -159,7 +161,7 @@ export class CreateSchemaComponent implements OnInit {
     const set = new Set();
     for (let i in fields) {
       if (set.has(fields[i].name)) {
-        this.schemaError = "Different column cannot have the same name!";
+        this.schemaError = "Different field cannot have the same name!";
         return false;
       }
       set.add(fields[i].name);

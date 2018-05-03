@@ -92,7 +92,9 @@ export class UpdateSchemaComponent implements OnInit {
 
   addField() {
     const fields = <FormArray>this.updateSchemaForm.controls['fields'];
-    fields.push(this.buildField());
+    const lastField = this.buildField();
+    const newField = new Field("New" + lastField.value.name, lastField.value.dataType.name, lastField.value.dataType._id, '', 0, this.fb).buildField();
+    fields.push(newField);
   }
 
   applyOption() {
