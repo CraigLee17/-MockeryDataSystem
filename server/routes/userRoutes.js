@@ -157,11 +157,17 @@ router.get("/users/:id", function (req, res) {
 router.put("/users/:id", function (req, res) {
     const id = req.params.id;
     const updatedUser = req.body;
-    userService.updateUser(id, updatedUser, function (err, newUser) {
-        if (err) {
-            res.send(err);
+    userService.findByEmail(updatedUser.email, function (err, user) {
+        if (user && user.id != id) {
+            res.send("Fail! Looks like someone already take this email.");
         } else {
-            res.json(newUser);
+            userService.updateUser(id, updatedUser, function (err, newUser) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.json(newUser);
+                }
+            });
         }
     });
 });

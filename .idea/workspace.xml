@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="53766845-77c7-4cff-b8c6-677ba42ddc63" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/profile/profile.component.ts" afterPath="$PROJECT_DIR$/client/src/app/profile/profile.component.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/app.js" afterPath="$PROJECT_DIR$/server/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/routes/userRoutes.js" afterPath="$PROJECT_DIR$/server/routes/userRoutes.js" />
     </list>
     <list id="323c578c-c3ab-48ae-b791-49cb55446d51" name="Register page gets response from server" comment="" />
@@ -20,7 +22,18 @@
     <favorites_list name="mockeryData" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="userRoutes.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/routes/userRoutes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="97">
+              <caret line="161" column="74" lean-forward="true" selection-start-line="161" selection-start-column="74" selection-end-line="161" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -31,7 +44,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>type</find>
       <find>selectedIndex</find>
       <find>ngClass</find>
       <find>theme</find>
@@ -45,7 +57,6 @@
       <find>req.sess</find>
       <find>userid</find>
       <find>schemaErr</find>
-      <find>error</find>
       <find>generateBySchema</find>
       <find>ngx</find>
       <find>handlebars</find>
@@ -61,6 +72,8 @@
       <find>role</find>
       <find>mock</find>
       <find>file</find>
+      <find>error</find>
+      <find>fail</find>
     </findStrings>
     <replaceStrings>
       <replace>modal</replace>
@@ -92,7 +105,6 @@
         <option value="$PROJECT_DIR$/client/src/styles.css" />
         <option value="$PROJECT_DIR$/server/models/userModel.js" />
         <option value="$PROJECT_DIR$/server/services/userService.js" />
-        <option value="$PROJECT_DIR$/client/src/app/profile/profile.component.ts" />
         <option value="$PROJECT_DIR$/server/services/dataTypeService.js" />
         <option value="$PROJECT_DIR$/server/models/mockDataModel.js" />
         <option value="$PROJECT_DIR$/server/package.json" />
@@ -109,7 +121,6 @@
         <option value="$PROJECT_DIR$/client/src/app/_models/schema.ts" />
         <option value="$PROJECT_DIR$/client/src/app/_models/field.ts" />
         <option value="$PROJECT_DIR$/client/src/app/schema-details/schema-details.component.html" />
-        <option value="$PROJECT_DIR$/server/app.js" />
         <option value="$PROJECT_DIR$/server/routes/authentication.js" />
         <option value="$PROJECT_DIR$/client/src/app/profile/profile.component.html" />
         <option value="$PROJECT_DIR$/server/routes/adminRoutes.js" />
@@ -134,6 +145,8 @@
         <option value="$PROJECT_DIR$/server/services/dataGeneratorService.js" />
         <option value="$PROJECT_DIR$/client/src/app/create-schema/create-schema.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/update-schema/update-schema.component.ts" />
+        <option value="$PROJECT_DIR$/server/app.js" />
+        <option value="$PROJECT_DIR$/client/src/app/profile/profile.component.ts" />
         <option value="$PROJECT_DIR$/server/routes/userRoutes.js" />
       </list>
     </option>
@@ -176,6 +189,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -187,18 +201,18 @@
             <path>
               <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
               <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mockeryData" type="b2602c69:ProjectViewProjectNode" />
               <item name="mockeryData" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -442,14 +456,9 @@
       <workItem from="1525146257516" duration="135000" />
       <workItem from="1525147282291" duration="157000" />
       <workItem from="1525364031614" duration="7661000" />
-      <workItem from="1525376227612" duration="2188000" />
-    </task>
-    <task id="LOCAL-00010" summary="create-schema component data type modal added">
-      <created>1506889852697</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1506889852697</updated>
+      <workItem from="1525376227612" duration="2388000" />
+      <workItem from="1525578356488" duration="2399000" />
+      <workItem from="1525638424487" duration="2518000" />
     </task>
     <task id="LOCAL-00011" summary="Schema list component pull out schemas base user id from back end">
       <created>1506914427991</created>
@@ -787,11 +796,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525370628853</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Fix bugs(Space in field name when generating xml file)">
+      <created>1525378467552</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1525378467553</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="625436000" />
+    <option name="totallyTimeSpent" value="630553000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -804,16 +820,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267857" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22434367" sideWeight="0.49156627" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22434367" sideWeight="0.49156627" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32857144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.2375" sideWeight="0.309467" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29233512" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24242425" sideWeight="0.65393794" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17825311" sideWeight="0.65393794" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Quokka" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2625" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27272728" sideWeight="0.69053304" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24420677" sideWeight="0.69053304" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10739857" sideWeight="0.50843376" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3642857" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -923,7 +940,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Stick the footer to bottom of page" />
     <MESSAGE value="Fix bug(footer blocks content)" />
     <MESSAGE value="Fix bug(footer blocks content) and modify home component" />
     <MESSAGE value="Update mockDataService to GET/PUT/DELETE data" />
@@ -948,7 +964,8 @@
     <MESSAGE value="Fix bugs(Forbid modify/delete users' schema)" />
     <MESSAGE value="Regenerate all mock data when multiple schemas are associated" />
     <MESSAGE value="Fix bugs(Duplicate email registered msg, duplicate schema field name)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs(Duplicate email registered msg, duplicate schema field name)" />
+    <MESSAGE value="Fix bugs(Space in field name when generating xml file)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs(Space in field name when generating xml file)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -957,13 +974,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/src/app/_service/schema.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/_service/user.service.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -975,13 +985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="65" column="6" lean-forward="true" selection-start-line="65" selection-start-column="6" selection-end-line="65" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/profile/profile.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-352">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1045,20 +1048,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="30" column="45" lean-forward="true" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="34" column="25" lean-forward="false" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/profile/profile.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1063">
-          <caret line="14" column="12" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1237,13 +1226,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/register/register.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="31" column="17" lean-forward="false" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/node_modules/@angular/forms/esm2015/forms.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -1255,7 +1237,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
           <caret line="17" column="45" lean-forward="false" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1277,7 +1258,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="3" column="2" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1285,7 +1265,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1293,9 +1272,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#73#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1303,11 +1279,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-331">
           <caret line="121" column="1" lean-forward="false" selection-start-line="121" selection-start-column="1" selection-end-line="126" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!block;n#buildForm#0;n#CreateSchemaComponent#0" expanded="false" />
-            <element signature="n#!!block;n#removeField#0;n#CreateSchemaComponent#0" expanded="false" />
-            <element signature="n#!!block;n#applyOption#0;n#CreateSchemaComponent#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1315,14 +1286,53 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="12" column="24" lean-forward="false" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/services/userService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="25" column="9" lean-forward="false" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/register/register.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="31" column="17" lean-forward="false" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/profile/profile.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="19" column="52" lean-forward="false" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/profile/profile.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="39" column="33" lean-forward="false" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/routes/userRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="328" column="39" lean-forward="true" selection-start-line="328" selection-start-column="39" selection-end-line="328" selection-end-column="39" />
+        <state relative-caret-position="97">
+          <caret line="161" column="74" lean-forward="true" selection-start-line="161" selection-start-column="74" selection-end-line="161" selection-end-column="74" />
           <folding />
         </state>
       </provider>

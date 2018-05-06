@@ -11,7 +11,7 @@ import {User} from "../_models/user";
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
-  error: string;
+  error: String;
   psw: String;
   confirmedPsw: String;
 
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
         },
         error => {
           console.log(error);
-          this.error = error._body;
+          alert(error.error.text);
         });
   }
 }
