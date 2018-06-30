@@ -30,7 +30,7 @@ Other tools and technologies used:
 
 ## Please open an issue if
 * you have any suggestion to improve this project
-* you noticed any problems or errors
+* you notice any problems or errors
 
 ## Author
 * Author: [Zhiyuan Li](https://craiglee17.github.io/)
