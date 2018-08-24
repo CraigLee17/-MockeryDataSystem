@@ -28,6 +28,13 @@ Other tools and technologies used:
 * Install [Node.js](https://nodejs.org)
 * Install [MongoDB](https://www.mongodb.com)
 
+## Running In Docker Container
+* Install [Docker](https://docs.docker.com/)
+* Run the following commands from project root directory
+* `cd server`
+* `docker-compose build`
+* `docker-compose up`
+
 ## Please open an issue if
 * you have any suggestion to improve this project
 * you notice any problems or errors
