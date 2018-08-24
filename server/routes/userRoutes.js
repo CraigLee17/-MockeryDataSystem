@@ -8,95 +8,9 @@ const schemaService = require("./../services/schemaService");
 const dataTypeService = require("./../services/dataTypeService");
 const userService = require("./../services/userService");
 const mockDataService = require("./../services/mockDataService");
-const mongoose = require("mongoose");
 const js2xmlparser = require("js2xmlparser");
 const json2csv = require("json2csv");
 const passport = require('../services/passport.js');
-
-function buildTypes() {
-    return [
-        "address.zipCode",
-        "address.city",
-        "address.cityPrefix",
-        "address.streetName",
-        "address.streetAddress",
-        "address.streetSuffix",
-        "address.streetPrefix",
-        "address.secondaryAddress",
-        "address.county",
-        "address.country",
-        "address.countryCode",
-        "address.state",
-        "address.stateAbbr",
-        "address.latitude",
-        "address.longitude",
-        "company.suffixes",
-        "company.companyName",
-        "company.companySuffix",
-        "company.catchPhrase",
-        "date.past",
-        "date.future",
-        "date.between",
-        "date.recent",
-        "date.month",
-        "date.weekday",
-        "finance.account",
-        "finance.accountName",
-        "finance.mask",
-        "finance.amount",
-        "finance.transactionType",
-        "finance.currencyCode",
-        "finance.currencyName",
-        "finance.currencySymbol",
-        "internet.avatar",
-        "internet.email",
-        "internet.userName",
-        "internet.protocol",
-        "internet.domainName",
-        "internet.url",
-        "internet.ip",
-        "internet.ipv6",
-        "internet.password",
-        "name.firstName",
-        "name.lastName",
-        "name.jobTitle",
-        "name.prefix",
-        "name.suffix",
-        "name.title",
-        "name.jobDescriptor",
-        "name.jobArea",
-        "name.jobType",
-        "phone.phoneNumber",
-        "phone.phoneNumberFormat",
-        "random.number",
-        "random.arrayElement",
-        "random.objectElement",
-        "random.uuid",
-        "random.boolean",
-        "random.word",
-        "random.image",
-        "random.locale",
-        "random.alphaNumeric",
-        "system.fileName",
-        "system.mimeType",
-        "system.fileType",
-        "system.fileExt",
-        "system.commonFileName"
-    ];
-}
-
-router.get("/init", function (req, res) {
-    mongoose.connection.db.dropCollection("datatypes", function (err, result) {
-        const types = buildTypes();
-        for (let i in types) {
-            let type = {
-                name: types[i]
-            };
-            dataTypeService.create(type, function (type) {})
-        }
-        res.send("success");
-    });
-});
 
 router.get("/template", function (req, res) {
     dataTypeService.findTemplate(function(err, datatypes) {
