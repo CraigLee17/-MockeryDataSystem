@@ -89,11 +89,18 @@ router.get("/init", function (req, res) {
     mongoose.connection.db.dropCollection("datatypes", function (err, result) {
         const types = buildTypes();
         for (let i in types) {
-            let type = {name: types[i]};
-            dataTypeService.create(type, function (type) {
-            })
+            let type = {
+                name: types[i]
+            };
+            dataTypeService.create(type, function (type) {})
         }
         res.send("success");
+    });
+});
+
+router.get("/template", function (req, res) {
+    dataTypeService.findTemplate(function(err, datatypes) {
+        res.send(datatypes);
     });
 });
 
@@ -334,7 +341,9 @@ router.get("/schemas/:id/file", function (req, res) {
                         const file = js2xmlparser.parse("record", mockData.data);
                         res.send(file);
                     } catch (err) {
-                        const msg = {error: err};
+                        const msg = {
+                            error: err
+                        };
                         res.send(js2xmlparser.parse("msg", msg));
                     }
                     break;
@@ -344,7 +353,10 @@ router.get("/schemas/:id/file", function (req, res) {
                     break;
                 case "csv":
                     const fields = schema.fields.map(field => field.name);
-                    const csv = json2csv({data: mockData.data, fields: fields});
+                    const csv = json2csv({
+                        data: mockData.data,
+                        fields: fields
+                    });
                     res.set('Content-disposition', 'attachment; filename=' + schema.name + '.csv');
                     res.set("Content-Type", "text/csv");
                     res.send(csv);

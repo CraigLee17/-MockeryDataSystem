@@ -165,28 +165,3 @@ function validateSchema(schema, cb) {
 }
 
 module.exports.validateSchema = validateSchema;
-
-/*
-function test(newSchema, cb) {
-    schemaService.findByID(newSchema, function (err, newSchema) {
-        const names = [];
-        schemaService.findSchemaNamesByUserId(newSchema.user, function (err, namesDB) {
-            for (let i in newSchema.fields) {
-                for (let j in namesDB) {
-                    if (newSchema.fields[i].option && newSchema.fields[i].option.includes("db." + namesDB[j].name)) {
-                        names.push(namesDB[j].name);
-                        break;
-                    }
-                }
-            }
-            schemaService.findByNameAndUserId(names, newSchema.user, function (err, schemas) {
-                schemas.push(newSchema);
-                schemaService.findByIDs(schemas, function (err, schemasDB) {
-                    generateBySchemas(schemasDB, cb);
-                });
-            });
-        });
-    });
-}
-
-module.exports.test = test;*/

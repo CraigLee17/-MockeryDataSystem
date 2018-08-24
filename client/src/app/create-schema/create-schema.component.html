@@ -1,4 +1,4 @@
-<div class="row" [formGroup]="createSchemaForm">
+<div class="row" *ngIf="createSchemaForm" [formGroup]="createSchemaForm">
   <div class="col-md-7 col-sm-12">
     <h3><strong>New Schema</strong></h3>
     <div class="alert-danger" *ngIf="schemaError">{{schemaError}}</div>

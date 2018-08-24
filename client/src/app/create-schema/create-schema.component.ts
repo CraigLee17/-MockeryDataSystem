@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {DataTypeService} from "../_service/data.type.service";
-import {FormGroup, Validators, FormArray, FormBuilder} from '@angular/forms';
-import {DataType} from "../_models/data.type";
-import {SchemaService} from "../_service/schema.service";
-import {Router} from "@angular/router";
-import {SessionService} from "../_service/session.service";
+import { Component, OnInit } from '@angular/core';
+import { DataTypeService } from "../_service/data.type.service";
+import { FormGroup, Validators, FormArray, FormBuilder } from '@angular/forms';
+import { DataType } from "../_models/data.type";
+import { SchemaService } from "../_service/schema.service";
+import { Router } from "@angular/router";
+import { SessionService } from "../_service/session.service";
 
 import 'brace';
 import 'brace/theme/tomorrow';
-import {Field} from "../_models/field";
+import { Field } from "../_models/field";
 
 
 @Component({
@@ -26,8 +26,8 @@ export class CreateSchemaComponent implements OnInit {
 
 
   constructor(private sessionService: SessionService,
-              private fb: FormBuilder, private dataTypeService: DataTypeService,
-              private schemaService: SchemaService, private router: Router) {
+    private fb: FormBuilder, private dataTypeService: DataTypeService,
+    private schemaService: SchemaService, private router: Router) {
     this.dataTypeService.getAllDataTypes().subscribe(dataTypes => this.categorizeTypes(dataTypes));
   }
 
@@ -42,9 +42,8 @@ export class CreateSchemaComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.createSchemaForm = this.buildForm();
-
+  async ngOnInit() {
+    this.createSchemaForm = await this.buildForm();
   }
 
   buildField() {
@@ -53,60 +52,29 @@ export class CreateSchemaComponent implements OnInit {
     return this.fb.group(lastOne.controls);
   }
 
-  buildFields() {
-    const fields = [{
-      name: 'firstName',
-      dataType: {
-        name: 'firstName',
-        _id: '59eabbc83bb4472dcc1f6c1a'
-      },
-      option: '',
-      blank: 0
-    }, {
-      name: 'lastName',
-      dataType: {
-        name: 'lastName',
-        _id: '59eabbc83bb4472dcc1f6c1b'
-      },
-      option: '',
-      blank: 0
-    }, {
-      name: 'email',
-      dataType: {
-        name: 'email',
-        _id: '59eabbc83bb4472dcc1f6c12'
-      },
-      option: '',
-      blank: 0
-    }, {
-      name: 'country',
-      dataType: {
-        name: 'country',
-        _id: '59eabbc83bb4472dcc1f6bf8'
-      },
-      option: '',
-      blank: 0
-    }, {
-      name: 'date',
-      dataType: {
-        name: 'past',
-        _id: '59eabbc83bb4472dcc1f6c02'
-      },
-      option: '',
-      blank: 0
-    }];
+  async buildFields() {
+    const dataTypes = await this.dataTypeService.getTemplate().toPromise();
+    const fields = dataTypes.map(dataType => {
+      const field = {
+        name: dataType.name.split('.')[1],
+        dataType: dataType,
+        option: '',
+        blank: 0
+      };
+      return field;
+    });
     const fieldGroup = fields.map(
       field => new Field(field.name, field.dataType.name, field.dataType._id, field.option, field.blank, this.fb).buildField()
     );
     return this.fb.array(fieldGroup);
   }
 
-  buildForm() {
+  async buildForm() {
     return this.fb.group({
       name: ['', Validators.required],
       count: ['', [Validators.required, Validators.pattern('^[1-9]+[0-9]*$')]],
       fileFormat: ['', Validators.required],
-      fields: this.buildFields()
+      fields: await this.buildFields()
     });
   }
 
@@ -128,7 +96,7 @@ export class CreateSchemaComponent implements OnInit {
 
   applyOption() {
     const fields = <FormArray>this.createSchemaForm.controls['fields'];
-    fields.controls[this.selectedIndex].patchValue({option: this.textfield});
+    fields.controls[this.selectedIndex].patchValue({ option: this.textfield });
     fields.controls[this.selectedIndex].patchValue({
       dataType: {
         _id: "5a2b5ca6bbeb612e307415f7",
@@ -139,7 +107,7 @@ export class CreateSchemaComponent implements OnInit {
 
   selectType(type: DataType) {
     const fields = <FormArray>this.createSchemaForm.controls['fields'];
-    fields.controls[this.selectedIndex].patchValue({dataType: type});
+    fields.controls[this.selectedIndex].patchValue({ dataType: type });
   }
 
   fillTextfield(index) {
