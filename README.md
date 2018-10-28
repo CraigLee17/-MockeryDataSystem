@@ -29,6 +29,8 @@ Other tools and technologies used:
 * Install [MongoDB](https://www.mongodb.com)
 
 ## Running in docker container
+* Install git
+* Clone the Project to your local machine: `git clone https://github.com/CraigLee17/mockeryData.git`
 * Install [Docker](https://docs.docker.com/)
 * Run the following commands from project root directory
 * `cd server`
