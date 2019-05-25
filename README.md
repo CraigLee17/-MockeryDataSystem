@@ -19,7 +19,6 @@ This system is used to mock your back-end API by providing realistic data and en
 
 Other tools and technologies used:
 * [Mocker-data-generator](https://github.com/danibram/mocker-data-generator) data generator
-* [Angular CLI](https://cli.angular.io): frontend scaffolding
 * [Bootstrap 4](http://www.getbootstrap.com): layout and styles
 * [Passport.js](http://passportjs.org/docs): user authentication
 * [Bcrypt-nodejs](https://github.com/kelektiv/node.bcrypt.js): password encryption
@@ -28,13 +27,17 @@ Other tools and technologies used:
 * Install [Node.js](https://nodejs.org)
 * Install [MongoDB](https://www.mongodb.com)
 
-## Running in docker container
+## Running in Docker Container
 * Install git
 * Clone the Project to your local machine: `git clone https://github.com/CraigLee17/mockeryData.git`
 * Install [Docker](https://docs.docker.com/)
 * Run the following commands from project root directory
 * `cd server`
 * `docker-compose up`
+
+## Advanced Topics
+* **Scaling**: [PM2](https://www.npmjs.com/package/pm2), a handy process manager to spin up multiple node instances in a multiple-cores machine. Out of the box, PM2 includes supports for load-balancing, monitoring and log managment.
+* **In-memory Cache**: [Redis](https://redis.io), frequent use sample data can be stored in memory.
 
 ## Please open an issue if
 * you have any suggestion to improve this project
