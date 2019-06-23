@@ -35,6 +35,11 @@ Other tools and technologies used:
 * `cd server`
 * `docker-compose up`
 
+## Future thoughts:
+* Mix user data with mock data. Alow users to append data with Mockery data. (In Machine learning area, mock data can be used to validated model. Expecting True Negative result with mock input data in an ideal model)
+* Derive metadata of the mock data with Spark. (Provide deeper insight into the data to users)
+* Generate mock data based on a REST endpoint for visitors. e.g. /api/v1/visitors/{dataTypeName}?amount=100
+
 ## Advanced Topics
 * **Scaling**: [PM2](https://www.npmjs.com/package/pm2), a handy process manager to spin up multiple node instances in a multiple-cores machine. Out of the box, PM2 includes supports for load-balancing, monitoring and log managment.
 * **In-memory Cache**: [Redis](https://redis.io), frequent use sample data can be stored in memory.
