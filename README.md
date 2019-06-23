@@ -49,5 +49,5 @@ Other tools and technologies used:
 * you notice any problems or errors
 
 ## Author
-* Author: [Zhiyuan Li](https://craiglee17.github.io/index)
+* Author: [Zhiyuan Li](https://craiglee17.github.io)
 * Tutor: [Kenny Hunt](http://charity.cs.uwlax.edu/)
