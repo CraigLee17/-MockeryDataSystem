@@ -50,4 +50,4 @@ Other tools and technologies used:
 
 ## Author
 * Author: [Zhiyuan Li](https://craiglee17.github.io)
-* Tutor: [Kenny Hunt](http://charity.cs.uwlax.edu/)
+* Tutor: [Kenny Hunt](https://charity.cs.uwlax.edu)
