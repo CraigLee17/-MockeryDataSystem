@@ -66,7 +66,7 @@ function connect() {
         }
     };
     mongoose.Promise = Promise;
-    return mongoose.connect('mongodb://' + process.env.mongo + '/mockerydata', options).connection;
+    return mongoose.connect('mongodb://' + process.env.mongo + '/mockerydata' + process.env.query, options).connection;
 }
 
 // catch 404 and forward to error handler
