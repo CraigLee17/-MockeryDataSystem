@@ -10,7 +10,8 @@ export class Schema {
     name: String;
     dataType: DataType,
     option: String,
-    blank: Number
+    blank: Number,
+    outlier: Number
   }];
   fileFormat: String;
 }

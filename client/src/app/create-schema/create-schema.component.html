@@ -9,6 +9,7 @@
           <th>Field Name</th>
           <th>Type</th>
           <th>Blank(%)</th>
+          <th>Outlier(%)</th>
           <th>Options</th>
         </tr>
         </thead>
@@ -26,6 +27,11 @@
             <input class="form-control" formControlName="blank" style="width: 60px"
                    data-toggle="popover" data-trigger="focus"
                    data-content="Tip: fields with the same blank % will be blank at the same time.">
+          </td>
+          <td>
+            <input class="form-control" formControlName="outlier" style="width: 60px"
+                   data-toggle="popover" data-trigger="focus"
+                   data-content="Tip: the % of outlier data to be applied">
           </td>
           <td>
             <i class="fa fa-pencil ml-4" data-toggle="modal" data-target="#optionModal" (click)="fillTextfield(i)"></i>
