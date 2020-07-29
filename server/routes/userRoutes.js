@@ -49,6 +49,17 @@ router.get("/types", function (req, res) {
     });
 });
 
+router.all('/*', function (req, res, next) {
+    const user = req.session.user;
+    if (user && user.status) {
+        next();
+    } else {
+        req.session.regenerate(function (err) {
+            res.status(403).json({msg: 'Forbidden'});
+        });
+    }
+});
+
 router.post("/users", function (req, res) {
     if (!(req.user && req.user.role == 'admin')) {
         req.body = userService.defaultRoleAndStatusForNewUser(req.body);
