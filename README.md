@@ -7,7 +7,7 @@ This system is used to mock your back-end API by providing realistic data and en
 * Test data is a vital requirement throughout the entire development of any web application.
 * The data must be real; not in the sense of the data having any type of semantic correlation to the external world; but real in the sense of its syntactic structure and internal references.
 * Generating this data can be a time-consuming process that is subject to a great deal of change, especially early in the software development cycle.
-* This tool provides you really supported back-end.
+* This tool provides you real supported back-end.
 * It lets you focus on developing UI prototypes more faster and interacting with mock data much simpler.
 * By making real requests to mock back-end, you'll uncover problems with application flow, timing, and API design early, improving the quality of both API and the user experience.
 
