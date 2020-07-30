@@ -19,7 +19,8 @@ const schemaSchema = mongoose.Schema({
             ref: 'DataType'
         },
         option: String,
-        blank: Number
+        blank: Number,
+        outlier: Number
     }],
     fileFormat: String
 });

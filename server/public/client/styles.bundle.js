@@ -144,7 +144,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "html {\n  height: 100%;\n  box-sizing: border-box;\n}\n\nbody{\n  position: relative;\n  margin: 0;\n  padding-bottom: 5rem;\n  min-height: 100%;\n}\n\nfooter {\n  position: absolute;\n  bottom: 3%;\n  width: 100%;\n}\n", ""]);
+exports.push([module.i, "html {\r\n  height: 100%;\r\n  box-sizing: border-box;\r\n}\r\n\r\nbody{\r\n  position: relative;\r\n  margin: 0;\r\n  padding-bottom: 5rem;\r\n  min-height: 100%;\r\n}\r\n\r\nfooter {\r\n  position: absolute;\r\n  bottom: 3%;\r\n  width: 100%;\r\n}\r\n", ""]);
 
 // exports
 
