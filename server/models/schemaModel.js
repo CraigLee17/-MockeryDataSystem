@@ -19,8 +19,7 @@ const schemaSchema = mongoose.Schema({
             ref: 'DataType'
         },
         option: String,
-        blank: Number,
-        dirty: Number
+        blank: Number
     }],
     fileFormat: String
 });
