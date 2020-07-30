@@ -1605,7 +1605,8 @@ var SchemaDetailsComponent = (function () {
     };
     // build headers for table base on mock data fields name
     SchemaDetailsComponent.prototype.buildHeaders = function () {
-        var headers = this.rows[0].map(function (name) { return ({ prop: name }); });
+        var keys = Object.keys(this.rows[0]);
+        var headers = keys.map(function (name) { return ({ prop: name }); });
         this.headers = headers;
     };
     SchemaDetailsComponent = __decorate([

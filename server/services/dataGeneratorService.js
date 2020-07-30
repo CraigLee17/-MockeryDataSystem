@@ -5,6 +5,8 @@ const mocker = require('mocker-data-generator').default;
 const mockDataService = require("./../services/mockDataService");
 const schemaService = require("./../services/schemaService");
 const dataTypeService = require("./../services/dataTypeService");
+const Schema = require('../models/schemaModel');
+
 
 function buildFields(fields) {
     const dataSchema = {};
@@ -64,9 +66,19 @@ function saveMockdata(schemas, data, cb) {
         mockDatas.push({user: schemas[i].user, dataSchema: schemas[i], data: applyBlank(schemas[i], data)});
         schemaIds.push({dataSchema: schemas[i].id});
     }
-    mockDataService.deleteMultipleBySchemaIds(schemaIds, function (err, msg) {
-        mockDataService.createMultiple(mockDatas, function (err, mocks) {
-            cb(err, data);
+    dataTypeService.findAll(function (err, types) {
+        let dataTypeNames;
+        if (err) {
+            //if there is an error, what to do
+        } else {
+            dataTypeNames = types;
+        }
+        applyDirtyData(mockDatas, dataTypeNames);
+
+        mockDataService.deleteMultipleBySchemaIds(schemaIds, function (err, msg) {
+            mockDataService.createMultiple(mockDatas, function (err, mocks) {
+                cb(err, data);
+            });
         });
     });
 }
@@ -86,6 +98,67 @@ function applyBlank(schema, data) {
     }
     data[schema.name] = shuffle(rows);
     return data[schema.name];
+}
+
+// This function is created by Yishu Xu on 2020/07/28
+function applyDirtyData(mockDatas, dataTypeNames) {   
+    for (let i in mockDatas) {
+        const mockData = mockDatas[i];
+        const schema = mockData.dataSchema;
+        let data = mockData.data;
+        let rows = data;
+        const fieldNo = Array.from(Array(schema.fields.length).keys());
+        for (let j in fieldNo) {
+            if (schema.fields[j].outlier) {
+                console.log("schema.name: " + schema.name);
+                console.log("schema.fields[j].name: " + schema.fields[j].name);
+                console.log("schema.fields[j].outlier: " + schema.fields[j].outlier);
+                const fieldName = schema.fields[j].name;
+                const dirtyRows = schema.fields[j].outlier * schema.count * 0.01;
+                // generate dirty data with the size of dirtyRows
+                const dirtyData = generateDirtyData(fieldName, dirtyRows, dataTypeNames);
+                // update rows with dirty data
+                const dirtyDataArr = Object.values(dirtyData);
+                let rowNum = 0;
+                for (let k = 0; k < dirtyDataArr.length && rowNum < dirtyRows; k ++) {
+                    const replaceDataArr = Object.values(dirtyDataArr[k]);
+                    for (let l = 0; l < replaceDataArr.length; l ++) {
+                        rows[rowNum][fieldName] = replaceDataArr[l];
+                        rowNum ++;
+                        if (rowNum >= dirtyRows) {
+                            break;
+                        }
+                    }
+                }
+            }
+            rows = shuffle(rows);
+        }
+        mockDatas[i].data = rows;
+    }
+}
+
+// This function is created by Yishu Xu on 2020/07/28
+function generateDirtyData(fieldName, dirtyRows, dataTypeNames) {
+    let dirtyDataTypeNames = shuffle(dataTypeNames);
+    const dirtyDataSchema = new Schema();
+    dirtyDataSchema.count = Math.ceil(dirtyRows / 3);
+    for (let typeRow = 0; typeRow < 3; typeRow ++) {
+        if (dirtyDataTypeNames[typeRow] === fieldName) {
+            dirtyDataTypeNames[typeRow] = dirtyDataTypeNames[3];
+        }
+        dirtyDataSchema.fields.push({name: dirtyDataTypeNames[typeRow].name, dataType: dirtyDataTypeNames[typeRow], option: "", blank:0, outlier:0});
+    }
+    
+    let dirtyData;
+    const dataSchema = buildFields(dirtyDataSchema.fields);
+    mocker().schema("dirtyDataSchema", dataSchema, dirtyDataSchema.count).build(function(err, data) {
+        if (err) {
+            
+        } else {
+            dirtyData = data;
+        }
+    });
+    return dirtyData["dirtyDataSchema"];
 }
 
 function shuffle(array) {
