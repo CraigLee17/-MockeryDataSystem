@@ -154,7 +154,7 @@ function generateDirtyData(fieldName, dirtyRows, dataTypeNames) {
     const dataSchema = buildFields(dirtyDataSchema.fields);
     mocker().schema("dirtyDataSchema", dataSchema, dirtyDataSchema.count).build(function(err, data) {
         if (err) {
-            console.log(err);
+            
         } else {
             dirtyData = data;
         }
