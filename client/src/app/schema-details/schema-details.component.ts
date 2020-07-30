@@ -78,7 +78,8 @@ export class SchemaDetailsComponent implements OnInit {
 
   // build headers for table base on mock data fields name
   buildHeaders() {
-    const headers = this.rows[0].map((name: string) => ({prop: name}));
+    const keys = Object.keys(this.rows[0]);
+    const headers = keys.map((name: string) => ({prop: name}));
     this.headers = headers;
   }
 }
