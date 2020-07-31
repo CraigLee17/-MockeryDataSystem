@@ -46,13 +46,17 @@ app.use('/*', function (req, res) {
 connect().on('error', console.log).on('disconneted', connect).on('open', initData);
 
 function initData() {
-    mongoose.connection.db.dropCollection("datatypes", function (err, result) {
-        const types = buildTypes();
-        for (let i in types) {
-            let type = {
-                name: types[i]
-            };
-            dataTypeService.create(type, function (type) {})
+    dataTypeService.findAll((err, dataTypes) => {
+        if (err || (dataTypes && dataTypes.length === 0)) {
+            mongoose.connection.db.dropCollection("datatypes", (err, result) => {
+                const types = buildTypes();
+                for (let i in types) {
+                    let type = {
+                        name: types[i]
+                    };
+                    dataTypeService.create(type, function (type) {})
+                }
+            });
         }
     });
 }
@@ -66,7 +70,8 @@ function connect() {
         }
     };
     mongoose.Promise = Promise;
-    return mongoose.connect('mongodb://' + process.env.mongo + '/mockerydata' + process.env.query, options).connection;
+    const host = process.env.mongo ? process.env.mongo : 'localhost:27017';
+    return mongoose.connect(`mongodb://${host}/mockerydata${process.env.query}`, options).connection;
 }
 
 // catch 404 and forward to error handler

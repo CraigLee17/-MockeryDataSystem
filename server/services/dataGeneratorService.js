@@ -6,7 +6,7 @@ const mockDataService = require("./../services/mockDataService");
 const schemaService = require("./../services/schemaService");
 const dataTypeService = require("./../services/dataTypeService");
 const Schema = require('../models/schemaModel');
-
+const _ = require('underscore');
 
 function buildFields(fields) {
     const dataSchema = {};
@@ -96,81 +96,50 @@ function applyBlank(schema, data) {
             }
         }
     }
-    data[schema.name] = shuffle(rows);
+    data[schema.name] = _.shuffle(rows);
     return data[schema.name];
 }
 
 // This function is created by Yishu Xu on 2020/07/28
 function applyDirtyData(mockDatas, dataTypeNames) {   
-    for (let i in mockDatas) {
-        const mockData = mockDatas[i];
+    for (let mockData of mockDatas) {
         const schema = mockData.dataSchema;
-        let data = mockData.data;
-        let rows = data;
-        const fieldNo = Array.from(Array(schema.fields.length).keys());
-        for (let j in fieldNo) {
-            if (schema.fields[j].outlier) {
-                console.log("schema.name: " + schema.name);
-                console.log("schema.fields[j].name: " + schema.fields[j].name);
-                console.log("schema.fields[j].outlier: " + schema.fields[j].outlier);
-                const fieldName = schema.fields[j].name;
-                const dirtyRows = schema.fields[j].outlier * schema.count * 0.01;
-                // generate dirty data with the size of dirtyRows
-                const dirtyData = generateDirtyData(fieldName, dirtyRows, dataTypeNames);
-                // update rows with dirty data
-                const dirtyDataArr = Object.values(dirtyData);
+        for (let field of schema.fields) {
+            if (field.outlier > 0) {
+                const numberOfDirtyRows = field.outlier * schema.count * 0.01;
+                const dirtyData = generateDirtyData(field.name, numberOfDirtyRows, dataTypeNames);
                 let rowNum = 0;
-                for (let k = 0; k < dirtyDataArr.length && rowNum < dirtyRows; k ++) {
-                    const replaceDataArr = Object.values(dirtyDataArr[k]);
-                    for (let l = 0; l < replaceDataArr.length; l ++) {
-                        rows[rowNum][fieldName] = replaceDataArr[l];
-                        rowNum ++;
-                        if (rowNum >= dirtyRows) {
-                            break;
-                        }
-                    }
+                while (rowNum < numberOfDirtyRows) {
+                    mockData.data[rowNum++][field.name] = getRandomData(dirtyData);
                 }
             }
-            rows = shuffle(rows);
+            mockData.data = _.shuffle(mockData.data);
         }
-        mockDatas[i].data = rows;
     }
+}
+
+function getRandomData(dirtyData) {
+    const i = Math.floor(Math.random() * dirtyData.length); 
+    return dirtyData[i];
 }
 
 // This function is created by Yishu Xu on 2020/07/28
-function generateDirtyData(fieldName, dirtyRows, dataTypeNames) {
-    let dirtyDataTypeNames = shuffle(dataTypeNames);
+function generateDirtyData(fieldName, numberOfDirtyRows, dataTypeNames) {
+    let dirtyDataTypeNames = _.shuffle(dataTypeNames);
     const dirtyDataSchema = new Schema();
-    dirtyDataSchema.count = Math.ceil(dirtyRows / 3);
-    for (let typeRow = 0; typeRow < 3; typeRow ++) {
+    const numberOfRandomDataTypes = 10;
+    dirtyDataSchema.count = Math.ceil(numberOfDirtyRows / numberOfRandomDataTypes);
+    for (let typeRow = 0; typeRow <= numberOfRandomDataTypes; typeRow++) {
         if (dirtyDataTypeNames[typeRow] === fieldName) {
-            dirtyDataTypeNames[typeRow] = dirtyDataTypeNames[3];
+            continue;
         }
         dirtyDataSchema.fields.push({name: dirtyDataTypeNames[typeRow].name, dataType: dirtyDataTypeNames[typeRow], option: "", blank:0, outlier:0});
     }
-    
+
     let dirtyData;
     const dataSchema = buildFields(dirtyDataSchema.fields);
-    mocker().schema("dirtyDataSchema", dataSchema, dirtyDataSchema.count).build(function(err, data) {
-        if (err) {
-            
-        } else {
-            dirtyData = data;
-        }
-    });
-    return dirtyData["dirtyDataSchema"];
-}
-
-function shuffle(array) {
-    let currentIndex = array.length, temporaryValue, randomIndex;
-    while (0 !== currentIndex) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-    return array;
+    mocker().schema("dirtyDataSchema", dataSchema, dirtyDataSchema.count).build((err, data) => dirtyData = data);
+    return _.flatten(dirtyData["dirtyDataSchema"].map(object => Object.values(object))); 
 }
 
 function generateBySchema(schema, cb) {
